@@ -27,3 +27,4 @@ dotfiles and scripts for DangerOS (rocky Linux 9.4(x))
  ░░▒
 
 ```
+![image](https://github.com/user-attachments/assets/9b56149a-7402-4552-949e-e7c64431cc1f)
