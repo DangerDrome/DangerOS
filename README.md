@@ -1,6 +1,6 @@
 # DangerOS
 dotfiles and scripts for DangerOS (rocky Linux 9.4(x))
-
+```
 
                                                              ■██████■     
                                                           ████████████■   
@@ -25,3 +25,5 @@ dotfiles and scripts for DangerOS (rocky Linux 9.4(x))
  ░▓███████                                                              v0.7.1
  ■▓██▒░░░                
  ░░▒
+
+```
