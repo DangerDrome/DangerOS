@@ -68,11 +68,11 @@ alias ff='fastfetch --logo /home/danger/logo_02.txt'
 alias neofetch='fastfetch --logo /home/danger/logo_02.txt'
 
 # Changing "ls" to "exa" a fancy lister with icons
-alias ls='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa --icons --color=always --group-directories-first; printf "\n"'
-alias ll='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa -alF --icons --color=always --group-directories-first; printf "\n"; printf "${fg_black}${rev}█▓▒░ [Size:$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed "s/total //") | Files:$(/bin/ls -A -1 | /usr/bin/wc -l)] "; printf "\n"'
-alias la='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa -a --icons --color=always --group-directories-first; printf "\n"'
-alias l='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa -F --icons --color=always --group-directories-first; printf "\n"'
-alias l.='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa -a | egrep "^\."'
+alias ls='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa --icons --color=always --group-directories-first; printf "${reset}\n"'
+alias ll='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa -alF --icons --color=always --group-directories-first; printf "\n"; printf "${fg_black}${rev}█▓▒░ [Size:$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed "s/total //") | Files:$(/bin/ls -A -1 | /usr/bin/wc -l)] "; printf "${reset}\n"'
+alias la='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa -a --icons --color=always --group-directories-first; printf "${reset}\n"'
+alias l='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa -F --icons --color=always --group-directories-first; printf "${reset}\n"'
+alias l.='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa -a | egrep "^\."${reset}'
 
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
