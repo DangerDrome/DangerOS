@@ -42,7 +42,7 @@ sudo wget -qO- https://git.io/papirus-folders-install | sh
 ```
 Switch folder color to black:
 ```
-papirus-folders -C black --theme Papirus-Dark
+papirus-folders -C grey --theme Papirus-Dark
 ```
 # Install custom Adwaita-dark themes
 Download the themes zip:
