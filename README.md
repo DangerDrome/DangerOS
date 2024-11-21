@@ -27,13 +27,17 @@ Installation instructions for DangerOS
  ░░▒
 
 ```
-## Install Fonts
+## Install Fonts for everyone
+
 ```
 sudo su
-curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf --output /usr/share/fonts/'MesloLGS NF Regular.ttf'
-curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf --output /usr/share/fonts/'MesloLGS NF Bold.ttf'
-curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf --output /usr/share/fonts/'MesloLGS NF Italic.ttf'
-curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf --output /usr/share/fonts/'MesloLGS NF Bold Italic.ttf'
+cd /usr/share/fonts
+mkdir meslo-lgs-nf
+cd meslo-lgs-nf
+curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Regular.ttf --output 'MesloLGS-NF-Regular.ttf'
+curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Bold.ttf --output 'MesloLGS-NF-Bold.ttf'
+curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Italic.ttf --output 'MesloLGS-NF-Italic.ttf'
+curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Bold%20Italic.ttf --output 'MesloLGS-NF-Bold-Italic.ttf'
 ```
 ## Install Papirus Icons
 #### https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
