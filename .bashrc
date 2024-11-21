@@ -1,3 +1,4 @@
+#!/bin/bash
 # .bashrc
 
 # Source global definitions
@@ -222,14 +223,6 @@ ver ()
 			exit 1
 		fi
 	fi
-}
-
-usage()
-{
-    printf "\n\e[1m%s\x1b[0m %-5s\n" "USAGE:" "Blah Blah"
-    printf "%7s \e[1m%-15s\x1b[0m %s %s\n" "" "-h" "[Optional]" "Display usage information"
-    printf "%7s \e[1m%-15s\x1b[0m %s %s" "" "-ofps" "[Optional] Number of output frames per second"
-    printf "%-34s %s\n" "" "Applies to the *output* video frame rate."
 }
 
 # Automatically install the needed support files for this .bashrc file
