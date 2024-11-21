@@ -34,6 +34,41 @@ fi
 unset rc
 
 #######################################################
+# Terminal Styles
+#######################################################
+
+# Text FG Colors
+fg_black=$(tput setaf 0)
+fg_red=$(tput setaf 1)
+fg_green=$(tput setaf 2)
+fg_yellow=$(tput setaf 3)
+fg_blue=$(tput setaf 4)
+fg_pink=$(tput setaf 5)
+fg_cyan=$(tput setaf 6)
+fg_grey=$(tput setaf 7)
+
+# Text BG Colors
+bg_black=$(tput setab 0)
+bg_red=$(tput setab 1)
+bg_green=$(tput setab 2)
+bg_yellow=$(tput setab 3)
+bg_blue=$(tput setab 4)
+bg_pink=$(tput setab 5)
+bg_cyan=$(tput setab 6)
+bg_grey=$(tput setab 7)
+
+# Text Attributes
+reset=$(tput sgr0)
+bold=$(tput bold)
+dim=$(tput dim)
+italic=$(tput sitm)
+underline=$(tput smul)
+blink=$(tput blink)
+rev=$(tput rev)
+strike=$(tput smxx)
+
+
+#######################################################
 # OH MY POSH
 #######################################################
 
@@ -348,7 +383,7 @@ function __setprompt
 
 	# Working prompt
 	if [[ $EUID -ne 0 ]]; then
-		PS1+="\[${GREEN}\][\[${BLUE}\]\h\[${BLUE}\]|\u\[${GREEN}\]] \w/\[${NOCOLOR}\] " # Normal user
+		PS1+="\[${rev}${fg_black}\] \h \[${reset}${bold}\] [\u\[${fg_green}\]] \w/\[${reset}\] " # Normal user
 	else
 		PS1+="\[${RED}\][\u] \w/\[${NOCOLOR}\] " # Root user
 	fi
