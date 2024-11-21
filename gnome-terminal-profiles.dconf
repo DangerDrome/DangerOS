@@ -1,0 +1,30 @@
+[/]
+default='b1dcc9dd-5262-4d8d-a863-c897e6d979b9'
+list=['b1dcc9dd-5262-4d8d-a863-c897e6d979b9']
+
+[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+audible-bell=false
+background-color='rgb(31,31,31)'
+bold-color='rgb(51,218,122)'
+bold-color-same-as-fg=false
+bold-is-bright=true
+cursor-background-color='rgb(51,218,122)'
+cursor-blink-mode='on'
+cursor-colors-set=true
+cursor-foreground-color='rgb(17,17,17)'
+default-size-columns=100
+default-size-rows=40
+font='MesloLGS Nerd Font 10'
+foreground-color='rgb(156,201,172)'
+highlight-background-color='rgb(47,155,93)'
+highlight-colors-set=true
+highlight-foreground-color='rgb(17,17,17)'
+login-shell=false
+palette=['rgb(59,59,59)', 'rgb(129,84,106)', 'rgb(47,155,93)', 'rgb(108,122,59)', 'rgb(93,172,167)', 'rgb(176,124,255)', 'rgb(3,131,134)', 'rgb(174,174,174)', 'rgb(64,82,71)', 'rgb(190,121,154)', 'rgb(51,218,122)', 'rgb(152,165,109)', 'rgb(124,226,220)', 'rgb(200,164,255)', 'rgb(77,188,190)', 'rgb(202,202,202)']
+title='Terminal 💀'
+title-mode='ignore'
+use-custom-command=false
+use-system-font=false
+use-theme-colors=false
+use-transparent-background=false
+visible-name='danger'
