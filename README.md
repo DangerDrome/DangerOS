@@ -30,9 +30,8 @@ Installation instructions for DangerOS
 ## Install Fonts for everyone
 
 ```
-sudo su
 cd /usr/share/fonts
-mkdir meslo-lgs-nf
+sudo mkdir meslo-lgs-nf
 cd meslo-lgs-nf
 curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Regular.ttf --output 'MesloLGS-NF-Regular.ttf'
 curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Bold.ttf --output 'MesloLGS-NF-Bold.ttf'
