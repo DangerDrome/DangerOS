@@ -24,7 +24,7 @@
  ░░▒
 ```
 # DangerOS
-#### DangerOS [Dangerous] is a streamlined operating system setup for Visual Effects.
+#### DangerOS [Dangerous] is a streamlined Operating System setup for Visual Effects.
 Visual effects is a pain in the ass, let's make is easier!
 
 
