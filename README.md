@@ -1,5 +1,3 @@
-# DangerOS
-#### DangerOS is a streamlined operating system setup for Visual Effects.
 ```
                                                              ■██████■     
                                                           ████████████■   
@@ -25,6 +23,42 @@
  ■▓██▒░░░                
  ░░▒
 ```
+# DangerOS
+#### DangerOS [Dangerous] is a streamlined operating system setup for Visual Effects.
+Visual effects is a pain in the ass, let's make is easier!
+
+
+## Index
+- [ ] Overview
+- [ ] Ansible install
+- [ ] Bash script install
+- [x] Step by step install
+
+
+# Ansible install
+### playbook:
+```
+comming soon...
+```
+> [!TIP]
+> Lean more about ansible here: https://www.ansible.com/how-ansible-works/
+
+
+# Bash install
+### Run the folloing in a shell:
+```
+comming soon...
+```
+> [!WARNING]
+> Use bash scripts at your own risk, read the code carefully before executing.
+
+
+# Step by step install
+## 1. Download rocky linux
+https://rockylinux.org/download | 
+https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-latest.iso
+
+
 ## Install fonts for everyone
 
 ```
