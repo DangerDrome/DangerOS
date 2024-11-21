@@ -5,8 +5,8 @@
 # Bash script Aliases
 
 # Save & Load terminal profiles
-alias save='dconf dump /org/gnome/terminal/legacy/profiles:/ > ~/gnome-terminal-profiles.dconf'
-alias load='dconf load /org/gnome/terminal/legacy/profiles:/ < ~/gnome-terminal-profiles.dconf'
+alias save='dconf dump /org/gnome/terminal/legacy/profiles:/ > ~/gnome-terminal-profiles.dconf; printf "\n ${bold}${rev} Saved! ${reset} Saved terminal theme to: ${bold}~/gnome-terminal-profiles.dconf\n"'
+alias load='dconf load /org/gnome/terminal/legacy/profiles:/ < ~/gnome-terminal-profiles.dconf; printf "\n ${bold}${rev} Loaded! ${reset} Loaded terminal theme from: ${bold}~/gnome-terminal-profiles.dconf\n"'
 
 #######################################################
 # Variables
