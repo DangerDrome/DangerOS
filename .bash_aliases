@@ -89,8 +89,14 @@ alias rm='rm -iv'
 alias mkdir='mkdir -p'
 
 # Network stuff
+host=$(hostname -b)
+ip_one=$(hostname -I | awk '{print $1}')
+ip_two=$(hostname -I | awk '{print $2}')
+mac=$(hostname -I | awk '{print $3}')
+ts=$(hostname -f)
+
+alias ipconfig='printf "\n${fg_red}█▓▒░   Hostname | ${host}"; printf "\n${fg_green}█▓▒░         IP | ${ip_one}"; printf "\n${fg_green}█▓▒░        MAC | ${mac}"; printf "\n${fg_blue}█▓▒░  Tailscale | ${ip_two}"; printf "\n${fg_blue}█▓▒░     Domain | ${ts}\n"'
 alias ping='ping -c 5'
-alias ip='printf "\n${fg_green}█▓▒░  Hostname |  ";hostname -b;printf "${blue}█▓▒░ Tailscale | "; hostname -f; '
 
 # Directories
 alias home='cd ~'
