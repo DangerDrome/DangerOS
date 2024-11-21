@@ -1,7 +1,6 @@
 # DangerOS
-Installation instructions for DangerOS
+#### DangerOS is a streamlined operating system setup for Visual Effects.
 ```
-
                                                              ■██████■     
                                                           ████████████■   
                                                  ███████ █████    ███     
@@ -25,7 +24,6 @@ Installation instructions for DangerOS
  ░▓███████                                                            
  ■▓██▒░░░                
  ░░▒
-
 ```
 ## Install fonts for everyone
 
