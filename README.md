@@ -36,7 +36,7 @@ Visual effects is a pain in the ass, let's make is easier!
 
 
 # Ansible install
-### playbook:
+### Playbook:
 ```
 comming soon...
 ```
