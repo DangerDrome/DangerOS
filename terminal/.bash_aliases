@@ -66,9 +66,12 @@ strike=$(tput smxx)
 # echo -e "\033[0;33mYELLOW\t\033[1;33mLIGHT_YELLOW"
 # echo -e "\033[1;30mGRAY\t\033[0;37mLIGHT_GRAY"
 
-# General aliases
+# App aliases
 alias ff='fastfetch --logo /home/danger/logo_02.txt'
 alias neofetch='fastfetch --logo /home/danger/logo_02.txt'
+
+# DCC  aliases
+alias nuke='/opt/Nuke15.1v4/Nuke15.1 --NukeX -indie'
 
 # Changing "ls" to "exa" a fancy lister with icons
 alias ls='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa --icons --color=always --group-directories-first; printf "${reset}\n"'
