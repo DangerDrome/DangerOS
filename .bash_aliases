@@ -168,6 +168,8 @@ ${fg_green}${bold}
 ║ f              ║     stuff     ║ Search for stuff          ║
 ║ ip	         ║      --       ║ List Network Information  ║
 ║ 777	         ║   filename    ║ Make File executable      ║
+║ save	         ║      --       ║ Save Terminal Theme       ║
+║ load	         ║      --       ║ Load Terminal Theme       ║
 ╚════════════════╩═══════════════╩═══════════════════════════╝
 
 EOF
