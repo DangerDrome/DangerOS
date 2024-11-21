@@ -58,6 +58,14 @@ comming soon...
 https://rockylinux.org/download | 
 https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-latest.iso
 
+## Speed up dnf installs
+```
+sudo nano /etc/dnf/dnf.conf
+
+# Add the following lines:
+max_parallel_downloads=10
+fastestmirror=True
+```
 
 ## Install fonts for everyone
 
