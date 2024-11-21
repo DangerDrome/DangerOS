@@ -27,7 +27,14 @@ Installation instructions for DangerOS
  ░░▒
 
 ```
-
+## Install Fonts
+```
+sudo su
+curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf --output /usr/share/fonts/'MesloLGS NF Regular.ttf'
+curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf --output /usr/share/fonts/'MesloLGS NF Bold.ttf'
+curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf --output /usr/share/fonts/'MesloLGS NF Italic.ttf'
+curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf --output /usr/share/fonts/'MesloLGS NF Bold Italic.ttf'
+```
 ## Install Papirus Icons
 #### https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
 Install it in the root folder:
