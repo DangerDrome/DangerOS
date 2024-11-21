@@ -1,19 +1,78 @@
+#!/bin/bash
+#░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀▄░█▀█░█▀▀
+#░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
+#░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
+# Bash script Aliases
+
+#######################################################
+# Variables
+#######################################################
+ver="1.0.1"
+
+
+#######################################################
+# Terminal Styles
+#######################################################
+
+# Text FG Colors
+fg_black=$(tput setaf 0)
+fg_red=$(tput setaf 1)
+fg_green=$(tput setaf 2)
+fg_yellow=$(tput setaf 3)
+fg_blue=$(tput setaf 4)
+fg_pink=$(tput setaf 5)
+fg_cyan=$(tput setaf 6)
+fg_grey=$(tput setaf 7)
+
+# Text BG Colors
+bg_black=$(tput setab 0)
+bg_red=$(tput setab 1)
+bg_green=$(tput setab 2)
+bg_yellow=$(tput setab 3)
+bg_blue=$(tput setab 4)
+bg_pink=$(tput setab 5)
+bg_cyan=$(tput setab 6)
+bg_grey=$(tput setab 7)
+
+# Text Attributes
+reset=$(tput sgr0)
+bold=$(tput bold)
+dim=$(tput dim)
+italic=$(tput sitm)
+underline=$(tput smul)
+blink=$(tput blink)
+rev=$(tput rev)
+strike=$(tput smxx)
+
+# Tests
+# printf "${reset}${bold}bold\n"
+# printf "${reset}${dim}dim\n"
+# printf "${reset}${italic}italic\n"
+# printf "${reset}${underline}underlined\n"
+# printf "${reset}${blink}blinking\n"
+# printf "${reset}${rev}reversed\n"
+# printf "${reset}${strike}strikethrough\n${reset}\n"
+
+# echo -e "\033[0mNC (No color)"
+# echo -e "\033[1;37mWHITE\t\033[0;30mBLACK"
+# echo -e "\033[0;34mBLUE\t\033[1;34mLIGHT_BLUE"
+# echo -e "\033[0;32mGREEN\t\033[1;32mLIGHT_GREEN"
+# echo -e "\033[0;36mCYAN\t\033[1;36mLIGHT_CYAN"
+# echo -e "\033[0;31mRED\t\033[1;31mLIGHT_RED"
+# echo -e "\033[0;35mPURPLE\t\033[1;35mLIGHT_PURPLE"
+# echo -e "\033[0;33mYELLOW\t\033[1;33mLIGHT_YELLOW"
+# echo -e "\033[1;30mGRAY\t\033[0;37mLIGHT_GRAY"
+
 # General aliases
 alias ff='fastfetch --logo /home/danger/logo_02.txt'
 alias neofetch='fastfetch --logo /home/danger/logo_02.txt'
 
-# alias ls='ls --color=auto'
-# alias ll='ls -alF'
-# alias la='ls -A'
-# alias l='ls -CF'
-
 # Changing "ls" to "exa" a fancy lister with icons
-blue=$(tput setaf 4)
-alias ls='printf "\n"; exa --icons --color=always --group-directories-first; printf "\n"'
-alias ll='printf "\n"; exa -alF --icons --color=always --group-directories-first; printf "\n"; printf "${blue}█▓▒░ [Size:$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed "s/total //") | Files:$(/bin/ls -A -1 | /usr/bin/wc -l)]"; printf "\n"'
-alias la='printf "\n"; exa -a --icons --color=always --group-directories-first; printf "\n"'
-alias l='printf "\n"; exa -F --icons --color=always --group-directories-first; printf "\n"'
-alias l.='printf "\n"; exa -a | egrep "^\."'
+alias ls='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa --icons --color=always --group-directories-first; printf "\n"'
+alias ll='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa -alF --icons --color=always --group-directories-first; printf "\n"; printf "${fg_black}${rev}█▓▒░ [Size:$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed "s/total //") | Files:$(/bin/ls -A -1 | /usr/bin/wc -l)] "; printf "\n"'
+alias la='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa -a --icons --color=always --group-directories-first; printf "\n"'
+alias l='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa -F --icons --color=always --group-directories-first; printf "\n"'
+alias l.='printf "\n${fg_black}${rev}█▓▒░ "; pwd; printf "\n${reset}"; exa -a | egrep "^\."'
 
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
@@ -28,12 +87,16 @@ alias mkdir='mkdir -p'
 
 # Network stuff
 alias ping='ping -c 5'
+alias ip='printf "\n${fg_green}█▓▒░  Hostname |  ";hostname -b;printf "${blue}█▓▒░ Tailscale | "; hostname -f; '
 
 # Directories
 alias home='cd ~'
+alias h='home'
 alias root='cd /'
 alias dtop='cd ~/Desktop'
+alias d='dtop'
 alias dload='cd ~/Downloads'
+alias dl='dload'
 alias gdrive='cd /run/user/1000/gvfs/'
 
 # Change Directories
@@ -48,12 +111,12 @@ alias rebootsafe='sudo shutdown -r now'
 alias rebootforce='sudo shutdown -r -n now'
 
 # alias chmod commands
-alias mx='chmod a+x'
-alias 000='chmod -R 000'
-alias 644='chmod -R 644'
-alias 666='chmod -R 666'
-alias 755='chmod -R 755'
-alias 777='chmod -R 777'
+alias mx='sudo chmod a+x'
+alias 000='sudo chmod -R 000'
+alias 644='sudo chmod -R 644'
+alias 666='sudo chmod -R 666'
+alias 755='sudo chmod -R 755'
+alias 777='sudo chmod -R 777'
 
 # dnf stuff
 alias update='sudo dnf update -y'
@@ -63,11 +126,12 @@ alias install='sudo dnf install -y'
 alias css='sudo nano ~/.config/gtk-4.0/gtk.css'
 
 # ohmyposh list themes
-alias themes='printf "\n[>] Listing Oh-My-Posh Themes: \n\n"; ls ~/.poshthemes; printf "\n"'
+# alias themes='printf "\n[>] Listing Oh-My-Posh Themes: \n\n"; ls ~/.poshthemes; printf "\n"'
 
 # Reload shell
-alias reload='printf "\n[>] Reloading the shell... \n\n"; exec bash'
+alias reload='printf "\n${fg_black}${rev}█▓▒░ ${blink}Terminal Reloaded. ${reset}"; exec bash'
 alias r='c; reload'
+alias u='usage'
 
 #Use this for when the boss comes around to look busy.
 alias busy="cat /dev/urandom | hexdump -C | grep 'ca fe'" 
@@ -77,6 +141,34 @@ alias busy="cat /dev/urandom | hexdump -C | grep 'ca fe'"
 # SPECIAL FUNCTIONS
 #######################################################
 
+
+
+# Information
+usage()
+{
+# all_aliases=$(compgen -a)
+cat << EOF
+${fg_green}${bold}
+
+		░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀▄░█▀█░█▀▀
+		░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
+		░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
+		 ${dim}${rev}█▓▒░  ${blink}Welcome to DangerOS${reset}${bold}${dim}${rev}  ░▒▓█${reset}${bold}
+
+╔════════════════╦═══════════════╦═══════════════════════════╗
+║    Command     ║     Flag      ║        Description        ║
+╠════════════════╬═══════════════╬═══════════════════════════╣
+║ h              ║      --       ║ ~/Home Directory          ║
+║ d              ║      --       ║ ~/Desktop Directory       ║
+║ dl             ║      --       ║ ~/Downloads Directory     ║
+║ root           ║      --       ║ ~/Root Directory          ║
+║ f              ║     stuff     ║ Search for stuff          ║
+║ ip	         ║      --       ║ List Network Information  ║
+║ 777	         ║   filename    ║ Make File executable      ║
+╚════════════════╩═══════════════╩═══════════════════════════╝
+
+EOF
+}
 
 # Show the current distribution
 distribution ()
@@ -167,7 +259,8 @@ ver ()
 
 # Shell intro
 printf "\n\n"
-cat << "EOF"
+cat << EOF
+${fg_green}${bold}
                                                               ■██████■     
                                                           ████████████■   
                                                   ███████ █████    ███     
@@ -187,12 +280,10 @@ cat << "EOF"
       ░████  ░███████                                                          
     ░▓████░████████                                                    ░█▀█░█▀▀
     ░▓███████████                                                      ░█░█░▀▀█
-    ░▓███████                                                          ░▀▀▀░▀▀▀
-  ░▓███████                                                              v0.7.1
-  ■▓██▒░░░                
+    ░▓███████                                                          ░▀▀▀░▀▀▀ v${ver}
+  ░▓███████
+  ■▓██▒░░░
   ░░▒
 
 
 EOF
-info=$(ver)
-# printf "${blue}${info}"
