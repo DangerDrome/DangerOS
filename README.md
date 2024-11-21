@@ -45,8 +45,3 @@ Switch theme to black:
 papirus-folders -C black --theme Papirus-Dark
 ```
 
-
-
-
-![image](https://github.com/user-attachments/assets/9b56149a-7402-4552-949e-e7c64431cc1f)
-
