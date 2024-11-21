@@ -44,4 +44,8 @@ Switch theme to black:
 ```
 papirus-folders -C black --theme Papirus-Dark
 ```
-
+# Install theme
+```
+cd /usr/share/themes
+cp
+```
