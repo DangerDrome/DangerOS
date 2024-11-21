@@ -1,5 +1,5 @@
 # DangerOS
-dotfiles and scripts for DangerOS (rocky Linux 9.x)
+Installation instructions for DangerOS
 ```
 
                                                              ■██████■     
