@@ -22,7 +22,7 @@ Installation instructions for DangerOS
    ░▓████░████████                                                    ░█▀█░█▀▀
    ░▓███████████                                                      ░█░█░▀▀█
    ░▓███████                                                          ░▀▀▀░▀▀▀
- ░▓███████                                                              v0.7.1
+ ░▓███████                                                            
  ■▓██▒░░░                
  ░░▒
 
@@ -40,14 +40,15 @@ Install it in the root folder:
 ```
 sudo wget -qO- https://git.io/papirus-folders-install | sh
 ```
-Switch theme to black:
+Switch folder color to black:
 ```
 papirus-folders -C black --theme Papirus-Dark
 ```
 # Install custom Adwaita-dark themes
 Download the themes zip:
 #### https://github.com/DangerDrome/DangerOS/blob/main/themes.tar.xz
+Extract and copy the folder to the themes directory:
 ```
 cd /usr/share/themes
-cp 
+sudo cp -r /home/danger/Downloads/Adwaita-gray-dark 
 ```
