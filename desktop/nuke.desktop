@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Nuke 15.1v4
+Comment= Nuke desktop shortcut
+Exec="/opt/Nuke15.1v4/Nuke15.1" --indie %f
+Terminal=false
+MimeType=application/x-nuke;
+Icon=/opt/Nuke15.1v4/plugins/icons/NukeApp256.png
+Type=Application
+Categories=Graphics;2DGraphics;RasterGraphics;FLTK;
