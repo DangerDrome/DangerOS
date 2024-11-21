@@ -42,7 +42,7 @@ reset=$(tput sgr0)
 bold=$(tput bold)
 dim=$(tput dim)
 italic=$(tput sitm)
-underline=$(tput smul)
+under=$(tput smul)
 blink=$(tput blink)
 rev=$(tput rev)
 strike=$(tput smxx)
@@ -51,7 +51,7 @@ strike=$(tput smxx)
 # printf "${reset}${bold}bold\n"
 # printf "${reset}${dim}dim\n"
 # printf "${reset}${italic}italic\n"
-# printf "${reset}${underline}underlined\n"
+# printf "${reset}${under}underlined\n"
 # printf "${reset}${blink}blinking\n"
 # printf "${reset}${rev}reversed\n"
 # printf "${reset}${strike}strikethrough\n${reset}\n"
@@ -116,8 +116,9 @@ alias c='clear'
 alias f="find . | grep "
 
 # Alias's for safe and forced reboots
-alias rebootsafe='sudo shutdown -r now'
-alias rebootforce='sudo shutdown -r -n now'
+alias reboots='sudo shutdown -r now'
+alias rebootf='sudo shutdown -r -n now'
+alias reboot='sudo reboot'
 
 # alias chmod commands
 alias mx='sudo chmod a+x'
@@ -143,7 +144,7 @@ alias r='c; reload'
 alias u='usage'
 
 #Use this for when the boss comes around to look busy.
-alias busy="cat /dev/urandom | hexdump -C | grep 'ca fe'" 
+alias busy='printf "${bold}${under}${rev}"; cat /dev/urandom | hexdump -C | grep "ca fe"'
 
 
 #######################################################
