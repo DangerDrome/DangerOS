@@ -4,14 +4,14 @@
 #░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
 # Bash script Aliases
 
+# Save & Load terminal profiles
+alias save='dconf dump /org/gnome/terminal/legacy/profiles:/ > ~/gnome-terminal-profiles.dconf'
+alias load='dconf load /org/gnome/terminal/legacy/profiles:/ < ~/gnome-terminal-profiles.dconf'
+
 #######################################################
 # Variables
 #######################################################
 ver="1.0.1"
-
-# Save & Load terminal profiles
-alias save='dconf dump /org/gnome/terminal/legacy/profiles:/ > ~/gnome-terminal-profiles.dconf'
-alias save='dconf load /org/gnome/terminal/legacy/profiles:/ < ~/gnome-terminal-profiles.dconf'
 
 #######################################################
 # Terminal Styles
