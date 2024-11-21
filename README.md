@@ -27,7 +27,7 @@ Installation instructions for DangerOS
  ░░▒
 
 ```
-## Install Fonts for everyone
+## Install fonts for everyone
 
 ```
 cd /usr/share/fonts
