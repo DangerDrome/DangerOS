@@ -44,8 +44,10 @@ Switch theme to black:
 ```
 papirus-folders -C black --theme Papirus-Dark
 ```
-# Install theme
+# Install custom Adwaita-dark themes
+Download the themes zip:
+#### https://github.com/DangerDrome/DangerOS/blob/main/themes.tar.xz
 ```
 cd /usr/share/themes
-cp
+cp 
 ```
