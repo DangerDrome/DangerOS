@@ -97,9 +97,11 @@ ts=$(hostname -f)
 
 alias ipconfig='printf "\n${fg_red}█▓▒░   Hostname | ${host}"; printf "\n${fg_green}█▓▒░         IP | ${ip_one}"; printf "\n${fg_green}█▓▒░        MAC | ${mac}"; printf "\n${fg_blue}█▓▒░  Tailscale | ${ip_two}"; printf "\n${fg_blue}█▓▒░     Domain | ${ts}\n"'
 alias ping='ping -c 5'
+alias selinux='printf "\n"; getenforce; sudo nano /etc/selinux/config'
 
 # Directories
 alias home='cd ~'
+alias fonts='cd /usr/share/fonts'
 alias h='home'
 alias root='cd /'
 alias dtop='cd ~/Desktop'
