@@ -1,7 +1,3 @@
-sudo usermod -aG wheel danger
-su - danger
-sudo dnf update
-
 ```
                                                              ■██████■     
                                                           ████████████■   
@@ -39,6 +35,10 @@ Visual effects is a pain in the ass, let's make is easier!
 - [x] Step by step install
 
 
+
+
+
+
 # Ansible install
 ### Playbook:
 ```
@@ -46,6 +46,11 @@ comming soon...
 ```
 > [!TIP]
 > Lean more about ansible here: https://www.ansible.com/how-ansible-works/
+
+
+
+
+
 
 
 # Bash install
@@ -63,6 +68,11 @@ comming soon...
 > - With great power comes great responsibility.
 
 
+
+
+
+
+
 # Step by step install
 ## 1. Download rocky linux
 https://rockylinux.org/download | 
@@ -75,6 +85,21 @@ sudo nano /etc/dnf/dnf.conf
 # Add the following lines:
 max_parallel_downloads=10
 fastestmirror=True
+```
+
+## Install pip
+```
+sudo dnf install python3-pip -y
+```
+
+## Install gnome extension CLI
+```
+sudo pip install --upgrade git+https://github.com/essembeh/gnome-extensions-cli -y
+```
+
+## Install ntfs stuff
+```
+sudo dnf install ntfs-3g -y
 ```
 
 ## Install fonts for everyone
