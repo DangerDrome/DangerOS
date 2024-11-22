@@ -169,23 +169,33 @@ sudo dnf install gnome-extensions-app-40.0-3.el9.x86_64 -y
 ```
 
 
-## Install gnome extension CLI
-```
-sudo pip install --upgrade git+https://github.com/essembeh/gnome-extensions-cli -y
-```
-
-
 ## Install Gnome Extension Manager
 ```
 flatpak install flathub com.mattjakeman.ExtensionManager -y
 ```
 
 
+## Install gnome extension CLI
+```
+sudo pip install --upgrade git+https://github.com/essembeh/gnome-extensions-cli -y
+```
+
+> [!TIP]
+> You can search for flatpak apps via the command line: 
+> ```
+> flatpak search <app-name>
+> ```
+
 ## Install Remmina (Remote Desktop Client)
 ```
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install --user flathub org.remmina.Remmina
+```
 
+
+## Install Resource (A Windows-like Task Manager)
+```
+flatpak install flathub net.nokyan.Resources -y
 ```
 
 
