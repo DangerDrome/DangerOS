@@ -104,6 +104,12 @@ sudo dnf install tcsh -y
 ```
 
 
+## install timemachine (backups)
+```
+sudo dnf install timemachine -y
+```
+
+
 ## Install mono icon fonts for the terminal 
 
 ```
