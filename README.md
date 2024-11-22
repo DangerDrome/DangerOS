@@ -118,9 +118,8 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-nonf
 sudo dnf install flatpak -y
 ```
 ```
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo -y
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 ```
-
 
 ## Install xrdp
 ```
@@ -175,6 +174,11 @@ sudo dnf install gnome-extensions-app-40.0-3.el9.x86_64 -y
 sudo pip install --upgrade git+https://github.com/essembeh/gnome-extensions-cli -y
 ```
 
+
+## Install Gnome Extension Manager
+```
+flatpak install flathub com.mattjakeman.ExtensionManager -y
+```
 
 
 ## Install fonts for everyone
