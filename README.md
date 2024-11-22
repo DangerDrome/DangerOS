@@ -211,6 +211,18 @@ flatpak install flathub md.obsidian.Obsidian -y
 ```
 
 
+## Install ProtonPlus (for steam)
+```
+flatpak install com.vysp3r.ProtonPlus -y
+```
+
+
+## Install Steam (for games)
+```
+flatpak install com.valvesoftware.Steam -y
+```
+
+
 ## Install Blender
 ```
 flatpak install flathub org.blender.Blender
