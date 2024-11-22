@@ -199,6 +199,18 @@ flatpak install flathub net.nokyan.Resources -y
 ```
 
 
+## Install VSCode
+```
+flatpak install flathub com.visualstudio.code -y
+```
+
+
+## Install Obsidian
+```
+flatpak install flathub md.obsidian.Obsidian -y
+```
+
+
 ## Install Blender
 ```
 flatpak install flathub org.blender.Blender
