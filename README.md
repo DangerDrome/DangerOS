@@ -104,9 +104,9 @@ sudo dnf install tcsh -y
 ```
 
 
-## install timemachine (backups)
+## install timeshift (backups)
 ```
-sudo dnf install timemachine -y
+sudo dnf install timeshift -y
 ```
 
 
