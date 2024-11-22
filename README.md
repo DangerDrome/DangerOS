@@ -133,6 +133,12 @@ sudo firewall-cmd --reload
 ```
 
 
+## Install tailscale
+```
+curl -fsSL https://tailscale.com/install.sh | sh
+```
+
+
 ## Install ntfs stuff
 ```
 sudo dnf install ntfs-3g -y
@@ -144,9 +150,16 @@ sudo dnf install ntfs-3g -y
 sudo dnf install python3-pip -y
 ```
 
+
 ## Install gnome-tweaks
 ```
 sudo dnf install gnome-tweaks -y
+```
+
+
+## Install gnome-extensions
+```
+sudo dnf install gnome-extensions-app-40.0-3.el9.x86_64 -y
 ```
 
 
