@@ -100,6 +100,15 @@ fastestmirror=True
 ```
 
 
+## Disable SELinux
+```
+sudo nano /etc/selinux/config 
+```
+Add this line:
+- SELINUX=disabled
+
+
+
 ## install epel repo
 ```
 sudo dnf install epel-release -y
