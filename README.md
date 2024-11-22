@@ -97,6 +97,13 @@ https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-lat
 sudo dnf install nano -y
 ```
 
+
+## install tcsh
+```
+sudo dnf install tcsh -y
+```
+
+
 ## Install mono icon fonts for the terminal 
 
 ```
