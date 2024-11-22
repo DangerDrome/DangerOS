@@ -105,6 +105,13 @@ fastestmirror=True
 sudo dnf install epel-release -y
 ```
 
+## install aditional rpms (rpmfusion,mesa)
+```
+cd ~/Downloads
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/mesa-libGLU-9.0.1-6.el9.x86_64.rpm --output 'mesa-libGLU-9.0.1-6.el9.x86_64.rpm'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-free-release-9.noarch.rpm --output 'rpmfusion-free-release-9.noarch.rpm'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-nonfree-release-9.noarch.rpm --output 'rpmfusion-nonfree-release-9.noarch.rpm'
+```
 
 ## install flatpak repo
 ```
