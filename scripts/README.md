@@ -1,1 +1,4 @@
-# Gnome & Nautilus scripts
+# Gnome & Nautilus
+```
+~/.local/share/nautilus/scripts
+```
