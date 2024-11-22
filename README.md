@@ -54,7 +54,7 @@ comming soon...
 
 
 # Bash install
-### Run the folloing in a shell:
+### Run the following in a shell:
 ```
 comming soon...
 ```
@@ -77,6 +77,18 @@ comming soon...
 ## 1. Download rocky linux
 https://rockylinux.org/download | 
 https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-latest.iso
+
+> [!TIP]
+> The workstation ISO is recommeded for this install. 
+> There are a sperate set of instructions for a minimal server install.
+>
+> 1. Download and install vendtoy on a usb thumb drive and copy the ISO to it. 
+> 2. Set system to boot to thumbdrive in the system bios.
+> 3. Follow the install instructions for the iso and ideally install onto an nvme drive on the system.
+> 4. reboot the system and login as an admin/sudo user and open the terminal.
+
+> [!WARNING]
+> The renaming instructions are mostly done via the gnome terminal.
 
 ## Speed up dnf installs
 ```
