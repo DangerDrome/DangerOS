@@ -60,7 +60,7 @@ comming soon...
 ```
 > [!WARNING]
 > Use bash scripts at your own risk, read the code carefully before executing.
->We trust you have received the usual lecture from the local System
+> We trust you have received the usual lecture from the local System
 > Administrator. It usually boils down to these three things:
 >
 > - Respect the privacy of others.
@@ -87,20 +87,58 @@ max_parallel_downloads=10
 fastestmirror=True
 ```
 
+
+## install epel repo
+```
+sudo dnf install epel-release -y
+```
+
+
+## install flatpak repo
+```
+sudo dnf install flatpak -y
+```
+```
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo -y
+```
+
+
+## Install xrdp
+```
+sudo dnf install xrdp -y
+```
+```
+sudo systemctl start xrdp
+```
+```
+sudo systemctl enable xrdp
+```
+```
+sudo firewall-cmd --permanent --add-port=3389/tcp
+```
+```
+sudo firewall-cmd --reload
+```
+
+
+## Install ntfs stuff
+```
+sudo dnf install ntfs-3g -y
+```
+
+
 ## Install pip
 ```
 sudo dnf install python3-pip -y
 ```
+
 
 ## Install gnome extension CLI
 ```
 sudo pip install --upgrade git+https://github.com/essembeh/gnome-extensions-cli -y
 ```
 
-## Install ntfs stuff
-```
-sudo dnf install ntfs-3g -y
-```
+
 
 ## Install fonts for everyone
 
@@ -113,12 +151,14 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20N
 sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Italic.ttf --output 'MesloLGS-NF-Italic.ttf'
 sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Bold%20Italic.ttf --output 'MesloLGS-NF-Bold-Italic.ttf'
 ```
+
 ## Install Papirus Icons
 #### https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
 Install it in the root folder:
 ```
 sudo wget -qO- https://git.io/papirus-icon-theme-install | sh
 ```
+
 ## Install Papirus Folder Colors
 #### https://github.com/PapirusDevelopmentTeam/papirus-folders
 Install it in the root folder:
