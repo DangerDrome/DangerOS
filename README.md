@@ -90,6 +90,32 @@ https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-lat
 > [!WARNING]
 > The renaming instructions are mostly done via the gnome terminal.
 
+
+
+## install Nano
+```
+sudo dnf install nano -y
+```
+
+## Install mono icon fonts for the terminal 
+
+```
+cd /usr/share/fonts
+sudo mkdir meslo-lgs-nf
+cd meslo-lgs-nf
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Regular.ttf --output 'MesloLGS-NF-Regular.ttf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Bold.ttf --output 'MesloLGS-NF-Bold.ttf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Italic.ttf --output 'MesloLGS-NF-Italic.ttf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Bold%20Italic.ttf --output 'MesloLGS-NF-Bold-Italic.ttf'
+```
+
+
+## Download terminal color scheme
+Get it from the DangerOS/themes folder:
+- gnome-terminal-profiles.dconf
+
+
+
 ## Speed up dnf installs
 ```
 sudo nano /etc/dnf/dnf.conf
@@ -256,18 +282,6 @@ flatpak install com.valvesoftware.Steam -y
 flatpak install flathub org.blender.Blender
 ```
 
-
-## Install fonts for everyone
-
-```
-cd /usr/share/fonts
-sudo mkdir meslo-lgs-nf
-cd meslo-lgs-nf
-sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Regular.ttf --output 'MesloLGS-NF-Regular.ttf'
-sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Bold.ttf --output 'MesloLGS-NF-Bold.ttf'
-sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Italic.ttf --output 'MesloLGS-NF-Italic.ttf'
-sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/MesloLGS%20NF%20Bold%20Italic.ttf --output 'MesloLGS-NF-Bold-Italic.ttf'
-```
 
 ## Install Papirus Icons
 #### https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
