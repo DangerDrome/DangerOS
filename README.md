@@ -275,6 +275,12 @@ flatpak install flathub md.obsidian.Obsidian -y
 ```
 
 
+## Install Celluloid
+```
+flatpak install io.github.celluloid_player.Celluloid -y
+```
+
+
 ## Install ProtonPlus (for steam)
 ```
 flatpak install com.vysp3r.ProtonPlus -y
