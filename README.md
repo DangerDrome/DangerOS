@@ -144,6 +144,11 @@ sudo dnf install ntfs-3g -y
 sudo dnf install python3-pip -y
 ```
 
+## Install gnome-tweaks
+```
+sudo dnf install gnome-tweaks -y
+```
+
 
 ## Install gnome extension CLI
 ```
