@@ -1,3 +1,7 @@
+sudo usermod -aG wheel danger
+su - danger
+sudo dnf update
+
 ```
                                                              ■██████■     
                                                           ████████████■   
@@ -51,6 +55,12 @@ comming soon...
 ```
 > [!WARNING]
 > Use bash scripts at your own risk, read the code carefully before executing.
+>We trust you have received the usual lecture from the local System
+> Administrator. It usually boils down to these three things:
+>
+> - Respect the privacy of others.
+> - Think before you type.
+> - With great power comes great responsibility.
 
 
 # Step by step install
