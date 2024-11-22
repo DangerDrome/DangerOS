@@ -144,6 +144,11 @@ sudo firewall-cmd --reload
 curl -fsSL https://tailscale.com/install.sh | sh
 ```
 
+## Install KTailctl a tailscale GUI
+```
+flatpak install org.fkoehler.KTailctl -y
+```
+
 
 ## Install ntfs stuff
 ```
