@@ -355,6 +355,11 @@ flatpak install com.vysp3r.ProtonPlus -y
 ```
 flatpak install com.valvesoftware.Steam -y
 ```
+<br>
+<br>
+<br>
+<br>
+
 
 ## DCC apps
 
