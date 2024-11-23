@@ -27,13 +27,13 @@
 #### DangerOS [Dangerous] is a streamlined spin on the Rocky Linux Operating System specifically for use in Visual Effects and Content Creation.
 DangerOS aims to setup a streamlined workstation system and desktop environment similar to windows 11 (or macOS comming soon...)
 <br>
-features include:
-- Windows 11 like layout(Application lanucher, task manager, etc)
-- A usable desktop (shortcuts, etc)
-- Useful default applications
-- Useful codecs for VFX
-- Remote Desktop features 
-- A bunch of other default settings
+features included:
+- [x] Windows 11 like layout(Application lanucher, task manager, etc)
+- [x] A usable desktop (shortcuts, etc)
+- [x] Useful default applications
+- [x] Useful codecs for VFX
+- [x] Remote Desktop features
+- [ ] Currently testing more stuff
 
 Apps included:
 - [x] Houdini
