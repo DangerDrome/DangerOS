@@ -92,14 +92,14 @@ https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-lat
 
 
 
-## install Nano
+## 2. install Nano
 ```
 sudo dnf install nano -y
 ```
 
 
 
-## Speed up dnf installs
+## 3. Speed up dnf installs
 ```
 sudo nano /etc/dnf/dnf.conf
 
@@ -109,7 +109,7 @@ fastestmirror=True
 ```
 
 
-## Disable SELinux
+## 4. Disable SELinux
 ```
 sudo nano /etc/selinux/config 
 ```
@@ -118,19 +118,20 @@ Add this line:
 
 
 
-## install tcsh
+## 5. install tcsh
 ```
 sudo dnf install tcsh -y
 ```
 
 
-## install epel repo
+## 6. install epel repo
 ```
 sudo dnf install epel-release -y
 ```
 
 
-## install aditional rpms (rpmfusion,mesa)
+## 7. install aditional rpms (rpmfusion,mesa)
+download then double cliek to install
 ```
 cd ~/Downloads
 sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/mesa-libGLU-9.0.1-6.el9.x86_64.rpm --output 'mesa-libGLU-9.0.1-6.el9.x86_64.rpm'
@@ -139,7 +140,7 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-nonf
 ```
 
 
-## install flatpak repo
+## 8. install flatpak repo
 ```
 sudo dnf install flatpak -y
 ```
@@ -149,13 +150,13 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 
 
 
-## install timeshift (backups)
+## 9. install timeshift (backups)
 ```
 sudo dnf install timeshift -y
 ```
 
 
-## Install mono icon fonts for the terminal 
+## 10. Install mono icon fonts for the terminal 
 
 ```
 cd /usr/share/fonts
@@ -178,13 +179,13 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-ner
 ```
 
 
-## Download terminal color scheme
+## 11. Download terminal color scheme
 Get it from the DangerOS/themes folder:
 - gnome-terminal-profiles.dconf
 
 
 
-## Install xrdp
+## 12. Install xrdp
 ```
 sudo dnf install xrdp -y
 ```
@@ -202,54 +203,56 @@ sudo firewall-cmd --reload
 ```
 
 
-## Install tailscale
+## 13. Install tailscale (VPN)
+follow command promt instructions
 ```
 curl -fsSL https://tailscale.com/install.sh | sh
 ```
 
-## Install KTailctl a tailscale GUI
+
+## 14. Install TrayScale (a tailscale GUI)
 ```
-flatpak install org.fkoehler.KTailctl -y
+flatpak install dev.deedles.Trayscale -y
 ```
 
 
-## Install ntfs stuff
+## 15. Install ntfs stuff(so you can mount ntfs drives)
 ```
 sudo dnf install ntfs-3g -y
 ```
 
 
-## Install pip
+## 16. Install pip (for python packeages)
 ```
 sudo dnf install python3-pip -y
 ```
 
 
-## Install gnome-tweaks
+## 17. Install gnome-tweaks
 ```
 sudo dnf install gnome-tweaks -y
 ```
 
 
-## Install gnome-extensions
+## 18. Install gnome-extensions
 ```
 sudo dnf install gnome-extensions-app-40.0-3.el9.x86_64 -y
 ```
 
 
-## Install Gnome Extension Manager
+## 19. Install Gnome Extension Manager
 ```
 flatpak install flathub com.mattjakeman.ExtensionManager -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark com.mattjakeman.ExtensionManager
 ```
 
 
-## Install gnome extension CLI
+## 20. Install gnome extension CLI (no sure if this is required, still testing)
 ```
 sudo pip install --upgrade git+https://github.com/essembeh/gnome-extensions-cli -y
 ```
 
-## Install Nvidia Drivers
+## 21. Install Nvidia Drivers
 You can use the nvidia-smi command after install/reboot to check the drivers 
 ```
 sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo 
