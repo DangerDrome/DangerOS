@@ -35,7 +35,6 @@
 - [x] Useful codecs for VFX
 - [x] Remote Desktop features
 - Currently testing more stuff...
-<br>
 
 #### Apps included:
 - [x] Houdini
@@ -45,7 +44,6 @@
 - [x] Resolve
 - [x] Rv
 - [x] Deadline
-<br>
 
 ## Index
 - [x] Overview
