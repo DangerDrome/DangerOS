@@ -28,6 +28,7 @@
 
 
 #### Features included:
+- [x] Ubiquitous Dark Mode
 - [x] Windows 11 like layout
 - [ ] MacOS like layout
 - [x] A usable desktop (shortcuts, etc)
