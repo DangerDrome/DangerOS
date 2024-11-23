@@ -274,6 +274,13 @@ sudo flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
 
 
 
+## Install Sticky Notes
+```
+sudo flatpak install com.vixalien.sticky -y
+```
+
+
+
 ## Install Remmina (Remote Desktop Client)
 ```
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
