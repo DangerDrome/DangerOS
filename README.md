@@ -34,10 +34,10 @@ features include:
 - Useful codecs for VFX
 - Remote Desktop features 
 - A bunch of other default settings
-
-
+<br>
+<br>
 ## Index
-- [ ] Overview
+- [x] Overview
 - [ ] Ansible install
 - [ ] Bash script install
 - [x] Step by step install
