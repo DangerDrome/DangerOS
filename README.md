@@ -25,7 +25,6 @@
 ```
 # DangerOS
 #### DangerOS [Dangerous] is a streamlined spin on the Rocky Linux Operating System specifically for use in Visual Effects and Content Creation.
-Hey, Visual Effects is a pain in the ass; let's make is easier!
 DangerOS aims to setup a streamlined workstation system and desktop environement similar to windows 11 (or macOS comming soon...)
 <br>
 features include:
