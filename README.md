@@ -235,6 +235,7 @@ sudo dnf install gnome-extensions-app-40.0-3.el9.x86_64 -y
 ## Install Gnome Extension Manager
 ```
 flatpak install flathub com.mattjakeman.ExtensionManager -y
+sudo flatpak override --env=GTK_THEME=Adwaita:dark com.mattjakeman.ExtensionManager
 ```
 
 
@@ -273,6 +274,7 @@ flatpak install --user flathub org.remmina.Remmina
 ## Install Resource (A Windows-like Task Manager)
 ```
 flatpak install flathub net.nokyan.Resources -y
+sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
 ```
 
 
