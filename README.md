@@ -89,7 +89,7 @@ comming soon...
 > - Respect the privacy of others.
 > - Think before you type.
 > - With great power comes great responsibility.
-### Run the following in a shell:
+### Run the following in a shell after the main OS install:
 ```
 comming soon...
 ```
