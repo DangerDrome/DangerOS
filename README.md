@@ -331,38 +331,7 @@ sudo depmod -a
 > ```
 
 
-
-### 1. Install Calendar
-```
-flatpak install flathub org.gnome.Calendar -y
-sudo flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
-```
-<br>
-
-
-### 2. Install Sticky Notes
-```
-sudo flatpak install com.vixalien.sticky -y
-```
-<br>
-
-
-### 3. Install Paper (very simple markdown notes)
-```
-sudo flatpak install io.posidon.Paper -y
-```
-<br>
-
-
-### 4. Install Remmina (Remote Desktop Client)
-```
-flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install --user flathub org.remmina.Remmina
-```
-<br>
-
-
-### 5. Install Resources (A Windows-like Task Manager)
+### 1. Install Resources (A Windows-like Task Manager)
 ```
 flatpak install flathub net.nokyan.Resources -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
@@ -370,35 +339,75 @@ sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
 <br>
 
 
-### 6. Install VSCode
+
+### 2. Install Remmina (Remote Desktop Client)
+```
+flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install --user flathub org.remmina.Remmina
+```
+<br>
+
+
+
+### 3. Install Boxes (Simple Virtual machine software)
+```
+sudo flatpak install org.gnome.Boxes -y
+```
+<br>
+
+
+### 4. Install Calendar
+```
+flatpak install flathub org.gnome.Calendar -y
+sudo flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
+```
+<br>
+
+
+### 5. Install Sticky Notes
+```
+sudo flatpak install com.vixalien.sticky -y
+```
+<br>
+
+
+### 6. Install Paper (very simple markdown notes)
+```
+sudo flatpak install io.posidon.Paper -y
+```
+<br>
+
+
+
+### 7. Install VSCode
 ```
 flatpak install flathub com.visualstudio.code -y
 ```
 <br>
 
 
-### 7. Install Obsidian
+### 8. Install Obsidian
 ```
 flatpak install flathub md.obsidian.Obsidian -y
 ```
 <br>
 
 
-### 8. Install Celluloid
+### 9. Install Celluloid
 ```
 flatpak install io.github.celluloid_player.Celluloid -y
 ```
 <br>
 
 
-### 9. Install ProtonPlus (for steam)
+### 10. Install ProtonPlus (for steam)
 ```
 flatpak install com.vysp3r.ProtonPlus -y
 ```
 <br>
 
 
-### 10. Install Steam (for games/ nvidia testing)
+### 11. Install Steam (for games/ nvidia testing)
 ```
 flatpak install com.valvesoftware.Steam -y
 ```
