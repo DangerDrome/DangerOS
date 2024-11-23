@@ -74,7 +74,8 @@ comming soon...
 
 
 # Step by step install
-## 1. Download rocky linux
+## Base system stuff
+### 1. Download rocky linux
 https://rockylinux.org/download | 
 https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-latest.iso
 
