@@ -34,7 +34,7 @@ features included:
 - [x] Useful default applications
 - [x] Useful codecs for VFX
 - [x] Remote Desktop features
-- [ ] Currently testing more stuff
+- Currently testing more stuff...
 
 Apps included:
 - [x] Houdini
