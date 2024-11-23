@@ -24,7 +24,7 @@
  ░░▒
 ```
 # DangerOS
-#### DangerOS [Dangerous] is a streamlined spin on the Rocky Linux Operating System specifically for use in Visual Effects and Content Creation.
+#### DangerOS(Dangerous) is a streamlined spin on the Rocky Linux Operating System specifically for use in Visual Effects and Content Creation.
 
 
 #### Features included:
