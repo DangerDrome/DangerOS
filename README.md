@@ -51,12 +51,6 @@
 - [ ] After Effects
 - [ ] Premiere
 - [ ] Photoshop
-
-## Index
-- [x] Overview
-- [ ] Ansible install
-- [ ] Bash script install
-- [x] Step by step install
 <br>
 <br>
 <br>
