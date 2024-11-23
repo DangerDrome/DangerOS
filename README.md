@@ -33,6 +33,10 @@ Visual effects is a pain in the ass, let's make is easier!
 - [ ] Ansible install
 - [ ] Bash script install
 - [x] Step by step install
+<br>
+<br>
+<br>
+<br>
 
 
 
@@ -46,10 +50,10 @@ comming soon...
 ```
 > [!TIP]
 > Lean more about ansible here: https://www.ansible.com/how-ansible-works/
-
-
-
-
+<br>
+<br>
+<br>
+<br>
 
 
 
@@ -66,6 +70,10 @@ comming soon...
 > - Respect the privacy of others.
 > - Think before you type.
 > - With great power comes great responsibility.
+<br>
+<br>
+<br>
+<br>
 
 
 
@@ -267,6 +275,10 @@ echo 'omit_drivers+=" nouveau "' | sudo tee /etc/dracut.conf.d/blacklist-nouveau
 sudo dracut --regenerate-all --force 
 sudo depmod -a
 ```
+<br>
+<br>
+<br>
+<br>
 
 ## General Apps
 
@@ -350,6 +362,10 @@ flatpak install com.valvesoftware.Steam -y
 ```
 flatpak install flathub org.blender.Blender
 ```
+<br>
+<br>
+<br>
+<br>
 
 
 ## DE customisation 
