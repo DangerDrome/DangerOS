@@ -261,7 +261,7 @@ sudo systemctl enable --now docker
 
 
 
-### 12. Install Dockge (An easy way to run docker compose)
+### 12.1. Install Dockge (An easy way to run docker compose)
 
 #### Create directories that store your stacks and stores Dockge's stack
 ```
@@ -277,7 +277,7 @@ curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --out
 ```
 docker compose up -d
 ```
-
+<br>
 
 ### 13. Install tailscale (VPN)
 follow command promt instructions
