@@ -416,6 +416,14 @@ flatpak install com.valvesoftware.Steam -y
 
 ## DCC apps
 
+### 1. Install Natron (why? cli automation stuff)
+```
+sudo flatpak install fr.natron.Natron -y
+```
+<br>
+
+
+
 ### 1. Install Blender
 ```
 flatpak install flathub org.blender.Blender
