@@ -101,14 +101,14 @@ https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-lat
 
 > [!WARNING]
 > The renaming instructions are mostly done via the gnome terminal.
-
+<br>
 
 
 ### 2. install Nano
 ```
 sudo dnf install nano -y
 ```
-
+<br>
 
 
 ### 3. Speed up dnf installs
@@ -119,6 +119,7 @@ sudo nano /etc/dnf/dnf.conf
 max_parallel_downloads=10
 fastestmirror=True
 ```
+<br>
 
 
 ### 4. Disable SELinux
@@ -127,19 +128,21 @@ sudo nano /etc/selinux/config
 ```
 Add this line:
 - SELINUX=disabled
-
+<br>
 
 
 ### 5. install tcsh
 ```
 sudo dnf install tcsh -y
 ```
+<br>
 
 
 ### 6. install epel repo
 ```
 sudo dnf install epel-release -y
 ```
+<br>
 
 
 ### 7. install aditional rpms (rpmfusion,mesa)
@@ -150,6 +153,7 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/mesa-libGLU-9.
 sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-free-release-9.noarch.rpm --output 'rpmfusion-free-release-9.noarch.rpm'
 sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-nonfree-release-9.noarch.rpm --output 'rpmfusion-nonfree-release-9.noarch.rpm'
 ```
+<br>
 
 
 ### 8. install flatpak repo
@@ -159,6 +163,7 @@ sudo dnf install flatpak -y
 ```
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 ```
+<br>
 
 
 
@@ -166,6 +171,7 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 ```
 sudo dnf install timeshift -y
 ```
+<br>
 
 
 ### 10. Install mono icon fonts for the terminal 
@@ -189,11 +195,13 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-ner
 sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font/MesloLGSNerdFont-Italic.ttf --output 'MesloLGSNerdFont-Italic.ttf'
 sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font/MesloLGSNerdFont-Regular.ttf --output 'MesloLGSNerdFont-Regular.ttf'
 ```
+<br>
 
 
 ### 11. Download terminal color scheme
 Get it from the DangerOS/themes folder:
 - gnome-terminal-profiles.dconf
+<br>
 
 
 
@@ -213,6 +221,7 @@ sudo firewall-cmd --permanent --add-port=3389/tcp
 ```
 sudo firewall-cmd --reload
 ```
+<br>
 
 
 ### 13. Install tailscale (VPN)
@@ -220,36 +229,42 @@ follow command promt instructions
 ```
 curl -fsSL https://tailscale.com/install.sh | sh
 ```
+<br>
 
 
 ### 14. Install TrayScale (a tailscale GUI)
 ```
 flatpak install dev.deedles.Trayscale -y
 ```
+<br>
 
 
 ### 15. Install ntfs stuff(so you can mount ntfs drives)
 ```
 sudo dnf install ntfs-3g -y
 ```
+<br>
 
 
 ### 16. Install pip (for python packeages)
 ```
 sudo dnf install python3-pip -y
 ```
+<br>
 
 
 ### 17. Install gnome-tweaks
 ```
 sudo dnf install gnome-tweaks -y
 ```
+<br>
 
 
 ### 18. Install gnome-extensions
 ```
 sudo dnf install gnome-extensions-app-40.0-3.el9.x86_64 -y
 ```
+<br>
 
 
 ### 19. Install Gnome Extension Manager
@@ -257,12 +272,15 @@ sudo dnf install gnome-extensions-app-40.0-3.el9.x86_64 -y
 flatpak install flathub com.mattjakeman.ExtensionManager -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark com.mattjakeman.ExtensionManager
 ```
+<br>
 
 
 ### 20. Install gnome extension CLI (no sure if this is required, still testing)
 ```
 sudo pip install --upgrade git+https://github.com/essembeh/gnome-extensions-cli -y
 ```
+<br>
+
 
 ### 21. Install Nvidia Drivers
 You can use the nvidia-smi command after install/reboot to check the drivers 
@@ -295,22 +313,21 @@ sudo depmod -a
 flatpak install flathub org.gnome.Calendar -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
 ```
-
+<br>
 
 
 ### 2. Install Sticky Notes
 ```
 sudo flatpak install com.vixalien.sticky -y
 ```
-
+<br>
 
 
 ### 3. Install Paper (very simple markdown notes)
 ```
 sudo flatpak install io.posidon.Paper -y
-
 ```
-
+<br>
 
 
 ### 4. Install Remmina (Remote Desktop Client)
@@ -318,6 +335,7 @@ sudo flatpak install io.posidon.Paper -y
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install --user flathub org.remmina.Remmina
 ```
+<br>
 
 
 ### 5. Install Resources (A Windows-like Task Manager)
@@ -325,30 +343,35 @@ flatpak install --user flathub org.remmina.Remmina
 flatpak install flathub net.nokyan.Resources -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
 ```
+<br>
 
 
 ### 6. Install VSCode
 ```
 flatpak install flathub com.visualstudio.code -y
 ```
+<br>
 
 
 ### 7. Install Obsidian
 ```
 flatpak install flathub md.obsidian.Obsidian -y
 ```
+<br>
 
 
 ### 8. Install Celluloid
 ```
 flatpak install io.github.celluloid_player.Celluloid -y
 ```
+<br>
 
 
 ### 9. Install ProtonPlus (for steam)
 ```
 flatpak install com.vysp3r.ProtonPlus -y
 ```
+<br>
 
 
 ### 10. Install Steam (for games/ nvidia testing)
@@ -381,6 +404,8 @@ Install it in the root folder:
 ```
 sudo wget -qO- https://git.io/papirus-icon-theme-install | sh
 ```
+<br>
+
 
 ### 2. Install Papirus Folder Colors
 #### https://github.com/PapirusDevelopmentTeam/papirus-folders
@@ -392,6 +417,9 @@ Switch folder color to black:
 ```
 papirus-folders -C grey --theme Papirus-Dark
 ```
+<br>
+
+
 ### 3. Install custom Adwaita-dark themes
 Download the themes zip:
 #### https://github.com/DangerDrome/DangerOS/blob/main/themes.tar.xz
