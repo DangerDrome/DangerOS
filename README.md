@@ -29,8 +29,8 @@
 
 #### Features included:
 - [x] Ubiquitous Dark Mode
-- [x] Windows 11 like layout
-- [ ] MacOS like layout
+- [x] Windows 11 layout
+- [ ] MacOS layout
 - [x] A usable desktop (shortcuts, etc)
 - [x] Useful default applications
 - [x] Useful codecs for VFX
