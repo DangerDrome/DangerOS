@@ -28,7 +28,8 @@
 DangerOS aims to setup a streamlined workstation system and desktop environment similar to windows 11 (or macOS comming soon...)
 <br>
 features included:
-- [x] Windows 11 like layout(Application lanucher, task manager, etc)
+- [x] Windows 11 like layout
+- [ ] MacOS like layout
 - [x] A usable desktop (shortcuts, etc)
 - [x] Useful default applications
 - [x] Useful codecs for VFX
