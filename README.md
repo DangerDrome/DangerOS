@@ -34,6 +34,15 @@ features include:
 - Useful codecs for VFX
 - Remote Desktop features 
 - A bunch of other default settings
+
+Apps included:
+- [x] Houdini
+- [x] Nuke
+- [x] Maya
+- [x] Blender
+- [x] Resolve
+- [x] Rv
+- [x] Deadline
 <br>
 
 ## Index
