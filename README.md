@@ -245,6 +245,8 @@ sudo firewall-cmd --reload
 ```
 <br>
 
+
+
 ### 12. Install Docker
 ```
 sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
@@ -258,6 +260,23 @@ sudo systemctl enable --now docker
 <br>
 
 
+
+### 12. Install Dockge (An easy way to run docker compose)
+
+#### Create directories that store your stacks and stores Dockge's stack
+```
+mkdir -p /opt/stacks /opt/dockge
+cd /opt/dockge
+```
+
+#### Download the compose.yaml
+```
+curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
+```
+#### Start the server
+```
+docker compose up -d
+```
 
 
 ### 13. Install tailscale (VPN)
