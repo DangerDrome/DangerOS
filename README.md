@@ -98,10 +98,55 @@ sudo dnf install nano -y
 ```
 
 
+
+## Speed up dnf installs
+```
+sudo nano /etc/dnf/dnf.conf
+
+# Add the following lines:
+max_parallel_downloads=10
+fastestmirror=True
+```
+
+
+## Disable SELinux
+```
+sudo nano /etc/selinux/config 
+```
+Add this line:
+- SELINUX=disabled
+
+
+
 ## install tcsh
 ```
 sudo dnf install tcsh -y
 ```
+
+
+## install epel repo
+```
+sudo dnf install epel-release -y
+```
+
+
+## install aditional rpms (rpmfusion,mesa)
+```
+cd ~/Downloads
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/mesa-libGLU-9.0.1-6.el9.x86_64.rpm --output 'mesa-libGLU-9.0.1-6.el9.x86_64.rpm'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-free-release-9.noarch.rpm --output 'rpmfusion-free-release-9.noarch.rpm'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-nonfree-release-9.noarch.rpm --output 'rpmfusion-nonfree-release-9.noarch.rpm'
+```
+
+
+## install flatpak repo
+```
+sudo dnf install flatpak -y
+```
+```
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+
 
 
 ## install timeshift (backups)
@@ -138,46 +183,6 @@ Get it from the DangerOS/themes folder:
 - gnome-terminal-profiles.dconf
 
 
-
-## Speed up dnf installs
-```
-sudo nano /etc/dnf/dnf.conf
-
-# Add the following lines:
-max_parallel_downloads=10
-fastestmirror=True
-```
-
-
-## Disable SELinux
-```
-sudo nano /etc/selinux/config 
-```
-Add this line:
-- SELINUX=disabled
-
-
-
-## install epel repo
-```
-sudo dnf install epel-release -y
-```
-
-## install aditional rpms (rpmfusion,mesa)
-```
-cd ~/Downloads
-sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/mesa-libGLU-9.0.1-6.el9.x86_64.rpm --output 'mesa-libGLU-9.0.1-6.el9.x86_64.rpm'
-sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-free-release-9.noarch.rpm --output 'rpmfusion-free-release-9.noarch.rpm'
-sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-nonfree-release-9.noarch.rpm --output 'rpmfusion-nonfree-release-9.noarch.rpm'
-```
-
-## install flatpak repo
-```
-sudo dnf install flatpak -y
-```
-```
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-```
 
 ## Install xrdp
 ```
