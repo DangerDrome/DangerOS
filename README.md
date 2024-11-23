@@ -108,7 +108,7 @@ https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-lat
 > 4. reboot the system and login as an admin/sudo user and open the terminal.
 
 > [!WARNING]
-> The renaming instructions are mostly done via the gnome terminal.
+> The renaming instructions are mostly done via the gnome terminal after the base OS install.
 <br>
 
 
