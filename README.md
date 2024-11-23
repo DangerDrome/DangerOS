@@ -281,6 +281,14 @@ sudo flatpak install com.vixalien.sticky -y
 
 
 
+## Install Paper (very simple markdown notes)
+```
+sudo flatpak install io.posidon.Paper -y
+
+```
+
+
+
 ## Install Remmina (Remote Desktop Client)
 ```
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
