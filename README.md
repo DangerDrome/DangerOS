@@ -35,7 +35,7 @@ features include:
 - Remote Desktop features 
 - A bunch of other default settings
 <br>
-<br>
+
 ## Index
 - [x] Overview
 - [ ] Ansible install
