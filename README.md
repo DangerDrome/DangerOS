@@ -46,8 +46,9 @@
 - [x] Maya
 - [x] Blender
 - [x] Resolve
-- [x] Rv
+- [x] OpenRV
 - [x] Deadline
+- [ ] Natron
 - [ ] 3ds Max
 - [ ] After Effects
 - [ ] Premiere
