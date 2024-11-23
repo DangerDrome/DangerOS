@@ -35,9 +35,9 @@
 - [x] Useful default applications
 - [x] Useful codecs for VFX
 - [x] Remote Desktop features
-- [ ] An Ansible install
-- [ ] An Automated install
-- [x] A Step by Step install
+- [ ] Ansible install
+- [ ] Automated install
+- [x] Step by Step install
 
 #### Apps included:
 - [x] Houdini
