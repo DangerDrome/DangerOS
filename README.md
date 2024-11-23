@@ -76,7 +76,7 @@ comming soon...
 
 
 
-# Bash install
+# Automated install
 ### Run the following in a shell:
 ```
 comming soon...
