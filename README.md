@@ -245,6 +245,20 @@ sudo firewall-cmd --reload
 ```
 <br>
 
+### 12. Install Docker
+```
+sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+```
+```
+sudo dnf install docker-ce docker-ce-cli containerd.io
+```
+```
+sudo systemctl enable --now docker
+```
+<br>
+
+
+
 
 ### 13. Install tailscale (VPN)
 follow command promt instructions
