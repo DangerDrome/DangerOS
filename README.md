@@ -75,6 +75,9 @@ comming soon...
 
 # Step by step install
 ## Base system stuff
+
+
+
 ### 1. Download rocky linux
 https://rockylinux.org/download | 
 https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-latest.iso
@@ -93,14 +96,14 @@ https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-lat
 
 
 
-## 2. install Nano
+### 2. install Nano
 ```
 sudo dnf install nano -y
 ```
 
 
 
-## 3. Speed up dnf installs
+### 3. Speed up dnf installs
 ```
 sudo nano /etc/dnf/dnf.conf
 
@@ -110,7 +113,7 @@ fastestmirror=True
 ```
 
 
-## 4. Disable SELinux
+### 4. Disable SELinux
 ```
 sudo nano /etc/selinux/config 
 ```
@@ -119,19 +122,19 @@ Add this line:
 
 
 
-## 5. install tcsh
+### 5. install tcsh
 ```
 sudo dnf install tcsh -y
 ```
 
 
-## 6. install epel repo
+### 6. install epel repo
 ```
 sudo dnf install epel-release -y
 ```
 
 
-## 7. install aditional rpms (rpmfusion,mesa)
+### 7. install aditional rpms (rpmfusion,mesa)
 download then double cliek to install
 ```
 cd ~/Downloads
@@ -141,7 +144,7 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-nonf
 ```
 
 
-## 8. install flatpak repo
+### 8. install flatpak repo
 ```
 sudo dnf install flatpak -y
 ```
@@ -151,13 +154,13 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 
 
 
-## 9. install timeshift (backups)
+### 9. install timeshift (backups)
 ```
 sudo dnf install timeshift -y
 ```
 
 
-## 10. Install mono icon fonts for the terminal 
+### 10. Install mono icon fonts for the terminal 
 
 ```
 cd /usr/share/fonts
@@ -180,13 +183,13 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-ner
 ```
 
 
-## 11. Download terminal color scheme
+### 11. Download terminal color scheme
 Get it from the DangerOS/themes folder:
 - gnome-terminal-profiles.dconf
 
 
 
-## 12. Install xrdp
+### 12. Install xrdp
 ```
 sudo dnf install xrdp -y
 ```
@@ -204,56 +207,56 @@ sudo firewall-cmd --reload
 ```
 
 
-## 13. Install tailscale (VPN)
+### 13. Install tailscale (VPN)
 follow command promt instructions
 ```
 curl -fsSL https://tailscale.com/install.sh | sh
 ```
 
 
-## 14. Install TrayScale (a tailscale GUI)
+### 14. Install TrayScale (a tailscale GUI)
 ```
 flatpak install dev.deedles.Trayscale -y
 ```
 
 
-## 15. Install ntfs stuff(so you can mount ntfs drives)
+### 15. Install ntfs stuff(so you can mount ntfs drives)
 ```
 sudo dnf install ntfs-3g -y
 ```
 
 
-## 16. Install pip (for python packeages)
+### 16. Install pip (for python packeages)
 ```
 sudo dnf install python3-pip -y
 ```
 
 
-## 17. Install gnome-tweaks
+### 17. Install gnome-tweaks
 ```
 sudo dnf install gnome-tweaks -y
 ```
 
 
-## 18. Install gnome-extensions
+### 18. Install gnome-extensions
 ```
 sudo dnf install gnome-extensions-app-40.0-3.el9.x86_64 -y
 ```
 
 
-## 19. Install Gnome Extension Manager
+### 19. Install Gnome Extension Manager
 ```
 flatpak install flathub com.mattjakeman.ExtensionManager -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark com.mattjakeman.ExtensionManager
 ```
 
 
-## 20. Install gnome extension CLI (no sure if this is required, still testing)
+### 20. Install gnome extension CLI (no sure if this is required, still testing)
 ```
 sudo pip install --upgrade git+https://github.com/essembeh/gnome-extensions-cli -y
 ```
 
-## 21. Install Nvidia Drivers
+### 21. Install Nvidia Drivers
 You can use the nvidia-smi command after install/reboot to check the drivers 
 ```
 sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo 
@@ -265,7 +268,7 @@ sudo dracut --regenerate-all --force
 sudo depmod -a
 ```
 
-
+## Aplliction Stuff
 
 > [!TIP]
 > You can search for flatpak apps via the command line: 
@@ -275,7 +278,7 @@ sudo depmod -a
 
 
 
-## Install Calendar
+### 1. Install Calendar
 ```
 flatpak install flathub org.gnome.Calendar -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
@@ -283,14 +286,14 @@ sudo flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
 
 
 
-## Install Sticky Notes
+### 2. Install Sticky Notes
 ```
 sudo flatpak install com.vixalien.sticky -y
 ```
 
 
 
-## Install Paper (very simple markdown notes)
+### 3. Install Paper (very simple markdown notes)
 ```
 sudo flatpak install io.posidon.Paper -y
 
@@ -298,64 +301,67 @@ sudo flatpak install io.posidon.Paper -y
 
 
 
-## Install Remmina (Remote Desktop Client)
+### 4. Install Remmina (Remote Desktop Client)
 ```
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install --user flathub org.remmina.Remmina
 ```
 
 
-## Install Resources (A Windows-like Task Manager)
+### 5. Install Resources (A Windows-like Task Manager)
 ```
 flatpak install flathub net.nokyan.Resources -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
 ```
 
 
-## Install VSCode
+### 6. Install VSCode
 ```
 flatpak install flathub com.visualstudio.code -y
 ```
 
 
-## Install Obsidian
+### 7. Install Obsidian
 ```
 flatpak install flathub md.obsidian.Obsidian -y
 ```
 
 
-## Install Celluloid
+### 8. Install Celluloid
 ```
 flatpak install io.github.celluloid_player.Celluloid -y
 ```
 
 
-## Install ProtonPlus (for steam)
+### 9. Install ProtonPlus (for steam)
 ```
 flatpak install com.vysp3r.ProtonPlus -y
 ```
 
 
-## Install Steam (for games)
+### 10. Install Steam (for games/ nvidia testing)
 ```
 flatpak install com.valvesoftware.Steam -y
 ```
 
+## DCC apps
 
-## Install Blender
+### 1. Install Blender
 ```
 flatpak install flathub org.blender.Blender
 ```
 
 
-## Install Papirus Icons
+## DE customisation 
+
+### 1. Install Papirus Icons
 #### https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
 Install it in the root folder:
 ```
 sudo wget -qO- https://git.io/papirus-icon-theme-install | sh
 ```
 
-## Install Papirus Folder Colors
+### 2. Install Papirus Folder Colors
 #### https://github.com/PapirusDevelopmentTeam/papirus-folders
 Install it in the root folder:
 ```
@@ -365,7 +371,7 @@ Switch folder color to black:
 ```
 papirus-folders -C grey --theme Papirus-Dark
 ```
-## Install custom Adwaita-dark themes
+### 3. Install custom Adwaita-dark themes
 Download the themes zip:
 #### https://github.com/DangerDrome/DangerOS/blob/main/themes.tar.xz
 Extract and copy the folder to the themes directory:
