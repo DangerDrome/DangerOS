@@ -76,7 +76,7 @@ comming soon...
 
 
 
-# Automated install
+# Automated Install
 > [!WARNING]
 > Use bash scripts at your own risk, read the code carefully before executing.
 > We trust you have received the usual lecture from the local System
