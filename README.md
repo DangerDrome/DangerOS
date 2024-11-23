@@ -77,10 +77,6 @@ comming soon...
 
 
 # Automated install
-### Run the following in a shell:
-```
-comming soon...
-```
 > [!WARNING]
 > Use bash scripts at your own risk, read the code carefully before executing.
 > We trust you have received the usual lecture from the local System
@@ -89,6 +85,11 @@ comming soon...
 > - Respect the privacy of others.
 > - Think before you type.
 > - With great power comes great responsibility.
+### Run the following in a shell:
+```
+comming soon...
+```
+
 <br>
 <br>
 <br>
