@@ -264,6 +264,16 @@ sudo depmod -a
 > flatpak search <app-name>
 > ```
 
+
+
+## Install Calendar
+```
+flatpak install flathub org.gnome.Calendar -y
+sudo flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
+```
+
+
+
 ## Install Remmina (Remote Desktop Client)
 ```
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -271,7 +281,7 @@ flatpak install --user flathub org.remmina.Remmina
 ```
 
 
-## Install Resource (A Windows-like Task Manager)
+## Install Resources (A Windows-like Task Manager)
 ```
 flatpak install flathub net.nokyan.Resources -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
