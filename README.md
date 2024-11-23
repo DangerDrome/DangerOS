@@ -40,12 +40,17 @@
 
 #### Apps included:
 - [x] Houdini
+- [x] Unreal
 - [x] Nuke
 - [x] Maya
 - [x] Blender
 - [x] Resolve
 - [x] Rv
 - [x] Deadline
+- [ ] 3ds Max
+- [ ] After Effects
+- [ ] Premiere
+- [ ] Photoshop
 
 ## Index
 - [x] Overview
