@@ -34,7 +34,7 @@
 - [x] Useful default applications
 - [x] Useful codecs for VFX
 - [x] Remote Desktop features
-- [ ] An ansible install
+- [ ] An Ansible install
 - [ ] An Automated install
 - [x] A Step by Step install
 
