@@ -268,7 +268,7 @@ sudo dracut --regenerate-all --force
 sudo depmod -a
 ```
 
-## Aplliction Stuff
+## General Apps
 
 > [!TIP]
 > You can search for flatpak apps via the command line: 
