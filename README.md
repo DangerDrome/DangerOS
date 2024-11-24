@@ -471,7 +471,10 @@ flatpak install com.valvesoftware.Steam -y
 
 ### 1. Install RV.
 ```
+sudo dnf install python3-qt5 -y
+sudo dnf install libXScrnSaver-devel-1.2.3-10.el9. -y 
 sudo dnf install libGLU -y
+sudo dnf install libnsl -y 
 ```
 <br>
 
