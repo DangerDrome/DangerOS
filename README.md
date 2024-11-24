@@ -196,9 +196,14 @@ sudo dnf install timeshift -y
 ```
 <br>
 
+### 9. install fastfetch (sysem info fetcher)
+```
+sudo dnf install fastfetch -y
+```
+<br>
+
 
 ### 10. Install mono icon fonts for the terminal 
-
 ```
 cd /usr/share/fonts
 sudo mkdir meslo-lgs-nf
@@ -221,12 +226,24 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-ner
 <br>
 
 
-### 11. Download terminal color scheme
-Get it from the DangerOS/themes folder:
-- gnome-terminal-profiles.dconf
+### 11. Install terminal customisations
+- Terminal theme
 ```
 cd ~/
 sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/gnome-terminal-profiles.dconf --output 'gnome-terminal-profiles.dconf'
+```
+- Terminal theme, dot files, logo
+```
+cd ~/
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/gnome-terminal-profiles.dconf --output 'gnome-terminal-profiles.dconf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/.bashrc --output '.bashrc'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/.bash_aliases --output '.bash_aliases'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/logo_02.txt --output 'logo_02.txt'
+exec bash
+load
+r
+c
+ff
 ```
 <br>
 
