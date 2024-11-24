@@ -453,6 +453,7 @@ flatpak install io.github.celluloid_player.Celluloid -y
 ### 10. Install ProtonPlus (for steam)
 ```
 flatpak install com.vysp3r.ProtonPlus -y
+sudo flatpak override --env=GTK_THEME=Adwaita:dark com.vysp3r.ProtonPlus
 ```
 <br>
 
