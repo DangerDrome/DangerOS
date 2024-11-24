@@ -294,7 +294,7 @@ sudo curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml 
 ```
 #### Start the server
 ```
-docker compose up -d
+sudo docker compose up -d
 ```
 <br>
 
