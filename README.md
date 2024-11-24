@@ -227,11 +227,6 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-ner
 
 
 ### 11. Install terminal customisations
-- Terminal theme
-```
-cd ~/
-sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/gnome-terminal-profiles.dconf --output 'gnome-terminal-profiles.dconf'
-```
 - Terminal theme, dot files, logo
 ```
 cd ~/
