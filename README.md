@@ -496,6 +496,16 @@ flatpak install flathub org.blender.Blender
 
 
 ## DE customisation 
+<br>
+
+### 1. Increase the screen sacle so you can actually read stuff.
+In a terminal:
+```
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
+```
+<br>
+
+
 
 ### 1. Install Papirus Icons
 #### https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
