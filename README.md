@@ -224,6 +224,10 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-ner
 ### 11. Download terminal color scheme
 Get it from the DangerOS/themes folder:
 - gnome-terminal-profiles.dconf
+```
+cd ~/
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/gnome-terminal-profiles.dconf --output 'gnome-terminal-profiles.dconf'
+```
 <br>
 
 
