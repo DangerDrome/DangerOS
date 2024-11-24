@@ -284,13 +284,13 @@ sudo systemctl enable --now docker
 
 #### Create directories that store your stacks and stores Dockge's stack
 ```
-mkdir -p /opt/stacks /opt/dockge
+sudo mkdir -p /opt/stacks /opt/dockge
 cd /opt/dockge
 ```
 
 #### Download the compose.yaml
 ```
-curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
+sudo curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
 ```
 #### Start the server
 ```
