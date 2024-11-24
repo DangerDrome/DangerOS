@@ -235,8 +235,10 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/.bashrc -
 sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/.bash_aliases --output '.bash_aliases'
 sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/logo_02.txt --output 'logo_02.txt'
 exec bash
+```
+- load theme
+```
 load
-r
 c
 ff
 ```
