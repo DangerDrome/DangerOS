@@ -133,6 +133,12 @@ sudo dnf install nano -y
 ```
 <br>
 
+### 3. Install Git
+```
+sudo dnf install git -y
+```
+<br>
+
 
 ### 3. Speed up dnf installs
 ```
@@ -461,6 +467,14 @@ sudo flatpak override --env=GTK_THEME=Adwaita:dark com.vysp3r.ProtonPlus
 ### 11. Install Steam (for games/ nvidia testing)
 ```
 flatpak install com.valvesoftware.Steam -y
+```
+<br>
+
+
+
+### 11. Install Github Desktop
+```
+flatpak install io.github.shiftey.Desktop -y
 ```
 <br>
 <br>
