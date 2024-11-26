@@ -126,6 +126,11 @@ https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-lat
 > The renaming instructions are mostly done via the gnome terminal after the base OS install.
 <br>
 
+### 2. update system
+```
+sudo dnf update -y
+```
+<br>
 
 ### 2. install Nano
 ```
