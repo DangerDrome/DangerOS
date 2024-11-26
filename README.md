@@ -312,7 +312,7 @@ curl -fsSL https://tailscale.com/install.sh | sh
 <br>
 
 
-### 14. Install TrayScale (a tailscale GUI)
+### 14. Install TrayScale (A tailscale GUI, has Wayland issues, skip for now.)
 ```
 flatpak install dev.deedles.Trayscale -y
 ```
