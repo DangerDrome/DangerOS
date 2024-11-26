@@ -190,7 +190,7 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-nonf
 <br>
 
 
-### 8. install flatpak repo
+### 8. install flatpak & the flathub repo
 ```
 sudo dnf install flatpak -y
 ```
@@ -201,13 +201,13 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 
 
 
-### 9. install timeshift (backups)
+### 9. install timeshift (Backups)
 ```
 sudo dnf install timeshift -y
 ```
 <br>
 
-### 9. install fastfetch (sysem info fetcher)
+### 9. install fastfetch (System info fetcher)
 ```
 sudo dnf install fastfetch -y
 ```
@@ -324,14 +324,14 @@ flatpak install dev.deedles.Trayscale -y
 <br>
 
 
-### 15. Install ntfs stuff(so you can mount ntfs drives)
+### 15. Install ntfs stuff (For mounting any ntfs drives)
 ```
 sudo dnf install ntfs-3g -y
 ```
 <br>
 
 
-### 16. Install pip (for python packeages)
+### 16. Install pip (Ror python packages)
 ```
 sudo dnf install python3-pip -y
 ```
@@ -360,7 +360,7 @@ sudo flatpak override --env=GTK_THEME=Adwaita:dark com.mattjakeman.ExtensionMana
 <br>
 
 
-### 20. Install gnome extension CLI (no sure if this is required, still testing)
+### 20. Install gnome extension CLI (Not sure if this is needed, still testing, skip for now)
 ```
 sudo pip install --upgrade git+https://github.com/essembeh/gnome-extensions-cli -y
 ```
@@ -368,11 +368,11 @@ sudo pip install --upgrade git+https://github.com/essembeh/gnome-extensions-cli 
 
 
 ### 21. Install Nvidia Drivers
-You can use the nvidia-smi command after install/reboot to check the drivers 
+You can use the **nvidia-smi** command after install/reboot to check the drivers 
 ```
 sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo 
-sudo dnf install kernel-headers-$(uname -r) kernel-devel-$(uname -r) tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms 
-sudo dnf module install nvidia-driver:latest-dkms 
+sudo dnf install kernel-headers-$(uname -r) kernel-devel-$(uname -r) tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms -y
+sudo dnf module install nvidia-driver:latest-dkms -y
 echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf 
 echo 'omit_drivers+=" nouveau "' | sudo tee /etc/dracut.conf.d/blacklist-nouveau.conf 
 sudo dracut --regenerate-all --force 
