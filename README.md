@@ -403,8 +403,7 @@ sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
 
 ### 2. Install Remmina (Remote Desktop Client)
 ```
-flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install --user flathub org.remmina.Remmina
+flatpak install --user flathub org.remmina.Remmina -y
 ```
 <br>
 
