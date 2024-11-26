@@ -505,7 +505,7 @@ sudo flatpak install fr.natron.Natron -y
 
 ### 2. Install Blender
 ```
-flatpak install flathub org.blender.Blender
+sudo flatpak install flathub org.blender.Blender -y
 ```
 <br>
 <br>
