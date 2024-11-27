@@ -48,7 +48,7 @@
 - [x] Resolve
 - [x] OpenRV
 - [x] Deadline
-- [ ] Natron
+- [x] Natron
 - [ ] 3ds Max
 - [ ] After Effects
 - [ ] Premiere
