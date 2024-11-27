@@ -70,6 +70,7 @@
 # Ansible install
 > [!TIP]
 > Lean more about ansible here: https://www.ansible.com/how-ansible-works/
+
 **1. Playbook:**
 ```
 comming soon...
@@ -90,6 +91,7 @@ comming soon...
 > - Respect the privacy of others.
 > - Think before you type.
 > - With great power comes great responsibility.
+
 **1. Run the following in a shell after the main OS install:**
 ```
 comming soon...
