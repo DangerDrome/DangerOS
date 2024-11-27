@@ -23,7 +23,8 @@
  ■▓██▒░░░                
  ░░▒
 ```
-# DangerOS
+# DangerOS v1.0.1
+**Status: Working**
 #### DangerOS(Dangerous) is a spin on the Rocky Linux Operating System: Streamlined specifically for use in Visual Effects.
 
 
