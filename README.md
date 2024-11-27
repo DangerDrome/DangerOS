@@ -27,7 +27,7 @@
 #### DangerOS(Dangerous) is a spin on the Rocky Linux Operating System: Streamlined specifically for use in Visual Effects.
 
 
-#### Features included:
+#### Features include
 - [x] Ubiquitous Dark Mode
 - [x] Windows 11 layout
 - [ ] MacOS layout
@@ -39,7 +39,7 @@
 - [ ] Automated install
 - [x] Step by Step install
 
-#### Apps included:
+#### Apps include
 - [x] Houdini
 - [x] Unreal
 - [x] Nuke
