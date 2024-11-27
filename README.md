@@ -205,6 +205,8 @@ https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-lat
 > 3. Follow the install instructions for the iso and ideally install onto an nvme drive on the system.
 > 4. reboot the system and login as an admin/sudo user and open the terminal.
 
+<br>
+
 > [!WARNING]
 > The renaming instructions are mostly done via the gnome terminal after the base OS install.
 <br>
