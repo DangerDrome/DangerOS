@@ -103,7 +103,8 @@ comming soon...
 
 
 
-# GPU passthrough (for running Virtual Machines)
+# GPU passthrough 
+**For running Virtual Machines.**
 > [!TIP] 
 > https://www.reddit.com/r/homelab/comments/b5xpua/the_ultimate_beginners_guide_to_gpu_passthrough/
 
