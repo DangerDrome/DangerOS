@@ -145,7 +145,7 @@ vfio_virqfd
 
 <br>
 
-**3. IOMMU interrupt remapping**
+**3. IOMMU interrupt remapping:**
 
 ```
 echo "options vfio_iommu_type1 allow_unsafe_interrupts=1" > /etc/modprobe.d/iommu_unsafe_interrupts.conf
@@ -154,7 +154,7 @@ echo "options kvm ignore_msrs=1" > /etc/modprobe.d/kvm.conf
 
 <br>
 
-**4. BlackListing Drivers**
+**4. BlackListing Drivers:**
 
 ```
 echo "blacklist radeon" >> /etc/modprobe.d/blacklist.conf
@@ -164,7 +164,7 @@ echo "blacklist nvidia" >> /etc/modprobe.d/blacklist.conf
 
 <br>
 
-**5. Adding GPU to VFIO**
+**5. Adding GPU to VFIO:**
 
 ```
 lspci -v | grep NVIDIA
