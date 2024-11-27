@@ -56,7 +56,7 @@
 <br>
 <br>
 
-# After installation you should get an operating sytsem that looks something like this:
+# After installation you should get an operating sytsem that looks something like this
 ![image](https://github.com/user-attachments/assets/07cf9726-3a6a-4e57-87c0-71bc686ca5a2)
 
 <br>
