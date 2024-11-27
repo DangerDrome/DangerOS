@@ -1,0 +1,13 @@
+#############################################
+# Environment Variables for /etc/environment
+#############################################
+
+# Try to force dark mode for everything
+GTK_THEME=Adwaita:dark
+QT_STYLE_OVERRIDE=Adwaita-Dark
+
+# An effort to fix random lock screen crashes (where the login screen freezes)
+MUTTER_DEBUG_KMS_THREAD_TYPE=user
+
+
+
