@@ -213,26 +213,26 @@ https://dl.rockylinux.org/pub/rocky/9/live/x86_64/Rocky-9-Workstation-x86_64-lat
 > The renaming instructions are mostly done via the gnome terminal after the base OS install.
 <br>
 
-### 2. update system
+### 2. update system [R][F]
 ```
 sudo dnf update -y
 ```
 <br>
 
-### 2. install Nano
+### 2. install Nano [R]
 ```
 sudo dnf install nano -y
 ```
 <br>
 
-### 3. Install Git
+### 3. Install Git [R]
 ```
 sudo dnf install git -y
 ```
 <br>
 
 
-### 3. Speed up dnf installs
+### 3. Speed up dnf installs [R]
 ```
 sudo nano /etc/dnf/dnf.conf
 
@@ -243,7 +243,7 @@ fastestmirror=True
 <br>
 
 
-### 4. Disable SELinux
+### 4. Disable SELinux [R][F]
 ```
 sudo nano /etc/selinux/config 
 ```
@@ -252,21 +252,21 @@ Add this line:
 <br>
 
 
-### 5. install tcsh
+### 5. install tcsh [R][F]
 ```
 sudo dnf install tcsh -y
 ```
 <br>
 
 
-### 6. install epel repo
+### 6. install epel repo [R]
 ```
 sudo dnf install epel-release -y
 ```
 <br>
 
 
-### 7. install aditional rpms (rpmfusion,mesa)
+### 7. install aditional rpms (rpmfusion,mesa) [R]
 download then double cliek to install
 ```
 cd ~/Downloads
@@ -277,7 +277,7 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/rpm/rpmfusion-nonf
 <br>
 
 
-### 8. install flatpak & the flathub repo
+### 8. install flatpak & the flathub repo [R]
 ```
 sudo dnf install flatpak -y
 ```
@@ -288,20 +288,20 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 
 
 
-### 9. install timeshift (Backups)
+### 9. install timeshift (Backups) [R][F]
 ```
 sudo dnf install timeshift -y
 ```
 <br>
 
-### 9. install fastfetch (System info fetcher)
+### 9. install fastfetch (System info fetcher) [R][F]
 ```
 sudo dnf install fastfetch -y
 ```
 <br>
 
 
-### 10. Install mono icon fonts for the terminal 
+### 10. Install mono icon fonts for the terminal [R][F]
 ```
 cd /usr/share/fonts
 sudo mkdir meslo-lgs-nf
@@ -324,7 +324,7 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-ner
 <br>
 
 
-### 11. Install terminal customisations
+### 11. Install terminal customisations [R][F]
 - Terminal theme, dot files, logo
 ```
 cd ~/
@@ -344,7 +344,7 @@ ff
 
 
 
-### 12. Install xrdp
+### 12. Install xrdp [R][F]
 ```
 sudo dnf install xrdp -y
 ```
@@ -364,7 +364,8 @@ sudo firewall-cmd --reload
 
 
 
-### 12. Install Docker
+### 12. Install Docker [R][F]
+Rocky:
 ```
 sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
 ```
@@ -374,29 +375,29 @@ sudo dnf install docker-ce docker-ce-cli containerd.io -y
 ```
 sudo systemctl enable --now docker
 ```
+Fedora:
+```
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+```
+sudo systemctl enable --now docker
+```
 <br>
 
 
 
-### 12.1. Install Dockge (An easy way to run docker compose)
+### 12.1. Install Dockge (An easy way to run docker compose) [R][F]
 
 #### Create directories that store your stacks and stores Dockge's stack
 ```
 sudo mkdir -p /opt/stacks /opt/dockge
 cd /opt/dockge
-```
-
-#### Download the compose.yaml
-```
 sudo curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
-```
-#### Start the server
-```
 sudo docker compose up -d
 ```
 <br>
 
-### 13. Install tailscale (VPN)
+### 13. Install tailscale (VPN) [R][F]
 follow command promt instructions
 ```
 curl -fsSL https://tailscale.com/install.sh | sh
@@ -404,42 +405,47 @@ curl -fsSL https://tailscale.com/install.sh | sh
 <br>
 
 
-### 14. Install TrayScale (A tailscale GUI, has Wayland issues, skip for now.)
+### 14. Install TrayScale (A tailscale GUI, has Wayland issues on Rocky, skip for now.) [F]
 ```
 flatpak install dev.deedles.Trayscale -y
 ```
 <br>
 
 
-### 15. Install ntfs stuff (For mounting any ntfs drives)
+### 15. Install ntfs stuff (For mounting any ntfs drives) [R]
 ```
 sudo dnf install ntfs-3g -y
 ```
 <br>
 
 
-### 16. Install pip (Ror python packages)
+### 16. Install pip (Ror python packages) [R][F]
 ```
 sudo dnf install python3-pip -y
 ```
 <br>
 
 
-### 17. Install gnome-tweaks
+### 17. Install gnome-tweaks [R][F]
 ```
 sudo dnf install gnome-tweaks -y
 ```
 <br>
 
 
-### 18. Install gnome-extensions
+### 18. Install gnome-extensions [R][F]
+Rocky:
+```
+sudo dnf install gnome-extensions-app-40.0-3.el9.x86_64 -y
+```
+Fedora:
 ```
 sudo dnf install gnome-extensions-app-40.0-3.el9.x86_64 -y
 ```
 <br>
 
 
-### 19. Install Gnome Extension Manager
+### 19. Install Gnome Extension Manager [R][F]
 ```
 flatpak install flathub com.mattjakeman.ExtensionManager -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark com.mattjakeman.ExtensionManager
@@ -454,7 +460,7 @@ sudo pip install --upgrade git+https://github.com/essembeh/gnome-extensions-cli 
 <br>
 
 
-### 21. Install Nvidia Drivers
+### 21. Install Nvidia Drivers [R][F]
 You can use the **nvidia-smi** command after install/reboot to check the drivers 
 ```
 sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo 
@@ -479,7 +485,7 @@ sudo depmod -a
 > ```
 
 
-### 1. Install Resources (A Windows-like Task Manager)
+### 1. Install Resources (A Windows-like Task Manager) [R][F]
 ```
 flatpak install flathub net.nokyan.Resources -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
@@ -488,7 +494,7 @@ sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
 
 
 
-### 2. Install Remmina (Remote Desktop Client)
+### 2. Install Remmina (Remote Desktop Client) [R][F]
 ```
 flatpak install --user flathub org.remmina.Remmina -y
 ```
@@ -496,14 +502,14 @@ flatpak install --user flathub org.remmina.Remmina -y
 
 
 
-### 3. Install Boxes (Simple Virtual machine software)
+### 3. Install Boxes (Simple Virtual machine software) [R][F]
 ```
 sudo flatpak install org.gnome.Boxes -y
 ```
 <br>
 
 
-### 4. Install Calendar
+### 4. Install Calendar [R]
 ```
 flatpak install flathub org.gnome.Calendar -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
@@ -511,14 +517,14 @@ sudo flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
 <br>
 
 
-### 5. Install Sticky Notes
+### 5. Install Sticky Notes [R][F]
 ```
 sudo flatpak install com.vixalien.sticky -y
 ```
 <br>
 
 
-### 6. Install Paper (very simple markdown notes)
+### 6. Install Paper (very simple markdown notes) [R][F]
 ```
 sudo flatpak install io.posidon.Paper -y
 ```
@@ -526,28 +532,28 @@ sudo flatpak install io.posidon.Paper -y
 
 
 
-### 7. Install VSCode
+### 7. Install VSCode [R][F]
 ```
 flatpak install flathub com.visualstudio.code -y
 ```
 <br>
 
 
-### 8. Install Obsidian
+### 8. Install Obsidian [R][F]
 ```
 flatpak install flathub md.obsidian.Obsidian -y
 ```
 <br>
 
 
-### 9. Install Celluloid
+### 9. Install Celluloid [R][F]
 ```
 flatpak install io.github.celluloid_player.Celluloid -y
 ```
 <br>
 
 
-### 10. Install ProtonPlus (for steam)
+### 10. Install ProtonPlus (for steam) [R][F]
 ```
 flatpak install com.vysp3r.ProtonPlus -y
 sudo flatpak override --env=GTK_THEME=Adwaita:dark com.vysp3r.ProtonPlus
@@ -555,7 +561,7 @@ sudo flatpak override --env=GTK_THEME=Adwaita:dark com.vysp3r.ProtonPlus
 <br>
 
 
-### 11. Install Steam (for games/ nvidia testing)
+### 11. Install Steam (for games/ nvidia testing) [R][F]
 ```
 flatpak install com.valvesoftware.Steam -y
 ```
@@ -563,7 +569,7 @@ flatpak install com.valvesoftware.Steam -y
 
 
 
-### 11. Install Github Desktop
+### 11. Install Github Desktop [R][F]
 ```
 flatpak install io.github.shiftey.Desktop -y
 ```
