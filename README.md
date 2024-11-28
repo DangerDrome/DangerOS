@@ -619,7 +619,7 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 
 
 
-### 1. Install Papirus Icons
+### 1. Install Papirus Icons [R][F]
 #### https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
 Install it in the root folder:
 ```
@@ -628,20 +628,20 @@ sudo wget -qO- https://git.io/papirus-icon-theme-install | sh
 <br>
 
 
-### 2. Install Papirus Folder Colors
+### 2. Install Papirus Folder Colors [R][F]
 #### https://github.com/PapirusDevelopmentTeam/papirus-folders
 Install it in the root folder:
 ```
 sudo wget -qO- https://git.io/papirus-folders-install | sh
 ```
-Switch folder color to black:
+Switch folder color to Grey:
 ```
 papirus-folders -C grey --theme Papirus-Dark
 ```
 <br>
 
 
-### 3. Install custom Adwaita-dark themes
+### 3. Install custom Adwaita-dark themes  [R][F]
 Download the themes zip:
 #### https://github.com/DangerDrome/DangerOS/blob/main/themes.tar.xz
 Extract and copy the folder to the themes directory:
