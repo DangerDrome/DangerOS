@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/30e644f7-a568-4fc1-ab7c-dda1c4fab268)
+
 # Fedora Install Guide
 
 ### Install via the Network Installer.
