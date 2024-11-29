@@ -82,7 +82,7 @@ sudo dnf install vlc -y
 
 ### Some useful default Applications.
 ```
-$ sudo dnf install gnome-calculator gnome-calendar gnome-system-monitor gnome-text-editor evince file-roller
+$ sudo dnf install gnome-disk-utility gnome-calculator gnome-calendar gnome-system-monitor gnome-text-editor evince file-roller -y
 ```
 - evince - document viewer
 - file-roller - archive manager
