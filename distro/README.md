@@ -78,4 +78,19 @@ $ sudo dnf install gnome-calculator gnome-system-monitor gnome-text-editor evinc
 <br>
 <br>
 
-# Rocky Install Guide
+# Example Install Script.
+```
+sudo dnf install -y \
+--setopt=install_weak_deps=False \
+gnome-shell \
+ffmpegthumbnailer \
+file-roller \
+gnome-console \
+gnome-extensions-app \
+gnome-system-monitor \
+gnome-text-editor \
+libavcodec-freeworld \
+nautilus \
+xdg-user-dirs \
+xdg-user-dirs-gtk
+```
