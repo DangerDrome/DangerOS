@@ -1,4 +1,5 @@
-![image](https://github.com/user-attachments/assets/30e644f7-a568-4fc1-ab7c-dda1c4fab268)
+![image](https://github.com/user-attachments/assets/4c10df54-2808-4768-a96b-ff5613d9de40)
+
 
 # Fedora Install Guide
 
