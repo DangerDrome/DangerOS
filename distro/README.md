@@ -7,7 +7,7 @@ Do all the basic steps (language, layout, time&date, partition, etc)
 - After Installation, Reboot and login to the shell (tty).
 <br>
 
-### Setup the Graphical User Interface (Gnome):
+### Setup the Graphical User Interface (Gnome).
 ```
 sudo dnf install @base-x gnome-shell gnome-console nautilus firefox
 ```
