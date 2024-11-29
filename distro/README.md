@@ -46,12 +46,12 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
 ### Multimedia Support.
 Installing VLC will pull all the multimedia codecs (requires RPM Fusion repo):
 ```
-sudo dnf install vlc
+sudo dnf install vlc -y
 ```
 <br>
 
 ### Fixes and Misc.
-For Hardware Support run the following command:
+~~For Hardware Support run the following command:~~ Not Required
 ```
 sudo dnf group install "Hardware Support"
 ```
@@ -86,6 +86,7 @@ gnome-shell \
 ffmpegthumbnailer \
 file-roller \
 gnome-console \
+gnome-software \
 gnome-extensions-app \
 gnome-system-monitor \
 gnome-text-editor \
@@ -93,4 +94,5 @@ libavcodec-freeworld \
 nautilus \
 xdg-user-dirs \
 xdg-user-dirs-gtk
+
 ```
