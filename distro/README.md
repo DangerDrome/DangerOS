@@ -7,33 +7,6 @@ Do all the basic steps (language, layout, time&date, partition, etc)
 - After Installation, Reboot and login to the shell (tty).
 <br>
 
-### Setup the Graphical User Interface (Gnome).
-```
-sudo dnf install @base-x gnome-shell gnome-console nautilus firefox
-```
-- @base-x - base for DE ('@' in dnf specifies a group )
-- gnome-shell - Pulls minimal dependencies for Gnome DE
-- gnome-console - Terminal
-- nautilus - File Manager
-- firefox - Web Browser
-<br>
-
-### Make Fedora boot into GUI by default
-```
-sudo systemctl set-default graphical.target
-reboot
-```
-<br>
-
-### Login to the Desktop Environment.
-Open the Terminal and run:
-```
-sudo dnf install gnome-tweaks @development-tools
-```
-- gnome-tweaks - To tweak gnome
-- @development-tools - provides basic dev tools. Why should i install development-tools? Installing gnome extensions from browser wont work until you install 'unzip'. Installing @devopment-tools will pull unzip & all necessary tools.
-<br>
-
 ### RPM Fusion.
 - RPM Fusion repositories provides some useful applications (Eg: VLC and other stuff)
 - Repository: https://rpmfusion.org/Configuration
@@ -67,6 +40,33 @@ sudo reboot
 ```
 <br>
 
+### Setup the Graphical User Interface (Gnome).
+```
+sudo dnf install @base-x gnome-shell gnome-console nautilus firefox
+```
+- @base-x - base for DE ('@' in dnf specifies a group )
+- gnome-shell - Pulls minimal dependencies for Gnome DE
+- gnome-console - Terminal
+- nautilus - File Manager
+- firefox - Web Browser
+<br>
+
+### Make Fedora boot into GUI by default
+```
+sudo systemctl set-default graphical.target
+reboot
+```
+<br>
+
+### Login to the Desktop Environment.
+Open the Terminal and run:
+```
+sudo dnf install gnome-tweaks @development-tools
+```
+- gnome-tweaks - To tweak gnome
+- @development-tools - provides basic dev tools. Why should i install development-tools? Installing gnome extensions from browser wont work until you install 'unzip'. Installing @devopment-tools will pull unzip & all necessary tools.
+<br>
+
 ### Multimedia Support.
 Installing VLC will pull all the multimedia codecs (requires RPM Fusion repo):
 ```
@@ -95,7 +95,7 @@ $ sudo dnf install gnome-calculator gnome-system-monitor gnome-text-editor evinc
 <br>
 <br>
 
-# Example Install Script.
+# Example Batch Install Script.
 ```
 sudo dnf install -y \
 --setopt=install_weak_deps=False \
