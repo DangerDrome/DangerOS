@@ -30,7 +30,6 @@ Open the Terminal and run:
 ```
 sudo dnf install gnome-tweaks @development-tools
 ```
-- ~~chrome-gnome-shell - Browser connecter for gnome shell integration~~ Not Required anymore
 - gnome-tweaks - To tweak gnome
 - @development-tools - provides basic dev tools. Why should i install development-tools? Installing gnome extensions from browser wont work until you install 'unzip'. Installing @devopment-tools will pull unzip & all necessary tools.
 <br>
@@ -40,6 +39,31 @@ sudo dnf install gnome-tweaks @development-tools
 - Repository: https://rpmfusion.org/Configuration
 ```
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
+sudo dnf makecache
+```
+<br>
+
+### NVIDIA Drivers.
+- After install & reboot you can check that it worked by running: **nvidia-smi** 
+Check that you have a card installed:
+```
+lspci | grep -Ei 'VGA|3D'
+```
+Refesh any packages:
+```
+sudo dnf update --refresh
+```
+Install headers and Dev tools:
+```
+sudo dnf install kernel-devel kernel-headers gcc make dkms acpid libglvnd-glx libglvnd-opengl libglvnd-devel pkgconfig -y
+```
+Install Drivers (x2)
+```
+sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda -y
+sudo dnf install nvidia-vaapi-driver libva-utils vdpauinfo -y
+```
+```
+sudo reboot
 ```
 <br>
 
@@ -47,13 +71,6 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
 Installing VLC will pull all the multimedia codecs (requires RPM Fusion repo):
 ```
 sudo dnf install vlc -y
-```
-<br>
-
-### Fixes and Misc.
-~~For Hardware Support run the following command:~~ Not Required
-```
-sudo dnf group install "Hardware Support"
 ```
 <br>
 
