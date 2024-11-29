@@ -28,9 +28,9 @@ reboot
 ### Login to the Desktop Environment.
 Open the Terminal and run:
 ```
-sudo dnf install chrome-gnome-shell gnome-tweaks @development-tools
+sudo dnf install gnome-tweaks @development-tools
 ```
-- chrome-gnome-shell - Browser connecter for gnome shell integration
+- ~~chrome-gnome-shell - Browser connecter for gnome shell integration~~ Not Required anymore
 - gnome-tweaks - To tweak gnome
 - @development-tools - provides basic dev tools. Why should i install development-tools? Installing gnome extensions from browser wont work until you install 'unzip'. Installing @devopment-tools will pull unzip & all necessary tools.
 <br>
