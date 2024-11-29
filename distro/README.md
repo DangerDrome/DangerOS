@@ -4,16 +4,17 @@
 - Available here: https://alt.fedoraproject.org/
 Do all the basic steps (language, layout, time&date, partition, etc)
 [Important Step] In Software Selection Menu tick "Minimal Install" and deselect all other options
+- After Installation, Reboot and login to the shell (tty).
 <br>
 
-## After Installation, Reboot and login to the shell (tty).
-Setup the Graphical User Interface (Gnome):
+### Setup the Graphical User Interface (Gnome):
 ```
-sudo dnf install @base-x gnome-shell gnome-terminal nautilus firefox
+sudo dnf install @base-x gnome-shell gnome-console gnome-text-editor nautilus firefox
 ```
 - @base-x - base for DE ('@' in dnf specifies a group )
 - gnome-shell - Pulls minimal dependencies for Gnome DE
-- gnome-terminal - Terminal
+- gnome-console - Terminal
+- gnome-text-editor - Text editor
 - nautilus - File Manager
 - firefox - Web Browser
 <br>
@@ -35,19 +36,19 @@ sudo dnf install chrome-gnome-shell gnome-tweaks @development-tools
 - @development-tools - provides basic dev tools. Why should i install development-tools? Installing gnome extensions from browser wont work until you install 'unzip'. Installing @devopment-tools will pull unzip & all necessary tools.
 <br>
 
-### RPM Fusion
+### RPM Fusion.
 - RPM Fusion repositories provides some useful applications (Eg: VLC)
 - To Install RPM Fusion Repository visit: https://rpmfusion.org/Configuration
 <br>
 
-## Multimedia Support:
+### Multimedia Support.
 Installing VLC will pull all the multimedia codecs (requires RPM Fusion repo):
 ```
 sudo dnf install vlc
 ```
 <br>
 
-## Fixes and Misc.
+### Fixes and Misc.
 For Hardware Support run the following command:
 ```
 sudo dnf group install "Hardware Support"
@@ -74,7 +75,5 @@ $ sudo dnf install gnome-calculator gnome-system-monitor gedit evince file-rolle
 <br>
 <br>
 <br>
-
-
 
 # Rocky Install Guide
