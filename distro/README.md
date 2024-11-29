@@ -51,14 +51,7 @@ sudo dnf install @base-x gnome-shell gnome-console nautilus firefox
 - firefox - Web Browser
 <br>
 
-### Make Fedora boot into GUI by default
-```
-sudo systemctl set-default graphical.target
-reboot
-```
-<br>
-
-### Login to the Desktop Environment.
+### Add Extensions.
 Open the Terminal and run:
 ```
 sudo dnf install gnome-tweaks @development-tools
@@ -67,14 +60,7 @@ sudo dnf install gnome-tweaks @development-tools
 - @development-tools - provides basic dev tools. Why should i install development-tools? Installing gnome extensions from browser wont work until you install 'unzip'. Installing @devopment-tools will pull unzip & all necessary tools.
 <br>
 
-### Multimedia Support.
-Installing VLC will pull all the multimedia codecs (requires RPM Fusion repo):
-```
-sudo dnf install vlc -y
-```
-<br>
-
-### Added functionality.
+### Added DE functionality.
 To add 'Open in Terminal' option for nautilus, user-directories in sidebar, thumbnails:
 ```
 sudo dnf install gnome-terminal-nautilus xdg-user-dirs xdg-user-dirs-gtk ffmpegthumbnailer
@@ -84,13 +70,27 @@ sudo dnf install gnome-terminal-nautilus xdg-user-dirs xdg-user-dirs-gtk ffmpegt
 - ffmpegthumbnailer - provides thumbnails for nautilus
 <br>
 
+### Multimedia Support.
+Installing VLC will pull all the multimedia codecs (requires RPM Fusion repo):
+```
+sudo dnf install vlc -y
+```
+<br>
+
 ### Some useful default Applications.
 ```
-$ sudo dnf install gnome-calculator gnome-system-monitor gnome-text-editor evince file-roller
+$ sudo dnf install gnome-calculator gnome-calendar gnome-system-monitor gnome-text-editor evince file-roller
 ```
-- gnome-text-editor - text editor
 - evince - document viewer
 - file-roller - archive manager
+<br>
+
+### Make Fedora boot into GUI by default
+```
+sudo systemctl set-default graphical.target
+reboot
+```
+<br>
 <br>
 <br>
 <br>
