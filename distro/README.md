@@ -9,12 +9,11 @@ Do all the basic steps (language, layout, time&date, partition, etc)
 
 ### Setup the Graphical User Interface (Gnome):
 ```
-sudo dnf install @base-x gnome-shell gnome-console gnome-text-editor nautilus firefox
+sudo dnf install @base-x gnome-shell gnome-console nautilus firefox
 ```
 - @base-x - base for DE ('@' in dnf specifies a group )
 - gnome-shell - Pulls minimal dependencies for Gnome DE
 - gnome-console - Terminal
-- gnome-text-editor - Text editor
 - nautilus - File Manager
 - firefox - Web Browser
 <br>
@@ -37,8 +36,11 @@ sudo dnf install chrome-gnome-shell gnome-tweaks @development-tools
 <br>
 
 ### RPM Fusion.
-- RPM Fusion repositories provides some useful applications (Eg: VLC)
-- To Install RPM Fusion Repository visit: https://rpmfusion.org/Configuration
+- RPM Fusion repositories provides some useful applications (Eg: VLC and other stuff)
+- Repository: https://rpmfusion.org/Configuration
+```
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+```
 <br>
 
 ### Multimedia Support.
@@ -67,9 +69,9 @@ sudo dnf install gnome-terminal-nautilus xdg-user-dirs xdg-user-dirs-gtk ffmpegt
 
 ### Some useful default Applications.
 ```
-$ sudo dnf install gnome-calculator gnome-system-monitor gedit evince file-roller
+$ sudo dnf install gnome-calculator gnome-system-monitor gnome-text-editor evince file-roller
 ```
-- gedit - text editor
+- gnome-text-editor - text editor
 - evince - document viewer
 - file-roller - archive manager
 <br>
