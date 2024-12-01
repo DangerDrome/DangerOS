@@ -112,6 +112,16 @@ sudo systemctl set-default graphical.target
 reboot
 ```
 <br>
+
+###  Resize the root logical volume as 15gigs is too small
+```
+# List volumes
+lsblk -o NAME,FSTYPE,SIZE,LABEL,FSSIZE,FSUSE%,MOUNTPOINTS
+# Extend the volume by 100gigs
+sudo lvextend /dev/mapper/fedora_work0060-root -L 100G
+# Add to the root 
+sudo xfs_growfs /dev/mapper/fedora_work0060-root 
+```
 <br>
 <br>       
 <br>
