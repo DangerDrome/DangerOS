@@ -72,6 +72,12 @@ sudo dnf install @base-x gnome-shell gnome-console nautilus firefox
 - firefox - Web Browser
 <br>
 
+### Nautilus Python.
+```
+sudo dnf install nautilus-python -y
+```
+<br>
+
 ### Add Extensions.
 Open the Terminal and run:
 ```
