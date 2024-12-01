@@ -10,6 +10,24 @@ Do all the basic steps (language, layout, time&date, partition, etc)
 - After Installation, Reboot and login to the shell (tty).
 <br>
 
+
+### Update. 
+```
+dnf update -y
+dnf install nano -y
+```
+<br>
+ 
+### Enable ssh and login from another machine.
+```
+# Open the ssh config file:
+nano /etc/ssh/ssh_config
+
+# Add this line:
+PermitRootLogin Yes
+```
+<br>
+
 ### RPM Fusion.
 - RPM Fusion repositories provides some useful applications (Eg: VLC and other stuff)
 - Repository: https://rpmfusion.org/Configuration
@@ -95,7 +113,7 @@ reboot
 ```
 <br>
 <br>
-<br>
+<br>       
 <br>
 
 # Example Batch Install Script.
