@@ -1,18 +1,24 @@
 # Rocky Install Guide
 
 ## 1. Install Minimal
-https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.2-x86_64-minimal.iso
+
+> [!TIP]
+> Grab the Rocky Linux `Minimal` ISO file from [here](https://rockylinux.org/download)
 After the minimal install, login using root user/password and Update stuff:
 ```
 dnf update -y
 ```
-enable ssh so you can copy paste stuff:
+<br>
+
+### Enable ssh so you can copy paste stuff:
 ```
 systemctl start sshd
 ```
 ```
 systemctl enable sshd
 ```
+<br>
+
 ## enable ssh for root:
 
 ### Open the ssh config file:
