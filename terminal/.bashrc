@@ -69,7 +69,7 @@ strike=$(tput smxx)
 
 
 #######################################################
-# OH MY POSH
+# OH MY POSH (Not being used)
 #######################################################
 
 # Brew 
@@ -139,7 +139,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 #######################################################
-# SPECIAL FUNCTIONS
+# FUNCTIONS
 #######################################################
 
 # Copy file with a progress bar
@@ -280,7 +280,7 @@ install_bashrc_support ()
 }
 
 #######################################################
-# Set the ultimate amazing command prompt
+# Set the DangerOS command prompt
 #######################################################
 
 alias cpu="grep 'cpu ' /proc/stat | awk '{usage=(\$2+\$4)*100/(\$2+\$4+\$5)} END {print usage}' | awk '{printf(\"%.1f\n\", \$1)}'"
