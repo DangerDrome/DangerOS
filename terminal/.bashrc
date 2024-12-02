@@ -73,7 +73,7 @@ strike=$(tput smxx)
 #######################################################
 
 # Brew 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # ohmyposh switch themes by typing: theme 'theme name'
 # theme () { eval "$(oh-my-posh --init --shell bash --config ~/.poshthemes/$@.omp.json)";}
