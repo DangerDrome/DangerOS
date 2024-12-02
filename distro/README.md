@@ -129,6 +129,13 @@ sudo lvextend /dev/mapper/fedora_work0060-root -L 100G
 sudo xfs_growfs /dev/mapper/fedora_work0060-root 
 ```
 <br>
+
+###  Networking stuff
+```
+sudo dnf install gvfs-smb -y 
+```
+<br>
+
 <br>       
 <br>
 
