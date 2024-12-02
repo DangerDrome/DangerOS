@@ -4,4 +4,5 @@ Download and copy .desktop files to:
 ```
 /usr/share/applications
 ```
-![image](https://github.com/user-attachments/assets/1cf7c341-7677-4ae6-b7e3-ac39023f73c9)
+![image](https://github.com/user-attachments/assets/6366a082-e2ad-4924-88a0-601122606849)
+
