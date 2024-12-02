@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Houdini
+GenericName=Houdini FX 20.0.896
+Comment=3D Animation Tools
+Exec=/opt/hfs20.0.896/bin/houdinifx %F
+Icon=/opt/hfs20.0.896/houdini_logo.png
+Type=Application
+Terminal=false
+Encoding=UTF-8
+Categories=Houdini 20.0.896;

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=0.9.4
+Name=Launcher
+Comment=Launch the Deadline Launcher
+Icon=/opt/Thinkbox/Deadline10/icons/Deadline_Launcher.png
+Exec=/opt/Thinkbox/Deadline10/bin/deadlinelauncher
+Terminal=false
+Path=/opt/Thinkbox/Deadline10/bin

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=0.9.4
+Name=Salve
+Comment=Launch the Deadline Worker
+Icon=/opt/Thinkbox/Deadline10/icons/Deadline_Worker.png
+Exec=/opt/Thinkbox/Deadline10/bin/deadlinelauncher -slave
+Terminal=false
+Path=/opt/Thinkbox/Deadline10/bin
