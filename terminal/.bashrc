@@ -84,8 +84,12 @@ strike=$(tput smxx)
 
 
 #######################################################
-# EXPORTS
+# ENV VARIABLES
 #######################################################
+
+# FORCE DARK MODE
+export GTK_THEME=Adwaita:dark
+export QT_STYLE_OVERRIDE=Adwaita-Dark
 
 # Disable the bell
 if [[ $iatest > 0 ]]; then bind "set bell-style visible"; fi
