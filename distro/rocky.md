@@ -25,7 +25,7 @@ systemctl enable sshd
 ```
 nano /etc/ssh/ssh_config
 ```
-### Add this line:
+### Add this line and save it:
 ```
 PermitRootLogin Yes
 ```
@@ -35,6 +35,8 @@ systemctl restart sshd
 ### View Status of ssh:
 ```
 systemctl status sshd
+# Get IP address
+hostname -I
 ```
 ### Install VPN (tailscale in this case):
 ```
