@@ -4,7 +4,8 @@
 
 > [!TIP]
 > Grab the Rocky Linux `Minimal` ISO file from [here](https://rockylinux.org/download)
-After the minimal install, login using root user/password and Update stuff:
+> After the minimal install, login using root user/password and Update stuff.
+
 ```
 dnf update -y
 ```
@@ -19,7 +20,7 @@ systemctl enable sshd
 ```
 <br>
 
-## enable ssh for root:
+### Enable ssh for root.
 
 ### Open the ssh config file:
 ```
@@ -42,9 +43,9 @@ hostname -I
 ```
 curl -fsSL https://tailscale.com/install.sh | sh
 ```
-### follow the instructions for the vpn install
+### Follow the instructions for the vpn install.
 
-### install this GUI:
+### Install the all the GUI packages:
 ```
 sudo dnf groupinstall "Server with GUI" -y
 ```
@@ -68,12 +69,16 @@ sudo firewall-cmd --reload
 ```
 sudo dnf install alsa-sof-firmware.noarch
 ```
+<br>
+
 ## 2. Install Flatpak repo
 https://flathub.org/
 ```
 sudo dnf install flatpak
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 ```
+<br>
+
 ## 3. Install NVIDIA Drivers
 ```
 sudo dnf install epel-release 
@@ -119,8 +124,9 @@ nvidia-smi
 |    0   N/A  N/A      2833      G   /usr/bin/gnome-shell                         18MiB |
 +---------------------------------------------------------------------------------------+
 ```
+<br>
 
-## 4. Install Houdini
+## 4. Install Houdini.
 Download and install houdini from the sidefx website & follow the instructions in the terminal
 
 ### Things that sidefx fails to mention in order to get houdini to run:
@@ -132,8 +138,9 @@ sudo dnf install libnsl -y
 ```
 sudo reboot
 ```
+<br>
 
-## 5. Install Docker
+## 5. Install Docker.
 ```
 sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
 sudo dnf install docker-ce docker-ce-cli containerd.io -y
@@ -143,14 +150,20 @@ sudo dnf install docker-ce docker-ce-cli containerd.io -y
 sudo systemctl enable --now docker
 ```
 ### Once the Docker is in place, it is now time to deploy Dockge OR Portainer on Rocky Linux.
+<br>
 
-## 6. Install Portainer
+## 6. Install Portainer.
 To begin with, you need to create Portainer server data volume. Please note that Portainer requires persistent storage in order to maintain the database and configuration information it needs to function:
 ```
 sudo docker volume create portainer_data
 ```
-The volume should be created in somewhere like :
-"/var/lib/docker/volumes/portainer_data/_data"
+<br>
+
+> [!TIP]
+> The volume should be created in somewhere like:
+> "/var/lib/docker/volumes/portainer_data/_data"
+
+
 ```
 sudo docker volume inspect portainer_data
 ```
