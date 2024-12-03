@@ -189,7 +189,7 @@
   <br>
   
 ## 7. Auto Mount Drives.
-make a file called `.smb` in the `~/` folder and add the following text with your user and pass for the drive:
+make a file called `.smb` in the `~/` folder and add the following text with your `username` and `password` for the drive:
   ```
   username=<user>
   password=<pass>
@@ -208,11 +208,14 @@ And add the following lines somehwhere:
   <br>
   
 ## 8. Mount Drives.
+Run the following command with your `username` and `password` for the drive:
   ```
   sudo dnf install smbclient -y 
   sudo dnf install cifs-utils -y
+
   # Checkout what shares are available:
-  smbclient -L 
+  smbclient -L
+
   # Mount Example, Jobs folder Mount:
   sudo mount -t cifs -rw -o username=<Username> //<server>/<share> /home/danger/JOBS
   ```
