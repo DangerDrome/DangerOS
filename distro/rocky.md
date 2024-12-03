@@ -186,3 +186,16 @@
   ```
   https://localhost:9443/
   ```
+  <br>
+  
+## 7. Mount Drives.
+  ```
+sudo dnf install smbclient -y 
+sudo dnf install cifs-utils -y
+# Checkout what shares are available:
+smbclient -L 
+# Mount Example, Jobs folder Mount:
+sudo mount -t cifs -o username=<Username> //<server>/<share> /home/danger/JOBS
+
+
+  ```
