@@ -189,11 +189,16 @@
   <br>
   
 ## 7. Auto Mount Drives.
-make a file called `.smb` in the `~/` folder and add:
+make a file called `.smb` in the `~/` folder and add the following text with your user and pass for the drive:
   ```
-  username=danger
-  password=danger
+  username=<user>
+  password=<pass>
   ```
+Open `/etc/fstab` with nano:
+  ```
+  sudo nano /etc/fstab
+  ```
+And add the following lines somehwhere:
   ```
   # AUTOMOUNT
   # smb:
