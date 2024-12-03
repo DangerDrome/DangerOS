@@ -176,7 +176,7 @@
   ```
   sudo docker volume inspect portainer_data
   ```
-### install portainer into that volume:
+  ### install portainer into that volume:
   ```
   sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer \
   --restart=always -v /var/run/docker.sock:/var/run/docker.sock \
@@ -189,6 +189,11 @@
   <br>
   
 ## 7. Auto Mount Drives.
+make a file called `.smb` in the `~/` folder and add:
+  ```
+  username=danger
+  password=danger
+  ```
   ```
   # AUTOMOUNT
   # smb:
