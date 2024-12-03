@@ -188,7 +188,7 @@
   ```
   <br>
   
-## 7. Auto Mount Drives.
+## 7. Auto Mount SMB shares.
 make a file called `.smb` in the `~/` folder and add the following text with your `username` and `password` for the drive:
   ```
   username=<user>
