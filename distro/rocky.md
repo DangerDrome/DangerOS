@@ -188,14 +188,21 @@
   ```
   <br>
   
-## 7. Mount Drives.
+## 7. Auto Mount Drives.
   ```
-sudo dnf install smbclient -y 
-sudo dnf install cifs-utils -y
-# Checkout what shares are available:
-smbclient -L 
-# Mount Example, Jobs folder Mount:
-sudo mount -t cifs -rw -o username=<Username> //<server>/<share> /home/danger/JOBS
-
-
+  # AUTOMOUNT
+  # smb:
+  //skeletor/jobs /home/danger/JOBS cifs credentials=/home/danger/.smb,uid=1000,gid=1000,vers=3.0,nounix 0 0
+  //skeletor/io /home/danger/IO cifs credentials=/home/danger/.smb,uid=1000,gid=1000,vers=3.0,nounix 0 0
+  ```
+  <br>
+  
+## 8. Mount Drives.
+  ```
+  sudo dnf install smbclient -y 
+  sudo dnf install cifs-utils -y
+  # Checkout what shares are available:
+  smbclient -L 
+  # Mount Example, Jobs folder Mount:
+  sudo mount -t cifs -rw -o username=<Username> //<server>/<share> /home/danger/JOBS
   ```
