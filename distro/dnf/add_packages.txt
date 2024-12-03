@@ -1,0 +1,23 @@
+# Add packages
+acpid
+elinks
+git
+glances
+iperf3
+lftp
+lynx
+lynis
+mailx
+mtools
+ncftp
+nmap
+ntfs-3g
+ntfsprogs
+ntpstat
+postfix
+recode
+rtorrent
+screen
+speedtest-cli
+tmux
+whois
