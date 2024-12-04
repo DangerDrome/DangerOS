@@ -220,7 +220,7 @@ Run the following command with your `username` and `password` for the drive:
   sudo mount -t cifs -rw -o username=<Username> //<server>/<share> /home/danger/JOBS
   ```
 
-# Batch Install Script (WIP)
+# Auto Install Script (WIP)
 ```
 #!/bin/bash
 cat << EOF
