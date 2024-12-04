@@ -2,8 +2,8 @@
 
 [rpmfusion-free]
 name=RPM Fusion
-baseurl=http://mirror.in2p3.fr/pub/linux/rpmfusion/free/el/updates/8/$basearch/
+baseurl=http://mirror.in2p3.fr/pub/linux/rpmfusion/free/el/updates/9/$basearch/
 enabled=1
 priority=10
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-8
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-9
