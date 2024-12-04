@@ -1,2 +1,3 @@
 # remove these packages:
 rocky-backgrounds
+libreoffice
