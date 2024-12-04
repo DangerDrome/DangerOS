@@ -1,2 +1,0 @@
-# Remove packages
-null
