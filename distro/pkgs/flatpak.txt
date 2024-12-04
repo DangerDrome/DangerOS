@@ -1,0 +1,15 @@
+io.github.shiftey.Desktop
+org.deluge_torrent.deluge
+com.mattjakeman.ExtensionManager
+net.nokyan.Resources
+org.remmina.Remmina
+org.gnome.Calendar
+com.vixalien.sticky
+com.visualstudio.code
+md.obsidian.Obsidian
+io.github.celluloid_player.Celluloid
+com.vysp3r.ProtonPlus
+com.valvesoftware.Steam
+fr.handbrake.ghb
+org.kde.krita
+com.github.tchx84.Flatseal
