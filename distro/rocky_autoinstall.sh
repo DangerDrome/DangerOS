@@ -67,33 +67,39 @@ sleep ${SLEEP}
 
 
 #############################
-# Update System:
-#############################
-
-# echo "[>] Updating system..."
-# dnf update -y
-# echo "[>] System updated."
-
-
-#############################
 # Install repositories:
 #############################
 
-echo "[>] Removing existing repositories"
+sleep ${SLEEP}
+cat << EOF
+
+####################################
+[>]  Install repositories:
+####################################
+
+EOF
+sleep ${SLEEP}
+
+echo "[>] Removing existing repositories..."
 rm -f /etc/yum.repos.d/*.repo
 rm -f /etc/yum.repos.d/*.rpmsave
 sleep ${SLEEP}
 
-echo "[>] Installing repositories..."
-#cp -f ${CWD}/dnf/rocky.repo /etc/yum.repos.d/
-#cp -f ${CWD}/dnf/rocky-addons.repo /etc/yum.repos.d/
-#cp -f ${CWD}/dnf/rocky-devel.repo /etc/yum.repos.d/
-#cp -f ${CWD}/dnf/rocky-extras.repo /etc/yum.repos.d/
-
-for REPOSITORY in addons devel extras
+echo "[>] Installing repository: Rocky"
+cp -f ${CWD}/dnf/rocky.repo /etc/yum.repos.d/
+for REPO in baseos appstream crb
 do
-  echo "[>] Enabling repository: ${REPOSITORY}"
-  cp -f ${CWD}/dnf/rocky-${REPOSITORY}.repo /etc/yum.repos.d/
+  echo "[>] Enabling repository: ${REPO}"
+  dnf config-manager --set-enabled ${REPO}
+  sleep ${SLEEP}
+done
+sleep ${SLEEP}
+
+for REPO in devel extras
+do
+  echo "[>] Enabling repository: ${REPO}"
+  cp -f ${CWD}/dnf/rocky-${REPO}.repo /etc/yum.repos.d/
+  dnf config-manager --set-enabled ${REPO}
   sleep ${SLEEP}
 done
 
@@ -130,9 +136,55 @@ sleep ${SLEEP}
 #dnf config-manager --enable crb
 
 
+##################################
+# Install gnome & enable packages:
+##################################
+
+sleep ${SLEEP}
+cat << EOF
+
+####################################
+[>] Install & enable gnome packages:
+####################################
+
+EOF
+sleep ${SLEEP}
+
+echo "[>] Installing gnome specific packages."
+sleep ${SLEEP}
+
+array=(${GNOME})
+sudo dnf install wget -y
+for i in "${array[@]}"
+do
+    VERSION_TAG=$(curl -Lfs "https://extensions.gnome.org/extension-query/?search=${i}" | jq '.extensions[0] | .shell_version_map | map(.pk) | max')
+    echo "[>] Downloading package: ${i}"
+    wget -O ${CWD}/gnome/extensions/${i}.zip "https://extensions.gnome.org/download-extension/${i}.shell-extension.zip?version_tag=$VERSION_TAG"
+    sleep ${SLEEP}
+    echo "[>] Installing package: ${i}"
+    gnome-extensions install ${CWD}/gnome/extensions/${i}.zip
+    if ! gnome-extensions list | grep --quiet ${i}; then
+        busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s ${i}
+    fi
+    echo "[>] Enabling package: ${i}"
+    gnome-extensions enable ${i}
+    #rm ${EXTENSION_ID}.zip
+done
+
+
 #############################
 # Install base packages:
 #############################
+
+sleep ${SLEEP}
+cat << EOF
+
+####################################
+[>]  Install base packages:
+####################################
+
+EOF
+sleep ${SLEEP}
 
 echo "[>] Installing the base packages."
 sleep ${SLEEP}
@@ -146,39 +198,6 @@ do
   fi
 done
 echo "[>] Basic packages have been installed on the system."
-sleep ${SLEEP}
-
-
-##################################
-# Install gnome & enable packages:
-##################################
-
-echo "[>] Installing gnome specific packages."
-sleep ${SLEEP}
-for PACKAGE in ${GNOME}
-do
-  if ! rpm -q ${PACKAGE} > /dev/null 2>&1
-  then
-    echo "[>] Installing package: ${PACKAGE}"
-    gnome-extensions install -f ./gnome/extensions/${PACKAGE}.zip > /dev/null
-    sleep ${SLEEP}
-  fi
-done
-echo "[>] Gnome specific packages have been installed."
-sleep ${SLEEP}
-
-echo "[>] Enabling gnome specific packages"
-sleep ${SLEEP}
-for PACKAGE in ${GNOME}
-do
-  if ! rpm -q ${PACKAGE} > /dev/null 2>&1
-  then
-    echo "[>] Installing package: ${PACKAGE}"
-    gnome-extensions enable ${PACKAGE} > /dev/null
-    sleep ${SLEEP}
-  fi
-done
-echo "[>] Gnome specific packages have been enabled."
 sleep ${SLEEP}
 
 
@@ -212,6 +231,32 @@ echo "[>] Useless packages have been removed from the system."
 sleep ${SLEEP}
 
 
+#############################
+# Setup system basics:
+#############################
+
+echo "[>] Configuring SSH server"
+systemctl start sshd
+systemctl enable sshd
+sed -i -e '/AcceptEnv/s/^#\?/#/' /etc/ssh/sshd_config
+systemctl reload sshd
+sleep ${SLEEP}
+
+# echo "[>] Configuring persistent password for sudo"
+# cp -f ${CWD}/sudoers.d/persistent_password /etc/sudoers.d/
+# sleep ${SLEEP}
+
+
+##############
+# Enable XRDP:
+##############
+sudo dnf install xrdp -y
+sudo systemctl start xrdp
+sudo systemctl enable xrdp
+sudo firewall-cmd --permanent --add-port=3389/tcp
+sudo firewall-cmd --reload
+
+
 #################
 # Install Docker:
 #################
@@ -228,33 +273,6 @@ cd /opt/dockge
 sudo curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
 sudo docker compose up -d
 echo "[>] Dockge installed: https://127.0.0.1:5001"
-
-
-##############
-# Enable XRDP:
-##############
-
-sudo systemctl start xrdp
-sudo systemctl enable xrdp
-sudo firewall-cmd --permanent --add-port=3389/tcp
-sudo firewall-cmd --reload
-
-
-#############################
-# Setup system basics:
-#############################
-
-echo "[>] Configuring SSH server"
-systemctl start sshd
-systemctl enable sshd
-sed -i -e '/AcceptEnv/s/^#\?/#/' /etc/ssh/sshd_config
-systemctl reload sshd
-sleep ${SLEEP}
-
-# echo "[>] Configuring persistent password for sudo"
-# cp -f ${CWD}/sudoers.d/persistent_password /etc/sudoers.d/
-# sleep ${SLEEP}
-
 
 
 ##################
@@ -314,21 +332,21 @@ echo "[>] Installing default terminal profile."
 cd ~/
 sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/gnome-terminal-profiles.dconf --output 'gnome-terminal-profiles.dconf'
 sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/logo_02.txt --output 'logo_02.txt'
-exec bash
-
-source ~/.bashrc
-load
+#exec bash
+# source ~/.bashrc
+# load
 #r
 #c
 #ff
 echo "[>] Bash Terminal customized."
-
+sleep ${SLEEP}
 
 #########################
 # Install nvidia drivers:
 #########################
-
+sleep ${SLEEP}
 echo "[>] Installing NVIDIA drivers on the system."
+sleep ${SLEEP}
 sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo 
 sudo dnf install kernel-headers-$(uname -r) kernel-devel-$(uname -r) tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms -y
 sudo dnf module install nvidia-driver:latest-dkms -y
