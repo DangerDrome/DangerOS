@@ -2,8 +2,8 @@
 
 [elrepo]
 name=ELRepo
-baseurl=http://mirror.in2p3.fr/pub/linux/elrepo/elrepo/el8/$basearch/
-        http://elrepo.org/linux/elrepo/el8/$basearch/
+baseurl=http://mirror.in2p3.fr/pub/linux/elrepo/elrepo/el9/$basearch/
+        http://elrepo.org/linux/elrepo/el9/$basearch/
 enabled=1
 priority=10
 gpgcheck=1
@@ -11,8 +11,8 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org
 
 [elrepo-testing]
 name=ELRepo Testing
-baseurl=http://mirror.in2p3.fr/pub/linux/elrepo/testing/el8/$basearch/
-        http://elrepo.org/linux/testing/el8/$basearch/
+baseurl=http://mirror.in2p3.fr/pub/linux/elrepo/testing/el9/$basearch/
+        http://elrepo.org/linux/testing/el9/$basearch/
 enabled=0
 priority=10
 gpgcheck=1
@@ -20,8 +20,8 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org
 
 [elrepo-kernel]
 name=ELRepo Kernel
-baseurl=http://mirror.in2p3.fr/pub/linux/elrepo/kernel/el8/$basearch/
-        http://elrepo.org/linux/kernel/el8/$basearch/
+baseurl=http://mirror.in2p3.fr/pub/linux/elrepo/kernel/el9/$basearch/
+        http://elrepo.org/linux/kernel/el9/$basearch/
 enabled=0
 priority=10
 gpgcheck=1
@@ -29,8 +29,8 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org
 
 [elrepo-extras]
 name=ELRepo Extras
-baseurl=http://mirror.in2p3.fr/pub/linux/elrepo/extras/el8/$basearch/
-        http://elrepo.org/linux/extras/el8/$basearch/
+baseurl=http://mirror.in2p3.fr/pub/linux/elrepo/extras/el9/$basearch/
+        http://elrepo.org/linux/extras/el9/$basearch/
 enabled=0
 priority=10
 gpgcheck=1
