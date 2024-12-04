@@ -3,5 +3,5 @@
 #░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
 #░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
 ```
-# Path: /usr/share/gnome-shell/extensions
 # Gnome Extentions
+### # Path: /usr/share/gnome-shell/extensions
