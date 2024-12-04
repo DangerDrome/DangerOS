@@ -1,52 +1,34 @@
-# Usefull Packages:
-ImageMagick
+# DCC:
 blender
+
+# Internet:
+firefox
+
+# Graphics
+#digikam
+#digikam-doc
+krita
+inkscape
+inkscape-docs
+inkscape-view
+
+# Multimedia
+vlc
+
+# System
+virt-manager
+
+# Utilities
+kde-connect
+keepassxc
+ImageMagick
 timeshift
 ffmpeg
 fastfetch
-vlc
 gh
 gnome-tweaks
 gnome-extensions-app
 gthumb
-keepassxc
 mediainfo
 tldr
 xdg-desktop-portal-gnome
-
-# Desktop
-
-# Internet
-firefox
-
-# Office
-libreoffice
-
-# Graphics
-digikam
-digikam-doc
-gimp
-# gimp-plugin-*
-inkscape
-inkscape-docs
-inkscape-view
-sane-backends-drivers-scanners
-simple-scan
-
-# Multimedia
-audacious
-# audacity
-# kdenlive
-# mplayer
-# obs-studio
-# vlc
-
-# System
-# anydesk
-virt-manager
-
-# Utilities
-ark
-k3b
-kde-connect
-keepassxc
