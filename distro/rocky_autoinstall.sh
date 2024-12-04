@@ -341,12 +341,21 @@ sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/logo_02.t
 echo "[>] Bash Terminal customized."
 sleep ${SLEEP}
 
+
 #########################
 # Install nvidia drivers:
 #########################
+
 sleep ${SLEEP}
-echo "[>] Installing NVIDIA drivers on the system."
+cat << EOF
+
+####################################
+[>] Install & enable gnome packages:
+####################################
+
+EOF
 sleep ${SLEEP}
+
 sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo 
 sudo dnf install kernel-headers-$(uname -r) kernel-devel-$(uname -r) tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms -y
 sudo dnf module install nvidia-driver:latest-dkms -y
