@@ -87,7 +87,7 @@ sleep ${SLEEP}
 
 echo "[>] Installing repository: Rocky"
 cp -f ${CWD}/dnf/rocky.repo /etc/yum.repos.d/
-for REPO in baseos appstream crb
+for REPO in baseos appstream crb plus
 do
   echo "[>] Enabling repository: ${REPO}"
   dnf config-manager --set-enabled ${REPO}
@@ -95,7 +95,7 @@ do
 done
 sleep ${SLEEP}
 
-for REPO in plus extras
+for REPO in extras
 do
   echo "[>] Enabling repository: ${REPO}"
   cp -f ${CWD}/dnf/rocky-${REPO}.repo /etc/yum.repos.d/
