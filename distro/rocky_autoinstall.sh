@@ -1,6 +1,5 @@
-# Auto Install Script (WIP)
-```
 #!/bin/bash
+#
 cat << EOF
 
 ░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀▄░█▀█░█▀▀
@@ -9,9 +8,9 @@ cat << EOF
 [>] Auto Install.
 
 EOF
-# Bash script Aliases
+# rocky_autoinstall.sh
 # DangerOS Auto Install
-# Rocky Linux 9.5 version
+# Rocky Linux 9.x
 
 
 #############################
@@ -85,10 +84,10 @@ sleep ${SLEEP}
 # Install repositories:
 #############################
 
-echo "[>] Removing existing repositories"
-rm -f /etc/yum.repos.d/*.repo
-rm -f /etc/yum.repos.d/*.rpmsave
-sleep ${SLEEP}
+# echo "[>] Removing existing repositories"
+# rm -f /etc/yum.repos.d/*.repo
+# rm -f /etc/yum.repos.d/*.rpmsave
+# sleep ${SLEEP}
 
 for REPOSITORY in BaseOS AppStream Extras PowerTools
 do
@@ -149,7 +148,7 @@ fi
 cp -f ${CWD}/dnf/rpmfusion-nonfree-updates.repo /etc/yum.repos.d/
 sleep ${SLEEP}
 
-echo "[>] Enabling repository: Flathub"
+echo "[>] INstalling & Enabling repository: Flathub"
 dnf install -y flatpak
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sleep ${SLEEP}
@@ -175,9 +174,9 @@ echo "[>] Basic packages have been installed on the system."
 sleep ${SLEEP}
 
 
-#############################
+#######################
 # Install flatpak apps:
-#############################
+#######################
 
 echo "[>] Installing flatpak apps"
 sleep ${SLEEP}
@@ -194,9 +193,9 @@ echo "[>] Flatpak apps have been installed on the system."
 sleep ${SLEEP}
 
 
-#############################
+##################################
 # Install gnome & enable packages:
-#############################
+##################################
 
 echo "[>] Installing gnome specific packages."
 sleep ${SLEEP}
@@ -227,9 +226,9 @@ echo "[>] Gnome specific packages have been enabled."
 sleep ${SLEEP}
 
 
-#############################
+##########################
 # Remove useless packages:
-#############################
+##########################
 
 echo "[>] Removing useless packages"
 sleep ${SLEEP}
@@ -238,9 +237,9 @@ echo "[>] Useless packages have been removed from the system."
 sleep ${SLEEP}
 
 
-#############################
+##############
 # Enable XRDP:
-#############################
+##############
 
 sudo systemctl start xrdp
 sudo systemctl enable xrdp
@@ -248,39 +247,11 @@ sudo firewall-cmd --permanent --add-port=3389/tcp
 sudo firewall-cmd --reload
 
 
-#############################
+##################
 # Make stuff Dark:
-#############################
+##################
 
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 echo "[>] Dark mode activated."
-
-
-#############################
-# Install gnome extentions:
-#############################
-
-gnome-extensions install -y \
-clipboard-indicator@Dieg0Js.github.io \
-gnome-shell-screenshot@ttll.de \
-ding@rastersoft.com \
-add-to-desktop@tommimon.github.com \
-hide-universal-access@akiirui.github.io \
-appindicatorsupport@rgcjonas.gmail.com \
-dash-to-panel@gnome-shell-extensions.gcampax.github.com \
-workspace-indicator@gnome-shell-extensions.gcampax.github.com 
-
-gnome-extensions enable \
-gnome-extensions install -y \
-clipboard-indicator@Dieg0Js.github.io \
-gnome-shell-screenshot@ttll.de \
-ding@rastersoft.com \
-add-to-desktop@tommimon.github.com \
-hide-universal-access@akiirui.github.io \
-appindicatorsupport@rgcjonas.gmail.com \
-dash-to-panel@gnome-shell-extensions.gcampax.github.com \
-workspace-indicator@gnome-shell-extensions.gcampax.github.com 
-
-```
 
