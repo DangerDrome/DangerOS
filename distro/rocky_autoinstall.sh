@@ -34,7 +34,6 @@ REMOVE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/remove.txt)
 dnf update -y
 
 
-
 #############################
 # Setup bash & aliases:
 #############################
@@ -152,7 +151,6 @@ echo "[>] INstalling & Enabling repository: Flathub"
 dnf install -y flatpak
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sleep ${SLEEP}
-
 
 
 #############################
