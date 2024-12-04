@@ -73,9 +73,9 @@ sleep ${SLEEP}
 sleep ${SLEEP}
 cat << EOF
 
-####################################
+#############################
 [>]  Installing repositories:
-####################################
+#############################
 
 EOF
 sleep ${SLEEP}
@@ -87,7 +87,7 @@ sleep ${SLEEP}
 
 echo "[>] Installing repository: Rocky"
 cp -f ${CWD}/dnf/rocky.repo /etc/yum.repos.d/
-for REPO in baseos appstream crb plus
+for REPO in baseos appstream crb
 do
   echo "[>] Enabling repository: ${REPO}"
   dnf config-manager --set-enabled ${REPO}
@@ -171,16 +171,16 @@ do
 done
 
 
-#############################
+########################
 # Install base packages:
-#############################
+########################
 
 sleep ${SLEEP}
 cat << EOF
 
-####################################
+##############################
 [>]  Installing base packages:
-####################################
+##############################
 
 EOF
 sleep ${SLEEP}
@@ -240,9 +240,9 @@ echo "[>] Useless packages have been removed from the system."
 sleep ${SLEEP}
 
 
-#############################
+######################
 # Setup system basics:
-#############################
+######################
 
 echo "[>] Configuring SSH server"
 systemctl start sshd
@@ -284,9 +284,9 @@ sudo docker compose up -d
 echo "[>] Dockge installed: https://127.0.0.1:5001"
 
 
-##################
+#################
 # Customisations:
-##################
+#################
 
 echo "[>] Installing .bashrc & bash_aliases for user: root"
 cp -f ${CWD}/bash/bashrc /root/.bashrc
@@ -376,9 +376,9 @@ sudo depmod -a
 echo "[>] NVIDIA drivers have been installed."
 
 
-#########################
+#########
 # Finish:
-#########################
+#########
 
 sudo dnf clean all
 echo "[>] Time to reboot!."
