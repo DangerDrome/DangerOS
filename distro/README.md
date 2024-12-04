@@ -139,7 +139,7 @@ sudo dnf install gvfs-smb -y
 <br>       
 <br>
 
-# Batch Install Script (WIP.
+# Batch Install Script (WIP)
 ```
 # Install el9 packages:
 
