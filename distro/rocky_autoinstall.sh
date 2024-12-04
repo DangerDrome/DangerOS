@@ -64,24 +64,88 @@ cp -f ${CWD}/bash/bash_aliases /etc/skel/.bash_aliases
 sleep ${SLEEP}
 
 
+#############################
+# Setup system basics:
+#############################
 
+echo "[>] Configuring SSH server"
+sed -i -e '/AcceptEnv/s/^#\?/#/' /etc/ssh/sshd_config
+systemctl reload sshd
+sleep ${SLEEP}
+
+echo "[>] Configuring persistent password for sudo"
+cp -f ${CWD}/sudoers.d/persistent_password /etc/sudoers.d/
+sleep ${SLEEP}
 
 
 #############################
-# Install Repos
+# Install repositories:
 #############################
 
-sudo dnf install epel-release -y
+echo "[>] Removing existing repositories"
+rm -f /etc/yum.repos.d/*.repo
+rm -f /etc/yum.repos.d/*.rpmsave
+sleep ${SLEEP}
 
+for REPOSITORY in BaseOS AppStream Extras PowerTools
+do
+  echo "[>] Enabling repository: ${REPOSITORY}"
+  cp -f ${CWD}/dnf/Rocky-${REPOSITORY}.repo /etc/yum.repos.d/
+  sleep ${SLEEP}
+done
 
-#############################
-# Enable ssh:
-#############################
+echo "[>] Enabling repository: EPEL"
+if ! rpm -q epel-release > /dev/null 2>&1
+then
+  dnf install -y epel-release > /dev/null
+fi
+cp -f ${CWD}/dnf/epel.repo /etc/yum.repos.d/
+sleep ${SLEEP}
 
-systemctl start sshd
-systemctl enable sshd
-systemctl status sshd
-hostname -I
+echo "[>] Enabling repository: EPEL Modular"
+cp -f ${CWD}/dnf/epel-modular.repo /etc/yum.repos.d/
+sleep ${SLEEP}
+
+echo "[>] Removing repository: EPEL Testing"
+rm -f /etc/yum.repos.d/epel-testing.repo
+sleep ${SLEEP}
+
+echo "[>] Removing repository: EPEL Testing Modular"
+rm -f /etc/yum.repos.d/epel-testing-modular.repo
+sleep ${SLEEP}
+
+echo "[>] Enabling repository: ELRepo"
+if ! rpm -q elrepo-release > /dev/null 2>&1
+then
+  dnf install -y elrepo-release > /dev/null
+fi
+cp -f ${CWD}/dnf/elrepo.repo /etc/yum.repos.d/
+sleep ${SLEEP}
+
+echo "[>] Enabling repository: RPM Fusion"
+if ! rpm -q rpmfusion-free-release > /dev/null 2>&1
+then
+  dnf install -y rpmfusion-free-release > /dev/null
+fi
+cp -f ${CWD}/dnf/rpmfusion-free-updates.repo /etc/yum.repos.d/
+sleep ${SLEEP}
+
+echo "[>] Enabling repository: RPM Fusion Tainted"
+if ! rpm -q rpmfusion-free-release-tainted > /dev/null 2>&1
+then
+  dnf install -y rpmfusion-free-release-tainted > /dev/null
+fi
+cp -f ${CWD}/dnf/rpmfusion-free-tainted.repo /etc/yum.repos.d/
+sleep ${SLEEP}
+
+echo "[>] Enabling repository: RPM Fusion Nonfree"
+if ! rpm -q rpmfusion-nonfree-release > /dev/null 2>&1
+then
+  dnf install -y ${FUSION}/nonfree/el/rpmfusion-nonfree-release-8.noarch.rpm  > /dev/null
+fi
+cp -f ${CWD}/dnf/rpmfusion-nonfree-updates.repo /etc/yum.repos.d/
+sleep ${SLEEP}
+
 
 
 #############################
