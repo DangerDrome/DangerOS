@@ -83,19 +83,18 @@ rm -f /etc/yum.repos.d/*.repo
 rm -f /etc/yum.repos.d/*.rpmsave
 sleep ${SLEEP}
 
-echo "[>] Install repositories:"
-cp -f ${CWD}/dnf/rocky.repo /etc/yum.repos.d/
-cp -f ${CWD}/dnf/rocky-addons.repo /etc/yum.repos.d/
-cp -f ${CWD}/dnf/rocky-devel.repo /etc/yum.repos.d/
-cp -f ${CWD}/dnf/rocky-extras.repo /etc/yum.repos.d/
+echo "[>] Installing repositories..."
+#cp -f ${CWD}/dnf/rocky.repo /etc/yum.repos.d/
+#cp -f ${CWD}/dnf/rocky-addons.repo /etc/yum.repos.d/
+#cp -f ${CWD}/dnf/rocky-devel.repo /etc/yum.repos.d/
+#cp -f ${CWD}/dnf/rocky-extras.repo /etc/yum.repos.d/
 
-#for REPOSITORY in addons devel extras
-#do
-#  echo "[>] Enabling repository: ${REPOSITORY}"
-#
-#  cp -f ${CWD}/dnf/rocky-${REPOSITORY}.repo /etc/yum.repos.d/
-#  sleep ${SLEEP}
-#done
+for REPOSITORY in addons devel extras
+do
+  echo "[>] Enabling repository: ${REPOSITORY}"
+  cp -f ${CWD}/dnf/rocky-${REPOSITORY}.repo /etc/yum.repos.d/
+  sleep ${SLEEP}
+done
 
 echo "[>] Enabling repository: EPEL"
 if ! rpm -q epel-release > /dev/null 2>&1
@@ -111,14 +110,6 @@ then
   dnf install -y rpmfusion-free-release > /dev/null
 fi
 cp -f ${CWD}/dnf/rpmfusion-free-updates.repo /etc/yum.repos.d/
-sleep ${SLEEP}
-
-echo "[>] Enabling repository: RPM Fusion Tainted"
-if ! rpm -q rpmfusion-free-release-tainted > /dev/null 2>&1
-then
-  dnf install -y rpmfusion-free-release-tainted > /dev/null
-fi
-cp -f ${CWD}/dnf/rpmfusion-free-tainted.repo /etc/yum.repos.d/
 sleep ${SLEEP}
 
 echo "[>] Enabling repository: RPM Fusion Nonfree"
@@ -168,7 +159,7 @@ do
   if ! rpm -q ${PACKAGE} > /dev/null 2>&1
   then
     echo "[>] Installing package: ${PACKAGE}"
-    gnome-extensions install -y ${PACKAGE} > /dev/null
+    gnome-extensions install -f ${PACKAGE} > /dev/null
     sleep ${SLEEP}
   fi
 done
