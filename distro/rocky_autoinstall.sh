@@ -161,11 +161,11 @@ do
     #echo "[>] Downloading package: ${i}"
     #wget -O ${CWD}/gnome/extensions/${i}.zip "https://extensions.gnome.org/download-extension/${i}.shell-extension.zip?version_tag=$VERSION_TAG"
     #sleep ${SLEEP}
+    #if ! gnome-extensions list | grep --quiet ${i}; then
+    #    busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s ${i}
+    #fi
     echo "[>] Installing package: ${i}"
-    gnome-extensions install ${CWD}/gnome/extensions/${i}.zip
-    if ! gnome-extensions list | grep --quiet ${i}; then
-        busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s ${i}
-    fi
+    gnome-extensions install --force ${CWD}/gnome/extensions/${i}.zip
     echo "[>] Enabling package: ${i}"
     gnome-extensions enable ${i}
 done
@@ -204,19 +204,29 @@ sleep ${SLEEP}
 # Install flatpak apps:
 #######################
 
-#echo "[>] Installing flatpak apps"
-#sleep ${SLEEP}
-#for PACKAGE in ${FLATPAK}
-#do
-#  if ! rpm -q ${PACKAGE} > /dev/null 2>&1
-#  then
-#    echo "[>] Installing package: ${PACKAGE}"
-#    flatpak install -y ${PACKAGE} > /dev/null
-#    sleep ${SLEEP}
-#  fi
-#done
-#echo "[>] Flatpak apps have been installed on the system."
-#sleep ${SLEEP}
+sleep ${SLEEP}
+cat << EOF
+
+####################################
+[>]  Installing base flatpak apps:
+####################################
+
+EOF
+sleep ${SLEEP}
+
+echo "[>] Installing flatpak apps"
+sleep ${SLEEP}
+for PACKAGE in ${FLATPAK}
+do
+  if ! rpm -q ${PACKAGE} > /dev/null 2>&1
+  then
+    echo "[>] Installing package: ${PACKAGE}"
+    flatpak install -y ${PACKAGE} > /dev/null
+    sleep ${SLEEP}
+  fi
+done
+echo "[>] Flatpak apps have been installed on the system."
+sleep ${SLEEP}
 
 
 ##########################
