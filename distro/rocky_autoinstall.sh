@@ -57,6 +57,7 @@ cat << EOF
 ░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀▄░█▀█░█▀▀
 ░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
 ░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
+
 [>] Auto Install.
 [>] ${SYSTEM}
 [>] ${VERSION}
@@ -133,7 +134,7 @@ sleep ${SLEEP}
 # Install base packages:
 #############################
 
-echo "[>] Installing some additional packages."
+echo "[>] Installing the base packages."
 sleep ${SLEEP}
 for PACKAGE in ${BASE}
 do
@@ -159,7 +160,7 @@ do
   if ! rpm -q ${PACKAGE} > /dev/null 2>&1
   then
     echo "[>] Installing package: ${PACKAGE}"
-    gnome-extensions install -f ${PACKAGE} > /dev/null
+    gnome-extensions install -f ./gnome/extensions/${PACKAGE}.zip > /dev/null
     sleep ${SLEEP}
   fi
 done
