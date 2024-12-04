@@ -13,7 +13,6 @@ FUSION="https://download1.rpmfusion.org"
 BASE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/base.txt)
 FLATPAK=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/flatpak.txt)
 GNOME=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/gnome.txt)
-REMOVE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/remove.txt)
 NETWORK_CONFIG="${CWD}/network/locations.txt"
 
 #############################
@@ -55,13 +54,6 @@ install_packages() {
   done
 }
 
-remove_packages() {
-  echo "Removing base packages..."
-  for PACKAGE in ${BASE}; do
-    sudo dnf remove -y ${PACKAGE}
-  done
-}
-
 install_gnome_extensions() {
   echo "Installing GNOME extensions..."
   for EXT in ${GNOME}; do
@@ -70,25 +62,10 @@ install_gnome_extensions() {
   done
 }
 
-remove_gnome_extensions() {
-  echo "Removing GNOME extensions..."
-  for EXT in ${GNOME}; do
-    sudo gnome-extensions disable ${EXT}
-    sudo gnome-extensions uninstall ${EXT}
-  done
-}
-
 install_flatpak_apps() {
   echo "Installing Flatpak apps..."
   for APP in ${FLATPAK}; do
     flatpak install -y ${APP}
-  done
-}
-
-remove_flatpak_apps() {
-  echo "Removing Flatpak apps..."
-  for APP in ${FLATPAK}; do
-    flatpak uninstall -y ${APP}
   done
 }
 
@@ -100,25 +77,11 @@ configure_system() {
   sudo firewall-cmd --reload
 }
 
-remove_system_configuration() {
-  echo "Removing SSH and XRDP configuration..."
-  sudo systemctl disable --now sshd
-  sudo systemctl disable --now xrdp
-  sudo firewall-cmd --remove-port=3389/tcp --permanent
-  sudo firewall-cmd --reload
-}
-
 install_docker() {
   echo "Installing Docker..."
   sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
   sudo dnf install -y docker-ce docker-ce-cli containerd.io
   sudo systemctl enable --now docker
-}
-
-remove_docker() {
-  echo "Removing Docker..."
-  sudo systemctl disable --now docker
-  sudo dnf remove -y docker-ce docker-ce-cli containerd.io
 }
 
 customize_environment() {
@@ -134,16 +97,6 @@ customize_environment() {
   done
 }
 
-remove_customizations() {
-  echo "Removing bash customizations..."
-  rm -f /root/.bashrc /root/.bash_aliases
-  for USER in ${USERS}; do
-    if [[ -d /home/${USER} ]]; then
-      rm -f /home/${USER}/.bashrc /home/${USER}/.bash_aliases
-    fi
-  done
-}
-
 auto_mount_network_locations() {
   echo "Mounting SMB network locations..."
   while IFS=, read -r SHARE MOUNT_POINT OPTIONS; do
@@ -154,71 +107,101 @@ auto_mount_network_locations() {
   done < "${NETWORK_CONFIG}"
 }
 
-remove_mounts() {
-  echo "Removing network mounts..."
-  while IFS=, read -r _ MOUNT_POINT _; do
-    if mount | grep -qs "${MOUNT_POINT}"; then
-      umount -l "${MOUNT_POINT}"
-      rm -rf "${MOUNT_POINT}"
+white_label_os() {
+  echo "Applying white-label branding to Rocky Linux..."
+
+  # Define the branding directory
+  BRANDING_DIR="${CWD}/media/brand"
+
+  # Ensure the branding directory exists
+  if [[ ! -d "${BRANDING_DIR}" ]]; then
+    echo "Branding directory not found at ${BRANDING_DIR}. Creating it now..."
+    sudo mkdir -p "${BRANDING_DIR}"
+    echo "Please add the following files to ${BRANDING_DIR}:"
+    echo "  - grub_background.png: Custom GRUB background."
+    echo "  - gdm_background.png: Custom GNOME login screen background."
+    echo "  - os-release: Custom OS branding."
+    echo "  - logo.png: Custom system logo."
+    echo "After adding these files, rerun this script."
+    exit 1
+  fi
+
+  # Define paths for branding assets
+  GRUB_BACKGROUND="/boot/grub2/themes/Rocky/background.png"
+  GDM_BACKGROUND="/usr/share/gnome-shell/theme/gnome-shell-theme.gresource"
+  OS_RELEASE="/etc/os-release"
+  ROCKY_LOGO="/usr/share/pixmaps/rocky-logo.png"
+
+  # Replace GRUB background
+  if [[ -f "${BRANDING_DIR}/grub_background.png" ]]; then
+    echo "Replacing GRUB background..."
+    sudo cp "${BRANDING_DIR}/grub_background.png" "${GRUB_BACKGROUND}"
+  else
+    echo "Warning: grub_background.png not found in ${BRANDING_DIR}. Skipping GRUB background replacement."
+  fi
+
+  # Replace GDM background
+  if [[ -f "${BRANDING_DIR}/gdm_background.png" ]]; then
+    echo "Replacing GDM background..."
+    sudo cp "${BRANDING_DIR}/gdm_background.png" "${GDM_BACKGROUND}"
+  else
+    echo "Warning: gdm_background.png not found in ${BRANDING_DIR}. Skipping GDM background replacement."
+  fi
+
+  # Update OS branding in /etc/os-release
+  if [[ -f "${BRANDING_DIR}/os-release" ]]; then
+    echo "Updating OS branding in /etc/os-release..."
+    sudo cp "${BRANDING_DIR}/os-release" "${OS_RELEASE}"
+  else
+    echo "Warning: os-release not found in ${BRANDING_DIR}. Skipping OS branding update."
+  fi
+
+  # Replace Rocky logo
+  if [[ -f "${BRANDING_DIR}/logo.png" ]]; then
+    echo "Replacing system logo..."
+    sudo cp "${BRANDING_DIR}/logo.png" "${ROCKY_LOGO}"
+  else
+    echo "Warning: logo.png not found in ${BRANDING_DIR}. Skipping logo replacement."
+  fi
+
+  # Notify user
+  echo "White-label branding process completed."
+  echo "Please restart your system for all changes to take effect."
+}
+
+set_desktop_wallpaper() {
+  echo "Changing desktop wallpaper for all users..."
+
+  # Define the path to the wallpaper in the branding directory
+  BRANDING_DIR="${CWD}/media/brand"
+  WALLPAPER_FILE="${BRANDING_DIR}/wallpaper.jpg"
+
+  # Ensure the wallpaper file exists
+  if [[ ! -f "${WALLPAPER_FILE}" ]]; then
+    echo "Error: Wallpaper file not found at ${WALLPAPER_FILE}."
+    echo "Please place a wallpaper.jpg file in ${BRANDING_DIR} and rerun this function."
+    return 1
+  fi
+
+  # Set wallpaper for the current user
+  echo "Setting wallpaper for the current user..."
+  gsettings set org.gnome.desktop.background picture-uri "file://${WALLPAPER_FILE}"
+  gsettings set org.gnome.desktop.background picture-options "zoom"
+
+  # Set wallpaper for all existing users
+  echo "Setting wallpaper for all users..."
+  for USER in ${USERS}; do
+    if [[ -d "/home/${USER}/.config" ]]; then
+      su -c "gsettings set org.gnome.desktop.background picture-uri 'file://${WALLPAPER_FILE}'" "${USER}" 2>/dev/null || {
+        echo "Failed to set wallpaper for user: ${USER}. Skipping..."
+      }
     fi
-  done < "${NETWORK_CONFIG}"
-  sed -i '/cifs/d' /etc/fstab
+  done
+
+  # Notify the user
+  echo "Desktop wallpaper has been updated. Users may need to log out and log back in to see the changes."
 }
 
-enable_dark_mode() {
-  echo "Enabling dark mode for GNOME desktop and applications globally..."
-
-  # Ensure dconf CLI is installed
-  if ! command -v dconf &>/dev/null; then
-    echo "Installing dconf to configure system-wide GNOME settings..."
-    sudo dnf install -y dconf
-  fi
-
-  # Set system-wide GNOME desktop to dark mode
-  echo "Setting system-wide GNOME desktop to dark mode..."
-  sudo mkdir -p /etc/dconf/db/local.d
-  echo "[org/gnome/desktop/interface]" | sudo tee /etc/dconf/db/local.d/00-dark-mode > /dev/null
-  echo "gtk-theme='Adwaita-dark'" | sudo tee -a /etc/dconf/db/local.d/00-dark-mode > /dev/null
-  echo "color-scheme='prefer-dark'" | sudo tee -a /etc/dconf/db/local.d/00-dark-mode > /dev/null
-
-  # Ensure GNOME Tweaks compatibility (User Themes)
-  echo "[org/gnome/shell/extensions/user-theme]" | sudo tee -a /etc/dconf/db/local.d/00-dark-mode > /dev/null
-  echo "name='Adwaita-dark'" | sudo tee -a /etc/dconf/db/local.d/00-dark-mode > /dev/null
-
-  # Apply the settings
-  echo "Applying system-wide GNOME dark mode settings..."
-  sudo dconf update
-
-  # Adjust Flatpak applications to use dark mode
-  echo "Applying dark mode to Flatpak applications globally..."
-  flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
-  flatpak override --env=GTK_THEME=Adwaita:dark org.mozilla.firefox
-  flatpak override --env=GTK_THEME=Adwaita:dark com.spotify.Client
-
-  echo "Dark mode has been applied globally. Please restart the system or GNOME Shell to see changes."
-}
-
-increase_scaling_factor() {
-  echo "Setting GNOME text scaling factor to 1.5 globally..."
-
-  # Ensure dconf CLI is installed
-  if ! command -v dconf &>/dev/null; then
-    echo "Installing dconf to configure system-wide GNOME settings..."
-    sudo dnf install -y dconf
-  fi
-
-  # Set system-wide GNOME scaling factor
-  echo "Configuring system-wide GNOME text scaling factor..."
-  sudo mkdir -p /etc/dconf/db/local.d
-  echo "[org/gnome/desktop/interface]" | sudo tee /etc/dconf/db/local.d/01-scaling-factor > /dev/null
-  echo "text-scaling-factor=1.5" | sudo tee -a /etc/dconf/db/local.d/01-scaling-factor > /dev/null
-
-  # Apply the settings
-  echo "Applying system-wide GNOME scaling factor..."
-  sudo dconf update
-
-  echo "GNOME text scaling factor has been set to 1.5 globally. Please restart GNOME Shell or the system to apply changes."
-}
 
 #############################
 # User Menu
@@ -228,23 +211,20 @@ run_tasks() {
   local tasks=(
     "1" "Set up repositories" off
     "2" "Install base packages" off
-    "3" "Remove installed packages" off
-    "4" "Install GNOME extensions" off
-    "5" "Remove GNOME extensions" off
-    "6" "Install Flatpak apps" off
-    "7" "Remove Flatpak apps" off
-    "8" "Configure system (SSH/XRDP)" off
-    "9" "Remove system configuration (SSH/XRDP)" off
-    "10" "Install Docker" off
-    "11" "Remove Docker" off
-    "12" "Customize environment" off
-    "13" "Remove customizations" off
-    "14" "Mount network locations" off
-    "15" "Remove network mounts" off
-    "16" "Enable dark mode globally" off
-    "17" "Increase GNOME scaling factor to 1.5" off
+    "3" "Install GNOME extensions" off
+    "4" "Install Flatpak apps" off
+    "5" "Configure system (SSH/XRDP)" off
+    "6" "Install Docker" off
+    "7" "Customize environment" off
+    "8" "Mount network locations" off
+    "9" "Enable dark mode globally" off
+    "10" "Increase GNOME scaling factor to 1.5" off
+    "11" "Set 100px universal padding for Nautilus" off
+    "12" "Apply white-label branding to Rocky Linux" off
+    "13" "Set desktop wallpaper from branding folder" off
+
   )
-  local choices=$(dialog --separate-output --checklist "Select tasks to perform:" 20 50 17 "${tasks[@]}" 3>&1 1>&2 2>&3)
+  local choices=$(dialog --separate-output --checklist "Select tasks to perform:" 20 50 12 "${tasks[@]}" 3>&1 1>&2 2>&3)
   clear
 
   check_prerequisites
@@ -253,21 +233,17 @@ run_tasks() {
     case $choice in
       1) setup_repositories ;;
       2) install_packages ;;
-      3) remove_packages ;;
-      4) install_gnome_extensions ;;
-      5) remove_gnome_extensions ;;
-      6) install_flatpak_apps ;;
-      7) remove_flatpak_apps ;;
-      8) configure_system ;;
-      9) remove_system_configuration ;;
-      10) install_docker ;;
-      11) remove_docker ;;
-      12) customize_environment ;;
-      13) remove_customizations ;;
-      14) auto_mount_network_locations ;;
-      15) remove_mounts ;;
-      16) enable_dark_mode ;;
-      17) increase_scaling_factor ;;
+      3) install_gnome_extensions ;;
+      4) install_flatpak_apps ;;
+      5) configure_system ;;
+      6) install_docker ;;
+      7) customize_environment ;;
+      8) auto_mount_network_locations ;;
+      9) enable_dark_mode ;;
+      10) increase_scaling_factor ;;
+      11) set_nautilus_padding ;;
+      12) white_label_os ;;
+      13) set_desktop_wallpaper ;;
       *) echo "Invalid option: ${choice}" ;;
     esac
   done
