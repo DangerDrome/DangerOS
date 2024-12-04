@@ -13,6 +13,7 @@ EOF
 # DangerOS Auto Install
 # Rocky Linux 9.5 version
 
+
 #############################
 # Variables
 #############################
@@ -38,7 +39,7 @@ dnf update -y
 #############################
 
 echo "[>] Installing .bashrc & bash_aliases for user: root"
-cp -f ${CWD}/bash/bashrc_root /root/.bashrc
+cp -f ${CWD}/bash/bashrc /root/.bashrc
 cp -f ${CWD}/bash/bash_aliases /root/.bash_aliases
 sleep ${SLEEP}
 
@@ -49,7 +50,7 @@ then
     if [ -d /home/${USER} ]
     then
       echo "[>] Installing .bashrc & bash_aliases for user: ${USER}"
-      cp -f ${CWD}/bash/bashrc_users /home/${USER}/.bashrc
+      cp -f ${CWD}/bash/bashrc /home/${USER}/.bashrc
       cp -f ${CWD}/bash/bash_aliases /home/${USER}/.bash_aliases
       chown ${USER}:${USER} /home/${USER}/.bashrc
       chown ${USER}:${USER} /home/${USER}/.bash_aliases
@@ -59,7 +60,7 @@ then
 fi
 
 echo "[>] Installing custom .bashrc for future users"
-cp -f ${CWD}/bash/bashrc_users /etc/skel/.bashrc
+cp -f ${CWD}/bash/bashrc /etc/skel/.bashrc
 cp -f ${CWD}/bash/bash_aliases /etc/skel/.bash_aliases
 sleep ${SLEEP}
 
