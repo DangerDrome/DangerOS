@@ -22,8 +22,10 @@ CWD=$(pwd)
 SLEEP=0
 USERS=$(awk -F: '$3 > 999 && $3 < 65534 {print $1}' /etc/passwd | sort)
 FUSION="https://download1.rpmfusion.org"
-GNOME=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkglists/gnome.txt)
-PAKS=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkglists/paks.txt)
+BASE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/base.txt)
+FLATPAK=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/flatpak.txt)
+GNOME=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/gnome.txt)
+REMOVE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/remove.txt)
 
 
 #############################
@@ -147,50 +149,93 @@ fi
 cp -f ${CWD}/dnf/rpmfusion-nonfree-updates.repo /etc/yum.repos.d/
 sleep ${SLEEP}
 
+echo "[>] Enabling repository: Flathub"
+dnf install -y flatpak
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sleep ${SLEEP}
 
-
-#############################
-# Install el9 packages:
-#############################
-
-sudo dnf install -y \
---setopt=install_weak_deps=False \
-xrdp \
-ImageMagick \
-timeshift \
-ffmpeg \
-fastfetch \
-vlc \
-gh \
-gnome-tweaks \
-gnome-extensions-app \
-keepassxc \
-mediainfo \
-tldr \
-xdg-desktop-portal-gnome
 
 
 #############################
-# Install flatpak packages:
+# Install base packages:
 #############################
 
-sudo flatpak install -y \
-com.mattjakeman.ExtensionManager \
-io.github.shiftey.Desktop \
-org.deluge_torrent.deluge \
-com.mattjakeman.ExtensionManager \
-net.nokyan.Resources \
-org.remmina.Remmina \
-org.gnome.Calendar \
-com.vixalien.sticky \
-com.visualstudio.code \
-md.obsidian.Obsidian \
-io.github.celluloid_player.Celluloid \
-com.vysp3r.ProtonPlus \
-com.valvesoftware.Steam \
-fr.handbrake.ghb \
-org.kde.krita \
-com.github.tchx84.Flatseal
+echo "[>] Installing some additional packages."
+sleep ${SLEEP}
+for PACKAGE in ${BASE}
+do
+  if ! rpm -q ${PACKAGE} > /dev/null 2>&1
+  then
+    echo "[>] Installing package: ${PACKAGE}"
+    dnf install -y ${PACKAGE} > /dev/null
+    sleep ${SLEEP}
+  fi
+done
+echo "[>] Basic packages have been installed on the system."
+sleep ${SLEEP}
+
+
+#############################
+# Install flatpak apps:
+#############################
+
+echo "[>] Installing flatpak apps"
+sleep ${SLEEP}
+for PACKAGE in ${FLATPAK}
+do
+  if ! rpm -q ${PACKAGE} > /dev/null 2>&1
+  then
+    echo "[>] Installing package: ${PACKAGE}"
+    flatpak install -y ${PACKAGE} > /dev/null
+    sleep ${SLEEP}
+  fi
+done
+echo "[>] Flatpak apps have been installed on the system."
+sleep ${SLEEP}
+
+
+#############################
+# Install gnome & enable packages:
+#############################
+
+echo "[>] Installing gnome specific packages."
+sleep ${SLEEP}
+for PACKAGE in ${GNOME}
+do
+  if ! rpm -q ${PACKAGE} > /dev/null 2>&1
+  then
+    echo "[>] Installing package: ${PACKAGE}"
+    gnome-extensions install -y ${PACKAGE} > /dev/null
+    sleep ${SLEEP}
+  fi
+done
+echo "[>] Gnome specific packages have been installed."
+sleep ${SLEEP}
+
+echo "[>] Enabling gnome specific packages"
+sleep ${SLEEP}
+for PACKAGE in ${GNOME}
+do
+  if ! rpm -q ${PACKAGE} > /dev/null 2>&1
+  then
+    echo "[>] Installing package: ${PACKAGE}"
+    gnome-extensions enable ${PACKAGE} > /dev/null
+    sleep ${SLEEP}
+  fi
+done
+echo "[>] Gnome specific packages have been enabled."
+sleep ${SLEEP}
+
+
+#############################
+# Remove useless packages:
+#############################
+
+echo "[>] Removing useless packages"
+sleep ${SLEEP}
+dnf remove -y ${REMOVE} > /dev/null
+echo "[>] Useless packages have been removed from the system."
+sleep ${SLEEP}
 
 
 #############################
@@ -209,6 +254,7 @@ sudo firewall-cmd --reload
 
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+echo "[>] Dark mode activated."
 
 
 #############################
