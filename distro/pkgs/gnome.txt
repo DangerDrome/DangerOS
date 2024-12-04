@@ -1,0 +1,8 @@
+clipboard-indicator@Dieg0Js.github.io
+gnome-shell-screenshot@ttll.de
+ding@rastersoft.com
+add-to-desktop@tommimon.github.com
+hide-universal-access@akiirui.github.io
+appindicatorsupport@rgcjonas.gmail.com
+dash-to-panel@gnome-shell-extensions.gcampax.github.com
+workspace-indicator@gnome-shell-extensions.gcampax.github.com
