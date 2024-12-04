@@ -12,5 +12,9 @@ io.github.celluloid_player.Celluloid
 com.vysp3r.ProtonPlus
 com.valvesoftware.Steam
 fr.handbrake.ghb
-org.kde.krita
 com.github.tchx84.Flatseal
+
+# DCC
+org.kde.krita
+org.blender.Blender
+fr.natron.Natron
