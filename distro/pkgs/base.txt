@@ -12,3 +12,49 @@ keepassxc
 mediainfo
 tldr
 xdg-desktop-portal-gnome
+
+# Desktop
+rocky-backgrounds
+
+# Internet
+filezilla
+firefox
+# google-chrome-stable
+hexchat
+hexchat-autoaway
+krdc
+pidgin
+thunderbird
+transmission
+
+# Office
+libreoffice
+
+# Graphics
+digikam
+digikam-doc
+gimp
+# gimp-plugin-*
+inkscape
+inkscape-docs
+inkscape-view
+sane-backends-drivers-scanners
+simple-scan
+
+# Multimedia
+audacious
+# audacity
+# kdenlive
+# mplayer
+# obs-studio
+# vlc
+
+# System
+# anydesk
+virt-manager
+
+# Utilities
+ark
+k3b
+kde-connect
+keepassxc
