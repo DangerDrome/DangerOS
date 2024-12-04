@@ -4,4 +4,4 @@
 #░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
 ```
 # Gnome Extentions
-### # Path: /usr/share/gnome-shell/extensions
+### Path: /usr/share/gnome-shell/extensions
