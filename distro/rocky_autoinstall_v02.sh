@@ -9,11 +9,10 @@
 
 CWD=$(pwd)
 USERS=$(awk -F: '$3 > 999 && $3 < 65534 {print $1}' /etc/passwd | sort)
-FUSION="https://download1.rpmfusion.org"
-BASE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/base.txt)
-FLATPAK=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/flatpak.txt)
-GNOME=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/gnome.txt)
-REMOVE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/remove.txt)
+BASE="firefox flatpak xdg-desktop-portal-gnome"
+EXTRA_PACKAGES="vlc keepassxc ImageMagick timeshift ffmpeg fastfetch gthumb mediainfo tldr htop ntfs-3g unrar xrdp"
+FLATPAK="org.gimp.GIMP org.videolan.VLC"
+REMOVE="nano"
 NETWORK_CONFIG="${CWD}/network/locations.txt"
 
 #############################
@@ -33,38 +32,27 @@ check_prerequisites() {
     exit 1
   fi
 
-  source /etc/os-release
-  if [[ "${ROCKY_SUPPORT_PRODUCT}" != "Rocky-Linux-9" || "${ROCKY_SUPPORT_PRODUCT_VERSION}" < "9" ]]; then
-    echo "Unsupported OS version. This script is only for Rocky Linux 9.x." >&2
-    exit 1
+  echo "Checking for EPEL repository..."
+  if ! rpm -q epel-release >/dev/null; then
+    sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
   fi
 }
 
 setup_repositories() {
   echo "Setting up repositories..."
-  rm -f /etc/yum.repos.d/*.repo /etc/yum.repos.d/*.rpmsave
-  cp -f ${CWD}/dnf/rocky.repo /etc/yum.repos.d/
-  for REPO in baseos appstream crb extras; do
-    dnf config-manager --set-enabled ${REPO}
-  done
-  dnf install -y epel-release
+  sudo dnf install -y epel-release
+  sudo dnf install -y https://download1.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm
+  sudo dnf install -y https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm
 }
 
 install_packages() {
   echo "Installing base packages..."
-  dnf install -y ${BASE}
-  dnf install -y flatpak
-  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  sudo dnf install -y ${BASE} ${EXTRA_PACKAGES}
 }
 
 remove_packages() {
   echo "Removing base packages..."
-  dnf remove -y ${BASE}
-}
-
-remove_repositories() {
-  echo "Removing repositories..."
-  dnf remove -y epel-release rpmfusion-free-release rpmfusion-nonfree-release
+  sudo dnf remove -y ${BASE} ${EXTRA_PACKAGES}
 }
 
 remove_flatpak_apps() {
@@ -74,15 +62,51 @@ remove_flatpak_apps() {
   done
 }
 
-remove_docker() {
-  echo "Removing Docker..."
-  systemctl stop docker
-  dnf remove -y docker-ce docker-ce-cli containerd.io
+remove_repositories() {
+  echo "Removing repositories..."
+  sudo dnf remove -y epel-release rpmfusion-free-release rpmfusion-nonfree-release
 }
 
-remove_nvidia_drivers() {
-  echo "Removing NVIDIA drivers..."
-  dnf remove -y nvidia-driver kernel-devel kernel-headers
+configure_system() {
+  echo "Configuring SSH and XRDP..."
+  sudo systemctl enable --now sshd
+  sudo systemctl enable --now xrdp
+  sudo firewall-cmd --permanent --add-port=3389/tcp
+  sudo firewall-cmd --reload
+}
+
+remove_system_configuration() {
+  echo "Removing SSH and XRDP configuration..."
+  sudo systemctl disable --now sshd
+  sudo systemctl disable --now xrdp
+  sudo firewall-cmd --remove-port=3389/tcp --permanent
+  sudo firewall-cmd --reload
+}
+
+install_docker() {
+  echo "Installing Docker..."
+  sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+  sudo dnf install -y docker-ce docker-ce-cli containerd.io
+  sudo systemctl enable --now docker
+}
+
+remove_docker() {
+  echo "Removing Docker..."
+  sudo systemctl disable --now docker
+  sudo dnf remove -y docker-ce docker-ce-cli containerd.io
+}
+
+customize_environment() {
+  echo "Customizing bash environment..."
+  for USER in ${USERS}; do
+    if [[ -d /home/${USER} ]]; then
+      cp -f ${CWD}/bash/bashrc /home/${USER}/.bashrc
+      cp -f ${CWD}/bash/bash_aliases /home/${USER}/.bash_aliases
+      chown ${USER}:${USER} /home/${USER}/.bashrc /home/${USER}/.bash_aliases
+    fi
+  done
+  cp -f ${CWD}/bash/bashrc /root/.bashrc
+  cp -f ${CWD}/bash/bash_aliases /root/.bash_aliases
 }
 
 remove_customizations() {
@@ -93,6 +117,27 @@ remove_customizations() {
       rm -f /home/${USER}/.bashrc /home/${USER}/.bash_aliases
     fi
   done
+}
+
+install_nvidia_drivers() {
+  echo "Installing NVIDIA drivers..."
+  sudo dnf config-manager --add-repo=https://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo
+  sudo dnf install -y kernel-headers kernel-devel gcc dkms nvidia-driver
+}
+
+remove_nvidia_drivers() {
+  echo "Removing NVIDIA drivers..."
+  sudo dnf remove -y nvidia-driver kernel-devel kernel-headers
+}
+
+auto_mount_network_locations() {
+  echo "Mounting SMB network locations..."
+  while IFS=, read -r SHARE MOUNT_POINT OPTIONS; do
+    if [[ ! -d "${MOUNT_POINT}" ]]; then
+      mkdir -p "${MOUNT_POINT}"
+    fi
+    mount -t cifs -o "${OPTIONS}" "//${SHARE}" "${MOUNT_POINT}"
+  done < "${NETWORK_CONFIG}"
 }
 
 remove_mounts() {
@@ -114,23 +159,21 @@ run_tasks() {
   local tasks=(
     "1" "Set up repositories" off
     "2" "Install packages" off
-    "3" "Remove unnecessary packages" off
+    "3" "Remove installed packages" off
     "4" "Configure system" off
-    "5" "Install Docker" off
-    "6" "Customize environment" off
-    "7" "Install NVIDIA drivers" off
-    "8" "Install custom fonts" off
-    "9" "Mount network locations" off
-    "10" "Remove repositories" off
-    "11" "Remove installed packages" off
-    "12" "Remove Flatpak apps" off
-    "13" "Remove Docker" off
-    "14" "Remove NVIDIA drivers" off
-    "15" "Remove customizations" off
-    "16" "Remove network mounts" off
-    "17" "Perform all tasks" off
+    "5" "Remove system configuration" off
+    "6" "Install Docker" off
+    "7" "Remove Docker" off
+    "8" "Customize environment" off
+    "9" "Remove customizations" off
+    "10" "Install NVIDIA drivers" off
+    "11" "Remove NVIDIA drivers" off
+    "12" "Mount network locations" off
+    "13" "Remove network mounts" off
+    "14" "Remove repositories" off
+    "15" "Remove Flatpak apps" off
   )
-  local choices=$(dialog --separate-output --checklist "Select tasks to perform:" 20 50 10 "${tasks[@]}" 3>&1 1>&2 2>&3)
+  local choices=$(dialog --separate-output --checklist "Select tasks to perform:" 20 50 15 "${tasks[@]}" 3>&1 1>&2 2>&3)
   clear
 
   check_prerequisites
@@ -139,31 +182,19 @@ run_tasks() {
     case $choice in
       1) setup_repositories ;;
       2) install_packages ;;
-      3) remove_unnecessary_packages ;;
+      3) remove_packages ;;
       4) configure_system ;;
-      5) install_docker ;;
-      6) customize_environment ;;
-      7) install_nvidia_drivers ;;
-      8) install_fonts ;;
-      9) auto_mount_network_locations ;;
-      10) remove_repositories ;;
-      11) remove_packages ;;
-      12) remove_flatpak_apps ;;
-      13) remove_docker ;;
-      14) remove_nvidia_drivers ;;
-      15) remove_customizations ;;
-      16) remove_mounts ;;
-      17)
-        setup_repositories
-        install_packages
-        remove_unnecessary_packages
-        configure_system
-        install_docker
-        customize_environment
-        install_nvidia_drivers
-        install_fonts
-        auto_mount_network_locations
-        ;;
+      5) remove_system_configuration ;;
+      6) install_docker ;;
+      7) remove_docker ;;
+      8) customize_environment ;;
+      9) remove_customizations ;;
+      10) install_nvidia_drivers ;;
+      11) remove_nvidia_drivers ;;
+      12) auto_mount_network_locations ;;
+      13) remove_mounts ;;
+      14) remove_repositories ;;
+      15) remove_flatpak_apps ;;
       *) echo "Invalid option: ${choice}" ;;
     esac
   done
