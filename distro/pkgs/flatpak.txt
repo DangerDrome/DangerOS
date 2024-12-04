@@ -15,6 +15,7 @@ fr.handbrake.ghb
 com.github.tchx84.Flatseal
 
 # DCC
-org.kde.krita
-org.blender.Blender
-fr.natron.Natron
+# install after NVIDIA drivers and a reboot
+#org.kde.krita
+#org.blender.Blender
+#fr.natron.Natron
