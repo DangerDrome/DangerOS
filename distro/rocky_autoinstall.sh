@@ -210,5 +210,31 @@ sudo firewall-cmd --reload
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 
+
+#############################
+# Install gnome extentions:
+#############################
+
+gnome-extensions install -y \
+clipboard-indicator@Dieg0Js.github.io \
+gnome-shell-screenshot@ttll.de \
+ding@rastersoft.com \
+add-to-desktop@tommimon.github.com \
+hide-universal-access@akiirui.github.io \
+appindicatorsupport@rgcjonas.gmail.com \
+dash-to-panel@gnome-shell-extensions.gcampax.github.com \
+workspace-indicator@gnome-shell-extensions.gcampax.github.com 
+
+gnome-extensions enable \
+gnome-extensions install -y \
+clipboard-indicator@Dieg0Js.github.io \
+gnome-shell-screenshot@ttll.de \
+ding@rastersoft.com \
+add-to-desktop@tommimon.github.com \
+hide-universal-access@akiirui.github.io \
+appindicatorsupport@rgcjonas.gmail.com \
+dash-to-panel@gnome-shell-extensions.gcampax.github.com \
+workspace-indicator@gnome-shell-extensions.gcampax.github.com 
+
 ```
 
