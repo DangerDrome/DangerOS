@@ -25,7 +25,7 @@ REMOVE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/remove.txt)
 # Init
 #############################
 
-# Make sure the script is being executed with superuser privileges.
+# Check privileges.
 if [[ "${UID}" -ne 0 ]]
 then
   echo
@@ -34,17 +34,19 @@ then
   exit 1
 fi
 
-# Make sure we're running Rocky Linux 9.x.
+# Check Linux Version.
 if [ -f /etc/os-release ]
 then
   source /etc/os-release
   SYSTEM="${ROCKY_SUPPORT_PRODUCT}"
   VERSION="${ROCKY_SUPPORT_PRODUCT_VERSION}"
 fi
-if [ "${SYSTEM}" != "Rocky Linux" ] && [ "${VERSION}" != "9" ] 
+if [ "${SYSTEM}" != "Rocky-Linux-9" ] && [ "${VERSION}" < "9" ] 
 then
   echo
-  echo "Unsupported operating system." >&2
+  # echo "[>] ${SYSTEM}"
+  # echo "[>] ${VERSION}"
+  echo "[>] Doh! Unsupported operating system... :(" >&2
   echo
   exit 1
 fi
@@ -56,6 +58,8 @@ cat << EOF
 ░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
 ░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
 [>] Auto Install.
+[>] ${SYSTEM}
+[>] ${VERSION}
 
 EOF
 sleep ${SLEEP}
@@ -65,71 +69,33 @@ sleep ${SLEEP}
 # Update System:
 #############################
 
-echo "[>] Updating system..."
-dnf update -y
-echo "[>] System updated."
-
-
-#############################
-# Setup bash & aliases:
-#############################
-
-echo "[>] Installing .bashrc & bash_aliases for user: root"
-cp -f ${CWD}/bash/bashrc /root/.bashrc
-cp -f ${CWD}/bash/bash_aliases /root/.bash_aliases
-sleep ${SLEEP}
-
-if [ ! -z "${USERS}" ]
-then
-  for USER in ${USERS}
-  do
-    if [ -d /home/${USER} ]
-    then
-      echo "[>] Installing .bashrc & bash_aliases for user: ${USER}"
-      cp -f ${CWD}/bash/bashrc /home/${USER}/.bashrc
-      cp -f ${CWD}/bash/bash_aliases /home/${USER}/.bash_aliases
-      chown ${USER}:${USER} /home/${USER}/.bashrc
-      chown ${USER}:${USER} /home/${USER}/.bash_aliases
-      sleep ${SLEEP}
-    fi
-  done
-fi
-
-echo "[>] Installing custom .bashrc for future users"
-cp -f ${CWD}/bash/bashrc /etc/skel/.bashrc
-cp -f ${CWD}/bash/bash_aliases /etc/skel/.bash_aliases
-sleep ${SLEEP}
-
-
-#############################
-# Setup system basics:
-#############################
-
-echo "[>] Configuring SSH server"
-sed -i -e '/AcceptEnv/s/^#\?/#/' /etc/ssh/sshd_config
-systemctl reload sshd
-sleep ${SLEEP}
-
-echo "[>] Configuring persistent password for sudo"
-cp -f ${CWD}/sudoers.d/persistent_password /etc/sudoers.d/
-sleep ${SLEEP}
+# echo "[>] Updating system..."
+# dnf update -y
+# echo "[>] System updated."
 
 
 #############################
 # Install repositories:
 #############################
 
-# echo "[>] Removing existing repositories"
-# rm -f /etc/yum.repos.d/*.repo
-# rm -f /etc/yum.repos.d/*.rpmsave
-# sleep ${SLEEP}
+echo "[>] Removing existing repositories"
+rm -f /etc/yum.repos.d/*.repo
+rm -f /etc/yum.repos.d/*.rpmsave
+sleep ${SLEEP}
 
-for REPOSITORY in BaseOS AppStream Extras PowerTools
-do
-  echo "[>] Enabling repository: ${REPOSITORY}"
-  cp -f ${CWD}/dnf/Rocky-${REPOSITORY}.repo /etc/yum.repos.d/
-  sleep ${SLEEP}
-done
+echo "[>] Install repositories:"
+cp -f ${CWD}/dnf/rocky.repo /etc/yum.repos.d/
+cp -f ${CWD}/dnf/rocky-addons.repo /etc/yum.repos.d/
+cp -f ${CWD}/dnf/rocky-devel.repo /etc/yum.repos.d/
+cp -f ${CWD}/dnf/rocky-extras.repo /etc/yum.repos.d/
+
+#for REPOSITORY in addons devel extras
+#do
+#  echo "[>] Enabling repository: ${REPOSITORY}"
+#
+#  cp -f ${CWD}/dnf/rocky-${REPOSITORY}.repo /etc/yum.repos.d/
+#  sleep ${SLEEP}
+#done
 
 echo "[>] Enabling repository: EPEL"
 if ! rpm -q epel-release > /dev/null 2>&1
@@ -137,26 +103,6 @@ then
   dnf install -y epel-release > /dev/null
 fi
 cp -f ${CWD}/dnf/epel.repo /etc/yum.repos.d/
-sleep ${SLEEP}
-
-echo "[>] Enabling repository: EPEL Modular"
-cp -f ${CWD}/dnf/epel-modular.repo /etc/yum.repos.d/
-sleep ${SLEEP}
-
-echo "[>] Removing repository: EPEL Testing"
-rm -f /etc/yum.repos.d/epel-testing.repo
-sleep ${SLEEP}
-
-echo "[>] Removing repository: EPEL Testing Modular"
-rm -f /etc/yum.repos.d/epel-testing-modular.repo
-sleep ${SLEEP}
-
-echo "[>] Enabling repository: ELRepo"
-if ! rpm -q elrepo-release > /dev/null 2>&1
-then
-  dnf install -y elrepo-release > /dev/null
-fi
-cp -f ${CWD}/dnf/elrepo.repo /etc/yum.repos.d/
 sleep ${SLEEP}
 
 echo "[>] Enabling repository: RPM Fusion"
@@ -183,10 +129,13 @@ fi
 cp -f ${CWD}/dnf/rpmfusion-nonfree-updates.repo /etc/yum.repos.d/
 sleep ${SLEEP}
 
-echo "[>] INstalling & Enabling repository: Flathub"
+echo "[>] Installing & Enabling Flathub repository."
 dnf install -y flatpak
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sleep ${SLEEP}
+
+#echo "[>] Enable PowerTools"
+#dnf config-manager --enable crb
 
 
 #############################
@@ -205,25 +154,6 @@ do
   fi
 done
 echo "[>] Basic packages have been installed on the system."
-sleep ${SLEEP}
-
-
-#######################
-# Install flatpak apps:
-#######################
-
-echo "[>] Installing flatpak apps"
-sleep ${SLEEP}
-for PACKAGE in ${FLATPAK}
-do
-  if ! rpm -q ${PACKAGE} > /dev/null 2>&1
-  then
-    echo "[>] Installing package: ${PACKAGE}"
-    flatpak install -y ${PACKAGE} > /dev/null
-    sleep ${SLEEP}
-  fi
-done
-echo "[>] Flatpak apps have been installed on the system."
 sleep ${SLEEP}
 
 
@@ -258,6 +188,25 @@ do
 done
 echo "[>] Gnome specific packages have been enabled."
 sleep ${SLEEP}
+
+
+#######################
+# Install flatpak apps:
+#######################
+
+#echo "[>] Installing flatpak apps"
+#sleep ${SLEEP}
+#for PACKAGE in ${FLATPAK}
+#do
+#  if ! rpm -q ${PACKAGE} > /dev/null 2>&1
+#  then
+#    echo "[>] Installing package: ${PACKAGE}"
+#    flatpak install -y ${PACKAGE} > /dev/null
+#    sleep ${SLEEP}
+#  fi
+#done
+#echo "[>] Flatpak apps have been installed on the system."
+#sleep ${SLEEP}
 
 
 ##########################
@@ -299,9 +248,52 @@ sudo firewall-cmd --permanent --add-port=3389/tcp
 sudo firewall-cmd --reload
 
 
+#############################
+# Setup system basics:
+#############################
+
+echo "[>] Configuring SSH server"
+systemctl start sshd
+systemctl enable sshd
+sed -i -e '/AcceptEnv/s/^#\?/#/' /etc/ssh/sshd_config
+systemctl reload sshd
+sleep ${SLEEP}
+
+# echo "[>] Configuring persistent password for sudo"
+# cp -f ${CWD}/sudoers.d/persistent_password /etc/sudoers.d/
+# sleep ${SLEEP}
+
+
+
 ##################
 # Customisations:
 ##################
+
+echo "[>] Installing .bashrc & bash_aliases for user: root"
+cp -f ${CWD}/bash/bashrc /root/.bashrc
+cp -f ${CWD}/bash/bash_aliases /root/.bash_aliases
+sleep ${SLEEP}
+
+if [ ! -z "${USERS}" ]
+then
+  for USER in ${USERS}
+  do
+    if [ -d /home/${USER} ]
+    then
+      echo "[>] Installing .bashrc & bash_aliases for user: ${USER}"
+      cp -f ${CWD}/bash/bashrc /home/${USER}/.bashrc
+      cp -f ${CWD}/bash/bash_aliases /home/${USER}/.bash_aliases
+      chown ${USER}:${USER} /home/${USER}/.bashrc
+      chown ${USER}:${USER} /home/${USER}/.bash_aliases
+      sleep ${SLEEP}
+    fi
+  done
+fi
+
+echo "[>] Installing custom .bashrc for future users"
+cp -f ${CWD}/bash/bashrc /etc/skel/.bashrc
+cp -f ${CWD}/bash/bash_aliases /etc/skel/.bash_aliases
+sleep ${SLEEP}
 
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
@@ -334,9 +326,9 @@ exec bash
 
 source ~/.bashrc
 load
-r
-c
-ff
+#r
+#c
+#ff
 echo "[>] Bash Terminal customized."
 
 
