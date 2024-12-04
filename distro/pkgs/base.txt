@@ -1,16 +1,9 @@
-# DCC:
-blender
-
 # Internet:
 firefox
 
 # Graphics
 #digikam
 #digikam-doc
-krita
-inkscape
-inkscape-docs
-inkscape-view
 
 # Multimedia
 vlc
@@ -19,7 +12,6 @@ vlc
 virt-manager
 
 # Utilities
-kde-connect
 keepassxc
 ImageMagick
 timeshift
