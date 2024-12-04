@@ -1,1 +1,2 @@
 //skeletor/jobs /mnt/jobs username=danger,password=danger
+//skeletor/io /mnt/io username=danger,password=danger
