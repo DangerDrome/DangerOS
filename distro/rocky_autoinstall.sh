@@ -165,7 +165,7 @@ do
     #    busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s ${i}
     #fi
     echo "[>] Installing package: ${i}"
-    gnome-extensions install --force ${CWD}/gnome/extensions/${i}.zip
+    gnome-extensions install unzip --force ${CWD}/gnome/extensions/${i}.zip
     echo "[>] Enabling package: ${i}"
     gnome-extensions enable ${i}
 done
@@ -207,9 +207,9 @@ sleep ${SLEEP}
 sleep ${SLEEP}
 cat << EOF
 
-####################################
+##################################
 [>]  Installing base flatpak apps:
-####################################
+##################################
 
 EOF
 sleep ${SLEEP}
