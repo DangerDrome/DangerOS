@@ -9,10 +9,11 @@
 
 CWD=$(pwd)
 USERS=$(awk -F: '$3 > 999 && $3 < 65534 {print $1}' /etc/passwd | sort)
-BASE="firefox flatpak xdg-desktop-portal-gnome"
-EXTRA_PACKAGES="vlc keepassxc ImageMagick timeshift ffmpeg fastfetch gthumb mediainfo tldr htop ntfs-3g unrar xrdp"
-FLATPAK="org.gimp.GIMP org.videolan.VLC"
-REMOVE="nano"
+FUSION="https://download1.rpmfusion.org"
+BASE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/base.txt)
+FLATPAK=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/flatpak.txt)
+GNOME=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/gnome.txt)
+REMOVE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/remove.txt)
 NETWORK_CONFIG="${CWD}/network/locations.txt"
 
 #############################
@@ -40,31 +41,55 @@ check_prerequisites() {
 
 setup_repositories() {
   echo "Setting up repositories..."
+  rm -f /etc/yum.repos.d/*.repo /etc/yum.repos.d/*.rpmsave
+  cp -f ${CWD}/dnf/rocky.repo /etc/yum.repos.d/
   sudo dnf install -y epel-release
-  sudo dnf install -y https://download1.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm
-  sudo dnf install -y https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm
+  sudo dnf install -y ${FUSION}/free/el/rpmfusion-free-release-9.noarch.rpm
+  sudo dnf install -y ${FUSION}/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm
 }
 
 install_packages() {
   echo "Installing base packages..."
-  sudo dnf install -y ${BASE} ${EXTRA_PACKAGES}
+  for PACKAGE in ${BASE}; do
+    sudo dnf install -y ${PACKAGE}
+  done
 }
 
 remove_packages() {
   echo "Removing base packages..."
-  sudo dnf remove -y ${BASE} ${EXTRA_PACKAGES}
+  for PACKAGE in ${BASE}; do
+    sudo dnf remove -y ${PACKAGE}
+  done
+}
+
+install_gnome_extensions() {
+  echo "Installing GNOME extensions..."
+  for EXT in ${GNOME}; do
+    sudo gnome-extensions install --force ${EXT}
+    sudo gnome-extensions enable ${EXT}
+  done
+}
+
+remove_gnome_extensions() {
+  echo "Removing GNOME extensions..."
+  for EXT in ${GNOME}; do
+    sudo gnome-extensions disable ${EXT}
+    sudo gnome-extensions uninstall ${EXT}
+  done
+}
+
+install_flatpak_apps() {
+  echo "Installing Flatpak apps..."
+  for APP in ${FLATPAK}; do
+    flatpak install -y ${APP}
+  done
 }
 
 remove_flatpak_apps() {
   echo "Removing Flatpak apps..."
-  for PACKAGE in ${FLATPAK}; do
-    flatpak uninstall -y ${PACKAGE}
+  for APP in ${FLATPAK}; do
+    flatpak uninstall -y ${APP}
   done
-}
-
-remove_repositories() {
-  echo "Removing repositories..."
-  sudo dnf remove -y epel-release rpmfusion-free-release rpmfusion-nonfree-release
 }
 
 configure_system() {
@@ -98,6 +123,8 @@ remove_docker() {
 
 customize_environment() {
   echo "Customizing bash environment..."
+  cp -f ${CWD}/bash/bashrc /root/.bashrc
+  cp -f ${CWD}/bash/bash_aliases /root/.bash_aliases
   for USER in ${USERS}; do
     if [[ -d /home/${USER} ]]; then
       cp -f ${CWD}/bash/bashrc /home/${USER}/.bashrc
@@ -105,8 +132,6 @@ customize_environment() {
       chown ${USER}:${USER} /home/${USER}/.bashrc /home/${USER}/.bash_aliases
     fi
   done
-  cp -f ${CWD}/bash/bashrc /root/.bashrc
-  cp -f ${CWD}/bash/bash_aliases /root/.bash_aliases
 }
 
 remove_customizations() {
@@ -117,17 +142,6 @@ remove_customizations() {
       rm -f /home/${USER}/.bashrc /home/${USER}/.bash_aliases
     fi
   done
-}
-
-install_nvidia_drivers() {
-  echo "Installing NVIDIA drivers..."
-  sudo dnf config-manager --add-repo=https://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo
-  sudo dnf install -y kernel-headers kernel-devel gcc dkms nvidia-driver
-}
-
-remove_nvidia_drivers() {
-  echo "Removing NVIDIA drivers..."
-  sudo dnf remove -y nvidia-driver kernel-devel kernel-headers
 }
 
 auto_mount_network_locations() {
@@ -158,20 +172,20 @@ remove_mounts() {
 run_tasks() {
   local tasks=(
     "1" "Set up repositories" off
-    "2" "Install packages" off
+    "2" "Install base packages" off
     "3" "Remove installed packages" off
-    "4" "Configure system" off
-    "5" "Remove system configuration" off
-    "6" "Install Docker" off
-    "7" "Remove Docker" off
-    "8" "Customize environment" off
-    "9" "Remove customizations" off
-    "10" "Install NVIDIA drivers" off
-    "11" "Remove NVIDIA drivers" off
-    "12" "Mount network locations" off
-    "13" "Remove network mounts" off
-    "14" "Remove repositories" off
-    "15" "Remove Flatpak apps" off
+    "4" "Install GNOME extensions" off
+    "5" "Remove GNOME extensions" off
+    "6" "Install Flatpak apps" off
+    "7" "Remove Flatpak apps" off
+    "8" "Configure system (SSH/XRDP)" off
+    "9" "Remove system configuration (SSH/XRDP)" off
+    "10" "Install Docker" off
+    "11" "Remove Docker" off
+    "12" "Customize environment" off
+    "13" "Remove customizations" off
+    "14" "Mount network locations" off
+    "15" "Remove network mounts" off
   )
   local choices=$(dialog --separate-output --checklist "Select tasks to perform:" 20 50 15 "${tasks[@]}" 3>&1 1>&2 2>&3)
   clear
@@ -183,18 +197,18 @@ run_tasks() {
       1) setup_repositories ;;
       2) install_packages ;;
       3) remove_packages ;;
-      4) configure_system ;;
-      5) remove_system_configuration ;;
-      6) install_docker ;;
-      7) remove_docker ;;
-      8) customize_environment ;;
-      9) remove_customizations ;;
-      10) install_nvidia_drivers ;;
-      11) remove_nvidia_drivers ;;
-      12) auto_mount_network_locations ;;
-      13) remove_mounts ;;
-      14) remove_repositories ;;
-      15) remove_flatpak_apps ;;
+      4) install_gnome_extensions ;;
+      5) remove_gnome_extensions ;;
+      6) install_flatpak_apps ;;
+      7) remove_flatpak_apps ;;
+      8) configure_system ;;
+      9) remove_system_configuration ;;
+      10) install_docker ;;
+      11) remove_docker ;;
+      12) customize_environment ;;
+      13) remove_customizations ;;
+      14) auto_mount_network_locations ;;
+      15) remove_mounts ;;
       *) echo "Invalid option: ${choice}" ;;
     esac
   done
