@@ -165,6 +165,61 @@ remove_mounts() {
   sed -i '/cifs/d' /etc/fstab
 }
 
+enable_dark_mode() {
+  echo "Enabling dark mode for GNOME desktop and applications globally..."
+
+  # Ensure dconf CLI is installed
+  if ! command -v dconf &>/dev/null; then
+    echo "Installing dconf to configure system-wide GNOME settings..."
+    sudo dnf install -y dconf
+  fi
+
+  # Set system-wide GNOME desktop to dark mode
+  echo "Setting system-wide GNOME desktop to dark mode..."
+  sudo mkdir -p /etc/dconf/db/local.d
+  echo "[org/gnome/desktop/interface]" | sudo tee /etc/dconf/db/local.d/00-dark-mode > /dev/null
+  echo "gtk-theme='Adwaita-dark'" | sudo tee -a /etc/dconf/db/local.d/00-dark-mode > /dev/null
+  echo "color-scheme='prefer-dark'" | sudo tee -a /etc/dconf/db/local.d/00-dark-mode > /dev/null
+
+  # Ensure GNOME Tweaks compatibility (User Themes)
+  echo "[org/gnome/shell/extensions/user-theme]" | sudo tee -a /etc/dconf/db/local.d/00-dark-mode > /dev/null
+  echo "name='Adwaita-dark'" | sudo tee -a /etc/dconf/db/local.d/00-dark-mode > /dev/null
+
+  # Apply the settings
+  echo "Applying system-wide GNOME dark mode settings..."
+  sudo dconf update
+
+  # Adjust Flatpak applications to use dark mode
+  echo "Applying dark mode to Flatpak applications globally..."
+  flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
+  flatpak override --env=GTK_THEME=Adwaita:dark org.mozilla.firefox
+  flatpak override --env=GTK_THEME=Adwaita:dark com.spotify.Client
+
+  echo "Dark mode has been applied globally. Please restart the system or GNOME Shell to see changes."
+}
+
+increase_scaling_factor() {
+  echo "Setting GNOME text scaling factor to 1.5 globally..."
+
+  # Ensure dconf CLI is installed
+  if ! command -v dconf &>/dev/null; then
+    echo "Installing dconf to configure system-wide GNOME settings..."
+    sudo dnf install -y dconf
+  fi
+
+  # Set system-wide GNOME scaling factor
+  echo "Configuring system-wide GNOME text scaling factor..."
+  sudo mkdir -p /etc/dconf/db/local.d
+  echo "[org/gnome/desktop/interface]" | sudo tee /etc/dconf/db/local.d/01-scaling-factor > /dev/null
+  echo "text-scaling-factor=1.5" | sudo tee -a /etc/dconf/db/local.d/01-scaling-factor > /dev/null
+
+  # Apply the settings
+  echo "Applying system-wide GNOME scaling factor..."
+  sudo dconf update
+
+  echo "GNOME text scaling factor has been set to 1.5 globally. Please restart GNOME Shell or the system to apply changes."
+}
+
 #############################
 # User Menu
 #############################
@@ -186,8 +241,10 @@ run_tasks() {
     "13" "Remove customizations" off
     "14" "Mount network locations" off
     "15" "Remove network mounts" off
+    "16" "Enable dark mode globally" off
+    "17" "Increase GNOME scaling factor to 1.5" off
   )
-  local choices=$(dialog --separate-output --checklist "Select tasks to perform:" 20 50 15 "${tasks[@]}" 3>&1 1>&2 2>&3)
+  local choices=$(dialog --separate-output --checklist "Select tasks to perform:" 20 50 17 "${tasks[@]}" 3>&1 1>&2 2>&3)
   clear
 
   check_prerequisites
@@ -209,6 +266,8 @@ run_tasks() {
       13) remove_customizations ;;
       14) auto_mount_network_locations ;;
       15) remove_mounts ;;
+      16) enable_dark_mode ;;
+      17) increase_scaling_factor ;;
       *) echo "Invalid option: ${choice}" ;;
     esac
   done
