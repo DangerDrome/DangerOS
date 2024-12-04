@@ -32,3 +32,13 @@ gthumb
 mediainfo
 tldr
 xdg-desktop-portal-gnome
+git
+htop
+python3-qt5
+libXScrnSaver-devel
+libGLU
+libnsl
+ntfs-3g
+unrar
+whois
+
