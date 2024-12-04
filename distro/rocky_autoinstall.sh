@@ -165,7 +165,7 @@ do
     #    busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s ${i}
     #fi
     echo "[>] Installing package: ${i}"
-    gnome-extensions install unzip --force ${CWD}/gnome/extensions/${i}.zip
+    gnome-extensions install --force ${CWD}/gnome/extensions/${i}.zip
     echo "[>] Enabling package: ${i}"
     gnome-extensions enable ${i}
 done
@@ -314,9 +314,23 @@ cp -f ${CWD}/bash/bashrc /etc/skel/.bashrc
 cp -f ${CWD}/bash/bash_aliases /etc/skel/.bash_aliases
 sleep ${SLEEP}
 
+echo "[>] Dark mode activated."
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
-echo "[>] Dark mode activated."
+
+sudo flatpak override --env=GTK_THEME=Adwaita:dark com.mattjakeman.ExtensionManager
+sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
+sudo flatpak override --env=GTK_THEME=Adwaita:dark org.deluge_torrent.deluge
+sudo flatpak override --env=GTK_THEME=Adwaita:dark org.remmina.Remmina
+sudo flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
+sudo flatpak override --env=GTK_THEME=Adwaita:dark io.github.celluloid_player.Celluloid
+sudo flatpak override --env=GTK_THEME=Adwaita:dark com.vysp3r.ProtonPlus
+sudo flatpak override --env=GTK_THEME=Adwaita:dark fr.handbrake.ghb
+sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
+sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
+sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
+sudo flatpak override --env=GTK_THEME=Adwaita:dark net.nokyan.Resources
+
 
 echo "[>] Installing terminal fonts."
 cd /usr/share/fonts
