@@ -139,21 +139,50 @@ sudo dnf install gvfs-smb -y
 <br>       
 <br>
 
-# Example Batch Install Script.
+# Batch Install Script (WIP.
 ```
+# Install el9 packages:
+
 sudo dnf install -y \
 --setopt=install_weak_deps=False \
-gnome-shell \
-ffmpegthumbnailer \
-file-roller \
-gnome-console \
-gnome-software \
+ImageMagick \
+timeshift \
+ffmpeg \
+fastfetch \
+vlc \
+gh \
+gnome-tweaks \
 gnome-extensions-app \
-gnome-system-monitor \
-gnome-text-editor \
-libavcodec-freeworld \
-nautilus \
-xdg-user-dirs \
-xdg-user-dirs-gtk
+keepassxc \
+mediainfo \
+tldr \
+xdg-desktop-portal-gnome
+
+
+# Install flatpak packages:
+
+sudo flatpak install -y \
+com.mattjakeman.ExtensionManager \
+io.github.shiftey.Desktop \
+org.deluge_torrent.deluge \
+com.mattjakeman.ExtensionManager \
+net.nokyan.Resources \
+org.remmina.Remmina \
+org.gnome.Calendar \
+com.vixalien.sticky \
+com.visualstudio.code \
+md.obsidian.Obsidian \
+io.github.celluloid_player.Celluloid \
+com.vysp3r.ProtonPlus \
+com.valvesoftware.Steam \
+fr.handbrake.ghb \
+org.kde.krita \
+com.github.tchx84.Flatseal
+
+
+# Make stuff Dark:
+
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 
 ```
