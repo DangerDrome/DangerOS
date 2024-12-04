@@ -235,6 +235,24 @@ echo "[>] Useless packages have been removed from the system."
 sleep ${SLEEP}
 
 
+#################
+# Install Docker:
+#################
+
+echo "[>] Installing docker"
+sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+sudo dnf install docker-ce docker-ce-cli containerd.io -y
+sudo systemctl enable --now docker
+echo "[>] Docker installed"
+
+echo "[>] Installing dockge"
+sudo mkdir -p /opt/stacks /opt/dockge
+cd /opt/dockge
+sudo curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
+sudo docker compose up -d
+echo "[>] Dockge installed: https://127.0.0.1:5001"
+
+
 ##############
 # Enable XRDP:
 ##############
@@ -246,10 +264,64 @@ sudo firewall-cmd --reload
 
 
 ##################
-# Make stuff Dark:
+# Customisations:
 ##################
 
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 echo "[>] Dark mode activated."
 
+echo "[>] Installing terminal fonts."
+cd /usr/share/fonts
+sudo mkdir meslo-lgs-nf
+cd meslo-lgs-nf
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font-mono/MesloLGSNerdFontMono-Bold.ttf --output 'MesloLGSNerdFontMono-Bold.ttf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font-mono/MesloLGSNerdFontMono-BoldItalic.ttf --output 'MesloLGSNerdFontMono-BoldItalic.ttf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font-mono/MesloLGSNerdFontMono-Italic.ttf --output 'MesloLGSNerdFontMono-Italic.ttf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font-mono/MesloLGSNerdFontMono-Regular.ttf --output 'MesloLGSNerdFontMono-Regular.ttf'
+
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font-propo/MesloLGSNerdFontPropo-Bold.ttf --output 'MesloLGSNerdFontPropo-Bold.ttf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font-propo/MesloLGSNerdFontPropo-BoldItalic.ttf --output 'MesloLGSNerdFontPropo-BoldItalic.ttf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font-propo/MesloLGSNerdFontPropo-Italic.ttf --output 'MesloLGSNerdFontPropo-Italic.ttf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font-propo/MesloLGSNerdFontPropo-Regular.ttf --output 'MesloLGSNerdFontPropo-Regular.ttf'
+
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font/MesloLGSNerdFont-Bold.ttf --output 'MesloLGSNerdFont-Bold.ttf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font/MesloLGSNerdFont-BoldItalic.ttf --output 'MesloLGSNerdFont-BoldItalic.ttf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font/MesloLGSNerdFont-Italic.ttf --output 'MesloLGSNerdFont-Italic.ttf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/fonts/meslolgs-nerd-font/MesloLGSNerdFont-Regular.ttf --output 'MesloLGSNerdFont-Regular.ttf'
+
+echo "[>] Installing default terminal profile."
+cd ~/
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/gnome-terminal-profiles.dconf --output 'gnome-terminal-profiles.dconf'
+sudo curl -L https://github.com/DangerDrome/DangerOS/raw/main/terminal/logo_02.txt --output 'logo_02.txt'
+exec bash
+
+source ~/.bashrc
+load
+r
+c
+ff
+echo "[>] Bash Terminal customized."
+
+
+#########################
+# Install nvidia drivers:
+#########################
+
+echo "[>] Installing NVIDIA drivers on the system."
+sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo 
+sudo dnf install kernel-headers-$(uname -r) kernel-devel-$(uname -r) tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms -y
+sudo dnf module install nvidia-driver:latest-dkms -y
+echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf 
+echo 'omit_drivers+=" nouveau "' | sudo tee /etc/dracut.conf.d/blacklist-nouveau.conf 
+sudo dracut --regenerate-all --force 
+sudo depmod -a
+echo "[>] NVIDIA drivers have been installed."
+
+
+#########################
+# Finish:
+#########################
+
+sudo dnf clean
+echo "[>] Time to reboot!."
