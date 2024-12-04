@@ -65,7 +65,9 @@ sleep ${SLEEP}
 # Update System:
 #############################
 
+echo "[>] Updating system..."
 dnf update -y
+echo "[>] System updated."
 
 
 #############################
