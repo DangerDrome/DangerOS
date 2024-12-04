@@ -219,3 +219,108 @@ Run the following command with your `username` and `password` for the drive:
   # Mount Example, Jobs folder Mount:
   sudo mount -t cifs -rw -o username=<Username> //<server>/<share> /home/danger/JOBS
   ```
+
+# Batch Install Script (WIP)
+```
+#!/bin/bash
+#░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀▄░█▀█░█▀▀
+#░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
+#░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
+#
+# Bash script Aliases
+# DangerOS Auto Install
+# Rocky Linux 9.5 version
+
+
+# Variables
+
+CWD=$(pwd)
+SLEEP=0
+USERS=$(awk -F: '$3 > 999 && $3 < 65534 {print $1}' /etc/passwd | sort)
+FUSION="https://download1.rpmfusion.org"
+
+
+# Intro
+cat << EOF
+
+		░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀▄░█▀█░█▀▀
+		░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
+		░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
+              Auto Install
+
+EOF
+
+# Update System:
+
+dnf update -y
+
+
+# Install Repos
+
+sudo dnf install epel-release -y
+
+
+# Enable ssh:
+
+systemctl start sshd
+systemctl enable sshd
+systemctl status sshd
+hostname -I
+
+
+# Enable XRDP:
+
+sudo dnf install epel-release -y
+sudo dnf install xrdp -y
+sudo systemctl start xrdp
+sudo systemctl enable xrdp
+sudo firewall-cmd --permanent --add-port=3389/tcp
+sudo firewall-cmd --reload
+
+
+# Install el9 packages:
+
+sudo dnf install -y \
+--setopt=install_weak_deps=False \
+ImageMagick \
+timeshift \
+ffmpeg \
+fastfetch \
+vlc \
+gh \
+gnome-tweaks \
+gnome-extensions-app \
+keepassxc \
+mediainfo \
+tldr \
+xdg-desktop-portal-gnome
+
+
+# Install flatpak packages:
+
+sudo flatpak install -y \
+com.mattjakeman.ExtensionManager \
+io.github.shiftey.Desktop \
+org.deluge_torrent.deluge \
+com.mattjakeman.ExtensionManager \
+net.nokyan.Resources \
+org.remmina.Remmina \
+org.gnome.Calendar \
+com.vixalien.sticky \
+com.visualstudio.code \
+md.obsidian.Obsidian \
+io.github.celluloid_player.Celluloid \
+com.vysp3r.ProtonPlus \
+com.valvesoftware.Steam \
+fr.handbrake.ghb \
+org.kde.krita \
+com.github.tchx84.Flatseal
+
+
+# Make stuff Dark:
+
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+
+```
+
