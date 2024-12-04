@@ -151,10 +151,10 @@ sleep ${SLEEP}
 echo "[>] Installing gnome specific packages."
 sleep ${SLEEP}
 
-array=(${GNOME})
-echo "[>] Installing wget."
-sudo dnf install wget -y
+#echo "[>] Installing wget."
+#sudo dnf install wget -y
 
+array=(${GNOME})
 for i in "${array[@]}"
 do
     #VERSION_TAG=$(curl -Lfs "https://extensions.gnome.org/extension-query/?search=${i}" | jq '.extensions[0] | .shell_version_map | map(.pk) | max')
