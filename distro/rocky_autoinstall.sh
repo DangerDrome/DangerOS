@@ -1,13 +1,5 @@
 #!/bin/bash
 #
-cat << EOF
-
-░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀▄░█▀█░█▀▀
-░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
-░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
-[>] Auto Install.
-
-EOF
 # rocky_autoinstall.sh
 # DangerOS Auto Install
 # Rocky Linux 9.x
@@ -18,13 +10,55 @@ EOF
 #############################
 
 CWD=$(pwd)
-SLEEP=0
+SLEEP=1
 USERS=$(awk -F: '$3 > 999 && $3 < 65534 {print $1}' /etc/passwd | sort)
+
 FUSION="https://download1.rpmfusion.org"
+
 BASE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/base.txt)
 FLATPAK=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/flatpak.txt)
 GNOME=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/gnome.txt)
 REMOVE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/remove.txt)
+
+
+#############################
+# Init
+#############################
+
+# Make sure the script is being executed with superuser privileges.
+if [[ "${UID}" -ne 0 ]]
+then
+  echo
+  echo "  Please run with sudo or as root." >&2
+  echo
+  exit 1
+fi
+
+# Make sure we're running Rocky Linux 9.x.
+if [ -f /etc/os-release ]
+then
+  source /etc/os-release
+  SYSTEM="${ROCKY_SUPPORT_PRODUCT}"
+  VERSION="${ROCKY_SUPPORT_PRODUCT_VERSION}"
+fi
+if [ "${SYSTEM}" != "Rocky Linux" ] && [ "${VERSION}" != "9" ] 
+then
+  echo
+  echo "Unsupported operating system." >&2
+  echo
+  exit 1
+fi
+
+sleep ${SLEEP}
+cat << EOF
+
+░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀▄░█▀█░█▀▀
+░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
+░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
+[>] Auto Install.
+
+EOF
+sleep ${SLEEP}
 
 
 #############################
