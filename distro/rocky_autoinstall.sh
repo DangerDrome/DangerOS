@@ -74,7 +74,7 @@ sleep ${SLEEP}
 cat << EOF
 
 ####################################
-[>]  Install repositories:
+[>]  Installing repositories:
 ####################################
 
 EOF
@@ -141,9 +141,9 @@ sleep ${SLEEP}
 sleep ${SLEEP}
 cat << EOF
 
-####################################
-[>] Install & enable gnome packages:
-####################################
+#########################################
+[>] Installing & enabling gnome packages:
+#########################################
 
 EOF
 sleep ${SLEEP}
@@ -157,10 +157,10 @@ sudo dnf install wget -y
 
 for i in "${array[@]}"
 do
-    VERSION_TAG=$(curl -Lfs "https://extensions.gnome.org/extension-query/?search=${i}" | jq '.extensions[0] | .shell_version_map | map(.pk) | max')
-    echo "[>] Downloading package: ${i}"
-    wget -O ${CWD}/gnome/extensions/${i}.zip "https://extensions.gnome.org/download-extension/${i}.shell-extension.zip?version_tag=$VERSION_TAG"
-    sleep ${SLEEP}
+    #VERSION_TAG=$(curl -Lfs "https://extensions.gnome.org/extension-query/?search=${i}" | jq '.extensions[0] | .shell_version_map | map(.pk) | max')
+    #echo "[>] Downloading package: ${i}"
+    #wget -O ${CWD}/gnome/extensions/${i}.zip "https://extensions.gnome.org/download-extension/${i}.shell-extension.zip?version_tag=$VERSION_TAG"
+    #sleep ${SLEEP}
     echo "[>] Installing package: ${i}"
     gnome-extensions install ${CWD}/gnome/extensions/${i}.zip
     if ! gnome-extensions list | grep --quiet ${i}; then
@@ -168,7 +168,6 @@ do
     fi
     echo "[>] Enabling package: ${i}"
     gnome-extensions enable ${i}
-    rm ${i}.zip
 done
 
 
@@ -180,7 +179,7 @@ sleep ${SLEEP}
 cat << EOF
 
 ####################################
-[>]  Install base packages:
+[>]  Installing base packages:
 ####################################
 
 EOF
