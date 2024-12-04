@@ -1,0 +1,14 @@
+ImageMagick
+blender
+timeshift
+ffmpeg
+fastfetch
+vlc
+gh
+gnome-tweaks
+gnome-extensions-app
+gthumb
+keepassxc
+mediainfo
+tldr
+xdg-desktop-portal-gnome
