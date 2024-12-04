@@ -1,3 +1,4 @@
+# Flatpak apps:
 io.github.shiftey.Desktop
 org.deluge_torrent.deluge
 com.mattjakeman.ExtensionManager
