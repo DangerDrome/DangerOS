@@ -95,7 +95,7 @@ do
 done
 sleep ${SLEEP}
 
-for REPO in devel extras
+for REPO in plus extras
 do
   echo "[>] Enabling repository: ${REPO}"
   cp -f ${CWD}/dnf/rocky-${REPO}.repo /etc/yum.repos.d/
@@ -380,5 +380,5 @@ echo "[>] NVIDIA drivers have been installed."
 # Finish:
 #########################
 
-sudo dnf clean
+sudo dnf clean all
 echo "[>] Time to reboot!."
