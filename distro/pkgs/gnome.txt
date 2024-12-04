@@ -1,9 +1,13 @@
 # Packages to enhance the gnome desktop:
-clipboard-indicator@Dieg0Js.github.io
-gnome-shell-screenshot@ttll.de
-ding@rastersoft.com
 add-to-desktop@tommimon.github.com
-hide-universal-access@akiirui.github.io
-appindicatorsupport@rgcjonas.gmail.com
-dash-to-panel@gnome-shell-extensions.gcampax.github.com
-workspace-indicator@gnome-shell-extensions.gcampax.github.com
+clipboard-indicator@tudmotu.com
+dash-to-panel@jderose9.github.com
+ding@rastersoft.com
+gnome-shell-screenshot@ttll.de
+gsconnect@andyholmes.github.io
+just-perfection-desktop@just-perfection
+replaceActivitiesText@pratap.fastmail.fm
+sound-output-device-chooser@kgshank.net
+system-monitor@paradoxxx.zero.gmail.com
+trayIconsReloaded@selfmade.pl
+# workspace-indicator@gnome-shell-extensions.gcampax.github.com
