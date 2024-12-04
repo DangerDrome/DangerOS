@@ -1,1 +1,2 @@
 # remove these packages:
+rocky-backgrounds
