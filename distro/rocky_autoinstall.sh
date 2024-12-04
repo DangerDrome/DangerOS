@@ -127,13 +127,11 @@ fi
 cp -f ${CWD}/dnf/rpmfusion-nonfree-updates.repo /etc/yum.repos.d/
 sleep ${SLEEP}
 
-echo "[>] Installing & Enabling Flathub repository."
+echo "[>] Installing Flatpak repository."
 dnf install -y flatpak
+echo "[>] Enabling Flathub."
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sleep ${SLEEP}
-
-#echo "[>] Enable PowerTools"
-#dnf config-manager --enable crb
 
 
 ##################################
@@ -154,7 +152,9 @@ echo "[>] Installing gnome specific packages."
 sleep ${SLEEP}
 
 array=(${GNOME})
+echo "[>] Installing wget."
 sudo dnf install wget -y
+
 for i in "${array[@]}"
 do
     VERSION_TAG=$(curl -Lfs "https://extensions.gnome.org/extension-query/?search=${i}" | jq '.extensions[0] | .shell_version_map | map(.pk) | max')
@@ -168,7 +168,7 @@ do
     fi
     echo "[>] Enabling package: ${i}"
     gnome-extensions enable ${i}
-    #rm ${EXTENSION_ID}.zip
+    rm ${i}.zip
 done
 
 
@@ -350,10 +350,11 @@ sleep ${SLEEP}
 cat << EOF
 
 ####################################
-[>] Install & enable gnome packages:
+[>] Install & enable NVIDIA Drivers:
 ####################################
 
 EOF
+sleep ${SLEEP}
 sleep ${SLEEP}
 
 sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo 
