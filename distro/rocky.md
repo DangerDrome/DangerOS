@@ -223,9 +223,14 @@ Run the following command with your `username` and `password` for the drive:
 # Batch Install Script (WIP)
 ```
 #!/bin/bash
-#░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀▄░█▀█░█▀▀
-#░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
-#░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
+cat << EOF
+
+░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀▄░█▀█░█▀▀
+░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
+░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
+Auto Install.
+
+EOF
 #
 # Bash script Aliases
 # DangerOS Auto Install
@@ -239,16 +244,6 @@ SLEEP=0
 USERS=$(awk -F: '$3 > 999 && $3 < 65534 {print $1}' /etc/passwd | sort)
 FUSION="https://download1.rpmfusion.org"
 
-
-# Intro
-cat << EOF
-
-		░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀▄░█▀█░█▀▀
-		░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
-		░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
-              Auto Install
-
-EOF
 
 # Update System:
 
