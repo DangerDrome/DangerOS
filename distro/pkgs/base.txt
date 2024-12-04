@@ -1,3 +1,4 @@
+# Usefull Packages:
 ImageMagick
 blender
 timeshift
@@ -14,18 +15,9 @@ tldr
 xdg-desktop-portal-gnome
 
 # Desktop
-rocky-backgrounds
 
 # Internet
-filezilla
 firefox
-# google-chrome-stable
-hexchat
-hexchat-autoaway
-krdc
-pidgin
-thunderbird
-transmission
 
 # Office
 libreoffice
