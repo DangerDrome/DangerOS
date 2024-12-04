@@ -1,0 +1,12 @@
+# /etc/yum.repos.d/epel-modular.repo
+
+[epel-modular]
+name=EPEL Modular
+baseurl=http://mirror.in2p3.fr/pub/linux/epel/$releasever/Modular/$basearch
+        http://fr2.rpmfind.net/linux/epel/$releasever/Modular/$basearch
+        http://mir01.syntis.net/epel/$releasever/Modular/$basearch
+enabled=1
+priority=10
+gpgcheck=1
+countme=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8

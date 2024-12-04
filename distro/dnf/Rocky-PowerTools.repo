@@ -1,0 +1,10 @@
+# /etc/yum.repos.d/Rocky-PowerTools.repo
+
+[powertools]
+name=PowerTools
+baseurl=http://mirror.in2p3.fr/pub/linux/rocky/$releasever/PowerTools/$basearch/os/
+        http://dl.rockylinux.org/$contentdir/$releasever/PowerTools/$basearch/os/
+gpgcheck=1
+enabled=1
+priority=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial

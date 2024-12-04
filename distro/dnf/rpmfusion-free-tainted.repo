@@ -1,0 +1,12 @@
+# /etc/yum.repos.d/rpmfusion-free-tainted.repo
+
+[rpmfusion-tainted]
+name=RPM Fusion Tainted
+baseurl=http://mirror.in2p3.fr/pub/linux/rpmfusion/free/el/tainted/8/$basearch/
+enabled=1
+priority=10
+metadata_expire=6h
+type=rpm-md
+gpgcheck=1
+repo_gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-8
