@@ -1,2 +1,3 @@
-//skeletor/jobs /mnt/jobs username=danger,password=danger
-//skeletor/io /mnt/io username=danger,password=danger
+# Network location Mounts:
+skeletor/jobs,/media/jobs,username=danger,password=danger
+skeletor/io,/media/io,username=danger,password=danger
