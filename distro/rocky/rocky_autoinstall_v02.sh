@@ -341,8 +341,14 @@ EOF
 increase_scaling_factor() {
   echo "Increasing scaling factor..."
 
-  # Set the scaling factor to 2 (or any desired value)
-  if ! gsettings set org.gnome.desktop.interface scaling-factor 1.5; then
+  # Enable fractional scaling
+  if ! gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"; then
+    echo "Error: Failed to enable fractional scaling."
+    return 1
+  fi
+
+  # Set the scaling factor to 1.5
+  if ! gsettings set org.gnome.desktop.interface text-scaling-factor 1.5; then
     echo "Error: Failed to increase scaling factor."
     return 1
   fi
