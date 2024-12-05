@@ -15,6 +15,7 @@ FLATPAK=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/flatpak.txt)
 GNOME=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/gnome.txt)
 NETWORK_CONFIG="${CWD}/network/locations.txt"
 BRANDING_DIR="${CWD}/media/brand"
+DNF_DIR="${CWD}/dnf"
 
 #############################
 # Functions
@@ -43,36 +44,61 @@ setup_repositories() {
   echo "Setting up repositories from .repo files in the /dnf directory..."
 
   # Path to the local repository files
-  DNF_DIR="${CWD}/dnf"
+
 
   # Check if the directory exists
-  if [[ ! -d "${DNF_DIR}" ]]; then
-    echo "Error: Repository directory ${DNF_DIR} does not exist."
-    echo "Please ensure the /dnf directory contains the necessary .repo files."
-    return 1
-  fi
+  #if [[ ! -d "${DNF_DIR}" ]]; then
+  #  echo "Error: Repository directory ${DNF_DIR} does not exist."
+  #  echo "Please ensure the /dnf directory contains the necessary .repo files."
+  #  return 1
+  #fi
 
   # Remove existing repository files
-  echo "Removing existing repository files in /etc/yum.repos.d..."
-  sudo rm -f /etc/yum.repos.d/*.repo /etc/yum.repos.d/*.rpmsave
+  #echo "Removing existing repository files in /etc/yum.repos.d..."
+  #sudo rm -f /etc/yum.repos.d/*.repo /etc/yum.repos.d/*.rpmsave
 
   # Copy all .repo files from /dnf to /etc/yum.repos.d
-  echo "Copying .repo files from ${DNF_DIR} to /etc/yum.repos.d..."
-  sudo cp -f "${DNF_DIR}"/*.repo /etc/yum.repos.d/ || {
-    echo "Error: Failed to copy .repo files from ${DNF_DIR}. Check if the files exist and have correct permissions."
-    return 1
-  }
+  #echo "Copying .repo files from ${DNF_DIR} to /etc/yum.repos.d..."
+  #sudo cp -f "${DNF_DIR}"/*.repo /etc/yum.repos.d/ || {
+    #echo "Error: Failed to copy .repo files from ${DNF_DIR}. Check if the files exist and have correct permissions."
+    #return 1
+  #}
 
   # Enable CRB repository
   echo "Enabling the CRB (CodeReady Builder) repository..."
   if sudo dnf config-manager --set-enabled crb; then
     # install epel repository
-    sudo dnf install epel-release
-    echo "CRB repository has been successfully enabled."
+    if ! sudo dnf install -y epel-release; then
+      echo "Error: Failed to install epel-release package. Check the repository files and network connection."
+      return 1
+    fi
   else
     echo "Error: Failed to enable the CRB repository. Please check your system configuration."
     return 1
   fi
+
+  # Install Community Enterprise Linux Repository (ELRepo)
+  echo "Installing ELRepo for additional kernel modules..."
+  
+  if ! sudo dnf install -y elrepo-release; then
+    echo "Error: Failed to install elrepo-release package. Check the repository files and network connection."
+    return 1
+  fi
+
+  echo "ELRepo installed successfully."
+  return 0
+
+  # Install RPM Fusion
+  echo "Installing RPM Fusion repository..."
+  
+  if ! sudo dnf install -y pmfusion-free-release; then
+    echo "Error: Failed to install RPM Fusion package. Check the repository files and network connection."
+    return 1
+  fi
+
+  echo "RPM Fusion installed successfully."
+  return 0
+
 
   # Refresh the repository cache
   echo "Refreshing repository cache..."
