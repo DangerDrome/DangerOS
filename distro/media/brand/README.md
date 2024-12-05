@@ -4,6 +4,6 @@
 #░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
 ```
 # Branding
-### White labelling stuff
+### path: /usr/share/pixmaps
 
 
