@@ -40,6 +40,36 @@ check_prerequisites() {
   fi
 }
 
+optimize_dnf() {
+  echo "Optimizing DNF for faster performance..."
+
+  # Path to the DNF configuration file
+  DNF_CONF="/etc/dnf/dnf.conf"
+
+  # Backup the original configuration
+  if [[ ! -f "${DNF_CONF}.backup" ]]; then
+    echo "Creating a backup of the current DNF configuration..."
+    sudo cp "${DNF_CONF}" "${DNF_CONF}.backup"
+  fi
+
+  # Apply optimizations
+  echo "Applying performance optimizations to ${DNF_CONF}..."
+  sudo tee -a "${DNF_CONF}" > /dev/null <<EOF
+
+# Optimization settings
+fastestmirror=True
+max_parallel_downloads=10
+keepcache=True
+EOF
+
+  # Notify user
+  echo "DNF has been optimized with the following settings:"
+  echo "  - Enabled fastest mirror detection"
+  echo "  - Increased parallel downloads to 10"
+  echo "  - Enabled cache retention"
+  echo "You may now experience faster DNF commands."
+}
+
 setup_repositories() {
   echo "Setting up repositories"
 
@@ -105,11 +135,40 @@ setup_repositories() {
   #dnf repolist
 }
 
+install_nvidia_drivers() {
+
+  echo "Installing NVIDIA drivers..."
+  # Add NVIDIA repository
+  sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo
+  # Install required packages
+  sudo dnf install kernel-headers-$(uname -r) kernel-devel-$(uname -r) tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms -y
+  # Install NVIDIA driver
+  sudo dnf module install nvidia-driver:latest-dkms -y
+  # Blacklist nouveau driver
+  echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+  echo 'omit_drivers+=" nouveau "' | sudo tee /etc/dracut.conf.d/blacklist-nouveau.conf
+  # Regenerate initramfs
+  sudo dracut --regenerate-all --force
+  # Update module dependencies
+  sudo depmod -a
+
+  echo "NVIDIA drivers installed successfully. Reboot and run nvidia-smi to verify."
+  return 0
+}
+
 install_packages() {
   echo "Installing base packages..."
   for PACKAGE in ${BASE}; do
     sudo dnf install -y ${PACKAGE}
   done
+}
+
+configure_system() {
+  echo "Configuring SSH and XRDP..."
+  sudo systemctl enable --now sshd
+  sudo systemctl enable --now xrdp
+  sudo firewall-cmd --permanent --add-port=3389/tcp
+  sudo firewall-cmd --reload
 }
 
 install_gnome_extensions() {
@@ -142,21 +201,6 @@ install_gnome_extensions() {
 
   echo "GNOME extensions installed, need to logout and back in to enable them."
   return 0
-}
-
-install_flatpak_apps() {
-  echo "Installing Apps..."
-  for APP in ${FLATPAK}; do
-    flatpak install -y ${APP}
-  done
-}
-
-configure_system() {
-  echo "Configuring SSH and XRDP..."
-  sudo systemctl enable --now sshd
-  sudo systemctl enable --now xrdp
-  sudo firewall-cmd --permanent --add-port=3389/tcp
-  sudo firewall-cmd --reload
 }
 
 install_docker() {
@@ -235,6 +279,31 @@ remove_rocky_wallpapers() {
   return 0
 }
 
+set_desktop_wallpaper() {
+  echo "Changing desktop wallpaper for all users..."
+
+  # Define the path to the wallpaper in the branding directory
+  WALLPAPER_FILE="${BRANDING_DIR}/wallpaper.jpg"
+
+  # Set wallpaper for the current user
+  echo "Setting wallpaper for the current user..."
+  gsettings set org.gnome.desktop.background picture-uri "file://${WALLPAPER_FILE}"
+  gsettings set org.gnome.desktop.background picture-options "zoom"
+
+  # Set wallpaper for all existing users
+  echo "Setting wallpaper for all users..."
+  for USER in ${USERS}; do
+    if [[ -d "/home/${USER}/.config" ]]; then
+      su -c "gsettings set org.gnome.desktop.background picture-uri 'file://${WALLPAPER_FILE}'" "${USER}" 2>/dev/null || {
+        echo "Failed to set wallpaper for user: ${USER}. Skipping..."
+      }
+    fi
+  done
+
+  # Notify the user
+  echo "Wallpaper has been updated. Users may need to log out and log back in to see the changes."
+}
+
 white_label_os() {
   echo "Applying white-label branding to Rocky Linux..."
 
@@ -266,31 +335,6 @@ white_label_os() {
     fi
   done
 
-}
-
-set_desktop_wallpaper() {
-  echo "Changing desktop wallpaper for all users..."
-
-  # Define the path to the wallpaper in the branding directory
-  WALLPAPER_FILE="${BRANDING_DIR}/wallpaper.jpg"
-
-  # Set wallpaper for the current user
-  echo "Setting wallpaper for the current user..."
-  gsettings set org.gnome.desktop.background picture-uri "file://${WALLPAPER_FILE}"
-  gsettings set org.gnome.desktop.background picture-options "zoom"
-
-  # Set wallpaper for all existing users
-  echo "Setting wallpaper for all users..."
-  for USER in ${USERS}; do
-    if [[ -d "/home/${USER}/.config" ]]; then
-      su -c "gsettings set org.gnome.desktop.background picture-uri 'file://${WALLPAPER_FILE}'" "${USER}" 2>/dev/null || {
-        echo "Failed to set wallpaper for user: ${USER}. Skipping..."
-      }
-    fi
-  done
-
-  # Notify the user
-  echo "Wallpaper has been updated. Users may need to log out and log back in to see the changes."
 }
 
 enable_dark_mode() {
@@ -336,36 +380,6 @@ EOF
   echo "Dark mode has been enabled system-wide. Please restart GNOME Shell or reboot the system to apply changes."
 }
 
-optimize_dnf() {
-  echo "Optimizing DNF for faster performance..."
-
-  # Path to the DNF configuration file
-  DNF_CONF="/etc/dnf/dnf.conf"
-
-  # Backup the original configuration
-  if [[ ! -f "${DNF_CONF}.backup" ]]; then
-    echo "Creating a backup of the current DNF configuration..."
-    sudo cp "${DNF_CONF}" "${DNF_CONF}.backup"
-  fi
-
-  # Apply optimizations
-  echo "Applying performance optimizations to ${DNF_CONF}..."
-  sudo tee -a "${DNF_CONF}" > /dev/null <<EOF
-
-# Optimization settings
-fastestmirror=True
-max_parallel_downloads=10
-keepcache=True
-EOF
-
-  # Notify user
-  echo "DNF has been optimized with the following settings:"
-  echo "  - Enabled fastest mirror detection"
-  echo "  - Increased parallel downloads to 10"
-  echo "  - Enabled cache retention"
-  echo "You may now experience faster DNF commands."
-}
-
 increase_scaling_factor() {
   echo "Increasing scaling factor..."
 
@@ -398,25 +412,11 @@ set_nautilus_padding() {
   return 0
 }
 
-install_nvidia_drivers() {
-
-  echo "Installing NVIDIA drivers..."
-  # Add NVIDIA repository
-  sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo
-  # Install required packages
-  sudo dnf install kernel-headers-$(uname -r) kernel-devel-$(uname -r) tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms -y
-  # Install NVIDIA driver
-  sudo dnf module install nvidia-driver:latest-dkms -y
-  # Blacklist nouveau driver
-  echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
-  echo 'omit_drivers+=" nouveau "' | sudo tee /etc/dracut.conf.d/blacklist-nouveau.conf
-  # Regenerate initramfs
-  sudo dracut --regenerate-all --force
-  # Update module dependencies
-  sudo depmod -a
-
-  echo "NVIDIA drivers installed successfully. Reboot and run nvidia-smi to verify."
-  return 0
+install_flatpak_apps() {
+  echo "Installing Apps..."
+  for APP in ${FLATPAK}; do
+    flatpak install -y ${APP}
+  done
 }
 
 #############################
@@ -425,20 +425,22 @@ install_nvidia_drivers() {
 
 run_tasks() {
   local tasks=(
-    "1" "Set up repositories" off
-    "2" "Install base packages" off
-    "3" "Install GNOME extensions" off
-    "4" "Install Flatpak apps" off
-    "5" "Configure system (SSH/XRDP)" off
-    "6" "Install Docker" off
-    "7" "Customize environment" off
-    "8" "Mount network locations" off
-    "9" "Enable dark mode globally" off
-    "10" "Increase GNOME scaling factor to 1.5" off
-    "11" "Set 100px universal padding for Nautilus" off
-    "12" "Apply white-label branding to Rocky Linux" off
-    "13" "Set desktop wallpaper from branding folder" off
-    "14" "Optimize DNF for faster commands" off
+    "1" "optimize_dnf" off
+    "2" "setup_repositories" off
+    "3" "install_nvidia_drivers" off
+    "4" "install_packages" off
+    "5" "configure_system (SSH/XRDP)" off
+    "6" "install_gnome_extensions" off
+    "7" "install_docker" off
+    "8" "customize_environment" off
+    "9" "auto_mount_network_locations" off
+    "10" "remove_rocky_wallpapers" off
+    "11" "set_desktop_wallpaper" off
+    "12" "white_label_os" off
+    "13" "enable_dark_mode" off
+    "14" "increase_scaling_factor" off
+    "15" "set_nautilus_padding" off
+    "16" "install_flatpak_apps" off
 
   )
   local choices=$(dialog --separate-output --checklist "Select tasks to perform:" 20 50 12 "${tasks[@]}" 3>&1 1>&2 2>&3)
@@ -448,20 +450,22 @@ run_tasks() {
 
   for choice in $choices; do
     case $choice in
-      1) setup_repositories ;;
-      2) install_packages ;;
-      3) install_gnome_extensions ;;
-      4) install_flatpak_apps ;;
+      1) optimize_dnf ;;
+      2) setup_repositories ;;
+      3) install_nvidia_drivers ;;
+      4) install_packages ;;
       5) configure_system ;;
-      6) install_docker ;;
-      7) customize_environment ;;
-      8) auto_mount_network_locations ;;
-      9) enable_dark_mode ;;
-      10) increase_scaling_factor ;;
-      11) set_nautilus_padding ;;
+      6) install_gnome_extensions ;;
+      7) install_docker ;;
+      8) customize_environment ;;
+      9) auto_mount_network_locations ;;
+      10) remove_rocky_wallpapers ;;
+      11) set_desktop_wallpaper ;;
       12) white_label_os ;;
-      13) set_desktop_wallpaper ;;
-      14) optimize_dnf ;;
+      13) enable_dark_mode ;;
+      14) increase_scaling_factor ;;
+      15) set_nautilus_padding ;;
+      16) install_flatpak_apps ;;
       *) echo "Invalid option: ${choice}" ;;
     esac
   done
