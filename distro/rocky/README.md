@@ -1,20 +1,22 @@
 
 ![image](https://github.com/DangerDrome/DangerOS/blob/fc4d13e57f73ae80edccb4f0f750be33b317193e/distro/rocky/media/brand/fedora-gdm-logo.png)
-<p align="center">
 # An operating system for VFX.
-</p>
-> [!TIP]
-> Get rocky 9 kick start stuff for building iso's [here](https://git.resf.org/sig_core/kickstarts/src/branch/r9)
+<br>
+<br>
 
-> [!TIP]
-> A list of reocky linux repositories [here](https://wiki.rockylinux.org/rocky/repo/#vault)
-<br>
-<br>
+
 
 ![image](https://github.com/user-attachments/assets/07cf9726-3a6a-4e57-87c0-71bc686ca5a2)
 <br>
 <br>
 
+> [!TIP]
+> Get rocky 9 kick start stuff for building iso's [here](https://git.resf.org/sig_core/kickstarts/src/branch/r9)
+
+> [!TIP]
+> A list of rocky linux repositories [here](https://wiki.rockylinux.org/rocky/repo/#vault)
+<br>
+<br>
 
 # Rocky Install Guide
 
