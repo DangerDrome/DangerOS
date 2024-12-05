@@ -118,7 +118,7 @@ install_packages() {
 # install GNOME extensions from gnome.txt
 
 install_gnome_extensions() {
-  echo "Installing GNOME extensions..."
+  echo "Installing Extensions..."
 
   # List of GNOME extensions to install
   GNOME_EXTENSIONS=(
@@ -145,12 +145,12 @@ install_gnome_extensions() {
     #fi
   done
 
-  echo "GNOME extensions installed and enabled successfully."
+  echo "GNOME extensions installed, need to logout and back in to enable them."
   return 0
 }
 
 install_flatpak_apps() {
-  echo "Installing Flatpak apps..."
+  echo "Installing Apps..."
   for APP in ${FLATPAK}; do
     flatpak install -y ${APP}
   done
@@ -172,7 +172,7 @@ install_docker() {
 }
 
 customize_environment() {
-  echo "Customizing bash environment..."
+  echo "Customizing Environment..."
   cp -f ${CWD}/bash/bashrc /root/.bashrc
   cp -f ${CWD}/bash/bash_aliases /root/.bash_aliases
   for USER in ${USERS}; do
@@ -182,6 +182,10 @@ customize_environment() {
       chown ${USER}:${USER} /home/${USER}/.bashrc /home/${USER}/.bash_aliases
     fi
   done
+  # Copy fastfetch logo
+  # Get fonts
+  sudo yum install rocky-display-fonts rocky-text-fonts
+  
 }
 
 auto_mount_network_locations() {
@@ -283,7 +287,7 @@ set_desktop_wallpaper() {
   done
 
   # Notify the user
-  echo "Desktop wallpaper has been updated. Users may need to log out and log back in to see the changes."
+  echo "Wallpaper has been updated. Users may need to log out and log back in to see the changes."
 }
 
 enable_dark_mode() {
