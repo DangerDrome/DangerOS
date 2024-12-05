@@ -192,11 +192,9 @@ customize_environment() {
   && fc-cache -f -v
 
   # Get rocky font
-  wget -O /usr/share/fonts/rocky.zip 
-
-
-
-  
+  # sudo wget -O /usr/share/fonts/rocky.zip https://github.com/DangerDrome/DangerOS/blob/main/distro/rocky/media/fonts/rocky.zip \
+  && sudo unzip ${CWD}/media/fonts/rocky.zip -d /usr/share/fonts/ \
+  && sudo fc-cache -f -v
 }
 
 auto_mount_network_locations() {

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="864"
+   height="242.52632"
+   viewBox="0 0 864 242.52632"
+   sodipodi:docname="logo_04.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#393939"
+     bordercolor="#eeeeee"
+     borderopacity="0.11764706"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#4d4d4d"
+     inkscape:zoom="2.1163194"
+     inkscape:cx="483.38638"
+     inkscape:cy="195.8589"
+     inkscape:window-width="3840"
+     inkscape:window-height="2023"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g2-5" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="LOGO"
+     id="g1">
+    <g
+       id="g2"
+       inkscape:label="Rocky"
+       style="display:none"
+       transform="translate(-1.8900738,-238.1493)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:201.604px;font-family:'Red Hat Text';-inkscape-font-specification:'Red Hat Text, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#10b981;fill-opacity:1;stroke:#10b981;stroke-width:16.7163"
+         x="230.51534"
+         y="188.40749"
+         id="text2"
+         inkscape:label="text"><tspan
+           sodipodi:role="line"
+           id="tspan2"
+           x="230.51534"
+           y="188.40749"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:201.604px;font-family:'Red Hat Text';-inkscape-font-specification:'Red Hat Text, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#10b981;fill-opacity:1;stroke-width:16.7163"
+           dx="0 5.6702213 8.9778519 8.9778519 21.735863">Rocky</tspan></text>
+      <path
+         d="m 110.91704,7.77768 c -60.778908,0 -110.043373,49.264466 -110.043373,110.04337 0,60.7789 49.264465,110.04445 110.043373,110.04445 60.77889,0 110.04445,-49.26555 110.04445,-110.04445 0,-60.778904 -49.26556,-110.04337 -110.04445,-110.04337 z m 1.1129,34.337478 c 16.82543,9.1e-5 30.46513,13.639781 30.46522,30.465221 -9e-5,16.825436 -13.63979,30.465131 -30.46522,30.465221 -16.825442,-9e-5 -30.46513,-13.639785 -30.465225,-30.465221 9.5e-5,-16.82544 13.639783,-30.46513 30.465225,-30.465221 z m 46.28593,61.219572 c 0.32387,-0.0425 0.6554,0.10771 0.8314,0.40808 l 11.72259,20.00281 c 0.23468,0.40044 0.10068,0.91135 -0.30005,1.14564 l -33.60645,19.65259 33.18204,19.40491 c 0.52675,0.30806 0.7024,0.97923 0.39387,1.5057 l -11.45529,19.54784 c -0.30853,0.52649 -0.98112,0.70193 -1.50787,0.39387 l -45.2352,-26.45329 -45.227591,26.44893 c -0.400652,0.2343 -0.912053,0.10037 -1.146725,-0.30004 L 54.243996,165.08895 c -0.234673,-0.40043 -0.100606,-0.91133 0.300047,-1.14565 L 87.717331,144.54385 54.574595,125.16186 c -0.526765,-0.30805 -0.702422,-0.97923 -0.393881,-1.50571 l 11.45637,-19.54784 c 0.231403,-0.39486 0.667445,-0.59264 1.093264,-0.5368 0.141943,0.0186 0.281832,0.066 0.413524,0.14293 l 45.195938,26.43038 45.66074,-26.70207 c 0.10016,-0.0586 0.20735,-0.0939 0.31532,-0.10805 z"
+         style="fill:#10b981;stroke-width:0.558634"
+         id="path36"
+         inkscape:label="logo" />
+    </g>
+    <g
+       id="g2-5"
+       inkscape:label="DangerOS"
+       transform="matrix(0.98034156,0,0,0.98034156,-0.42474794,5.2572539)"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:142.886px;font-family:'Red Hat Text';-inkscape-font-specification:'Red Hat Text, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#10b981;fill-opacity:1;stroke:#10b981;stroke-width:11.8476"
+         x="164.33517"
+         y="203.58371"
+         id="text2-0"
+         inkscape:label="text"><tspan
+           sodipodi:role="line"
+           id="tspan2-9"
+           x="164.33517"
+           y="203.58371"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:142.886px;font-family:'Red Hat Text';-inkscape-font-specification:'Red Hat Text, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#10b981;fill-opacity:1;stroke-width:11.8476"
+           dx="0 4.7055573 2.8233345 3.7644458 3.7644458 3.7644458 -0.88449645 -1.0797759">DangerOS</tspan></text>
+      <path
+         d="m 79.191618,74.875301 c -43.256394,0 -78.317951,35.061559 -78.317951,78.317949 0,43.25639 35.061557,78.31872 78.317951,78.31872 43.256382,0 78.318722,-35.06233 78.318722,-78.31872 0,-43.25639 -35.06234,-78.317949 -78.318722,-78.317949 z m 0.792052,24.438014 c 11.974671,6e-5 21.68206,9.707435 21.68212,21.682115 -6e-5,11.97468 -9.707449,21.68206 -21.68212,21.68212 -11.97468,-6e-5 -21.682056,-9.70744 -21.682124,-21.68212 6.8e-5,-11.97468 9.707444,-21.682055 21.682124,-21.682115 z m 32.94173,43.570015 c 0.2305,-0.0302 0.46645,0.0767 0.59171,0.29043 l 8.34298,14.23601 c 0.16702,0.28499 0.0717,0.64861 -0.21355,0.81535 l -23.917736,13.98677 23.615686,13.81049 c 0.37488,0.21924 0.4999,0.69691 0.28031,1.0716 l -8.15273,13.91222 c -0.21959,0.3747 -0.69827,0.49956 -1.07316,0.28031 L 80.204988,182.45969 48.016477,201.28341 c -0.285144,0.16675 -0.649109,0.0714 -0.816125,-0.21354 L 38.85737,186.83385 c -0.167017,-0.28499 -0.0716,-0.64859 0.213544,-0.81536 l 23.609454,-13.8066 -23.58771,-13.79418 c -0.374899,-0.21924 -0.499914,-0.69692 -0.280326,-1.07161 l 8.153508,-13.91222 c 0.164689,-0.28102 0.475021,-0.42178 0.778076,-0.38204 0.101021,0.0132 0.20058,0.047 0.294306,0.10173 l 32.165983,18.81052 32.496785,-19.00389 c 0.0713,-0.0417 0.14757,-0.0668 0.22441,-0.0769 z"
+         style="fill:#10b981;stroke-width:0.39758"
+         id="path36-6"
+         inkscape:label="logo" />
+    </g>
+  </g>
+</svg>
