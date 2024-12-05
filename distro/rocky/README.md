@@ -1,6 +1,8 @@
-![image](/distro/rocky/media/brand/logo_04.svg)
-# An operating system for VFX.
 
+![image](https://github.com/DangerDrome/DangerOS/blob/fc4d13e57f73ae80edccb4f0f750be33b317193e/distro/rocky/media/brand/fedora-gdm-logo.png)
+<p align="center">
+# An operating system for VFX.
+</p>
 > [!TIP]
 > Get rocky 9 kick start stuff for building iso's [here](https://git.resf.org/sig_core/kickstarts/src/branch/r9)
 
