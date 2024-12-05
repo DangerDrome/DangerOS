@@ -311,6 +311,9 @@ white_label_os() {
     "${BRANDING_DIR}/fedora-logo-sprite.svg"
     "${BRANDING_DIR}/fedora-logo.png"
     "${BRANDING_DIR}/system-logo-white.png"
+    "${BRANDING_DIR}/fedora_logo.svg"
+    "${BRANDING_DIR}/fedora_logo_darkbackground.svg"
+    "${BRANDING_DIR}fedora_logo_lightbackground.svg"
   )
 
   ROCKY_LOGO=(
@@ -320,6 +323,9 @@ white_label_os() {
     "/usr/share/pixmaps/fedora-logo-sprite.svg"
     "/usr/share/pixmaps/fedora-logo.png"
     "/usr/share/pixmaps/system-logo-white.png"
+    "/usr/share/rocky-logos/fedora_logo.svg"
+    "/usr/share/rocky-logos/fedora_logo_darkbackground.svg"
+    "/usr/share/rocky-logos/fedora_logo_lightbackground.svg"
   )
 
   # Replace ROCKY_LOGO with DANGER_LOGO
