@@ -6,7 +6,7 @@
 #############################
 # Variables
 #############################
-
+P="[>] "
 CWD=$(pwd)
 USERS=$(awk -F: '$3 > 999 && $3 < 65534 {print $1}' /etc/passwd | sort)
 FUSION="https://download1.rpmfusion.org"
@@ -23,37 +23,37 @@ DNF_DIR="${CWD}/dnf"
 
 install_dialog() {
   if ! command -v dialog &>/dev/null; then
-    echo "Installing dialog for interactive menu..."
+    echo "${P} Installing dialog for interactive menu..."
     sudo dnf install dialog -y
   fi
 }
 
 check_prerequisites() {
   if [[ "${UID}" -ne 0 ]]; then
-    echo "Please run this script as root or with sudo." >&2
+    echo "${P} Please run this script as root or with sudo." >&2
     exit 1
   fi
 
-  echo "Checking for EPEL repository..."
+  echo "${P} Checking for EPEL repository..."
   if ! rpm -q epel-release >/dev/null; then
     sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
   fi
 }
 
 optimize_dnf() {
-  echo "Optimizing DNF for faster performance..."
+  echo "${P} Optimizing DNF for faster performance..."
 
   # Path to the DNF configuration file
   DNF_CONF="/etc/dnf/dnf.conf"
 
   # Backup the original configuration
   if [[ ! -f "${DNF_CONF}.backup" ]]; then
-    echo "Creating a backup of the current DNF configuration..."
+    echo "${P} Creating a backup of the current DNF configuration..."
     sudo cp "${DNF_CONF}" "${DNF_CONF}.backup"
   fi
 
   # Apply optimizations
-  echo "Applying performance optimizations to ${DNF_CONF}..."
+  echo "${P} Applying performance optimizations to ${DNF_CONF}..."
   sudo tee -a "${DNF_CONF}" > /dev/null <<EOF
 
 # Optimization settings
@@ -63,81 +63,81 @@ keepcache=True
 EOF
 
   # Notify user
-  echo "DNF has been optimized with the following settings:"
-  echo "  - Enabled fastest mirror detection"
-  echo "  - Increased parallel downloads to 10"
-  echo "  - Enabled cache retention"
-  echo "You may now experience faster DNF commands."
+  echo "${P} DNF has been optimized with the following settings:"
+  echo "${P}  - Enabled fastest mirror detection"
+  echo "${P}  - Increased parallel downloads to 10"
+  echo "${P}  - Enabled cache retention"
+  echo "${P} You may now experience faster DNF commands."
 }
 
 setup_repositories() {
-  echo "Setting up repositories"
+  echo "${P} Setting up repositories"
 
   # Enable CRB repository
-  echo "Enabling the CRB (CodeReady Builder) repository..."
+  echo "${P} Enabling the CRB (CodeReady Builder) repository..."
   if sudo dnf config-manager --set-enabled crb; then
     # install epel repository
     if ! sudo dnf install -y epel-release; then
-      echo "Error: Failed to install epel-release package. Check the repository files and network connection."
+      echo "${P} Error: Failed to install epel-release package. Check the repository files and network connection."
       return 1
     fi
   else
-    echo "Error: Failed to enable the CRB repository. Please check your system configuration."
+    echo "${P} Error: Failed to enable the CRB repository. Please check your system configuration."
     return 1
   fi
 
   # Install Community Enterprise Linux Repository (ELRepo)
-  echo "Installing ELRepo for additional kernel modules..."
+  echo "${P} Installing ELRepo for additional kernel modules..."
   
   if ! sudo dnf install -y elrepo-release; then
-    echo "Error: Failed to install elrepo-release package. Check the repository files and network connection."
+    echo "${P} Error: Failed to install elrepo-release package. Check the repository files and network connection."
     return 1
   fi
 
-  echo "ELRepo installed successfully."
+  echo "${P} ELRepo installed successfully."
 
   # Install RPM Fusion
-  echo "Installing RPM Fusion repository..."
+  echo "${P} Installing RPM Fusion repository..."
   
   if ! sudo dnf install -y rpmfusion-free-release; then
-    echo "Error: Failed to install RPM Fusion free package. Check the repository files and network connection."
+    echo "${P} Error: Failed to install RPM Fusion free package. Check the repository files and network connection."
     return 1
   fi
   if ! sudo dnf install -y rpmfusion-nonfree-release; then
     # grab it from a different mirror
     if ! sudo dnf install -y ${FUSION}/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm; then
-      echo "Error: Failed to install RPM Fusion nonfree package. Check the repository files and network connection."
+      echo "${P} Error: Failed to install RPM Fusion nonfree package. Check the repository files and network connection."
       return 1
-    echo "Switched to another mirror to install RPM Fusion nonfree package."
+    echo "${P} Switched to another mirror to install RPM Fusion nonfree package."
     fi
   fi 
-  echo "RPM Fusion free & nonfree installed successfully."
+  echo "${P} RPM Fusion free & nonfree installed successfully."
 
   # Install flatpak & flathub
-  echo "Installing Flatpak and Flathub..."
+  echo "${P} Installing Flatpak and Flathub..."
   if ! sudo dnf install -y flatpak; then
-    echo "Error: Failed to install Flatpak package. Check the repository files and network connection."
+    echo "${P} Error: Failed to install Flatpak package. Check the repository files and network connection."
     return 1
   fi
   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  echo "Flatpak and Flathub installed successfully."
+  echo "${P} Flatpak and Flathub installed successfully."
 
   # Refresh the repository cache
-  echo "Refreshing repository cache..."
+  echo "${P} Refreshing repository cache..."
   sudo dnf clean all
   sudo dnf makecache || {
-    echo "Error: Failed to refresh the repository cache. Check the repository files and network connection."
+    echo "${P} Error: Failed to refresh the repository cache. Check the repository files and network connection."
     return 1
   }
 
   # Notify user
-  echo "Repositories have been successfully set up from ${DNF_DIR}, and CRB is enabled."
+  echo "${P} Repositories have been successfully set up from ${DNF_DIR}, and CRB is enabled."
   #dnf repolist
 }
 
 install_nvidia_drivers() {
 
-  echo "Installing NVIDIA drivers..."
+  echo "${P} Installing NVIDIA drivers..."
   # Add NVIDIA repository
   sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo
   # Install required packages
@@ -152,19 +152,19 @@ install_nvidia_drivers() {
   # Update module dependencies
   sudo depmod -a
 
-  echo "NVIDIA drivers installed successfully. Reboot and run nvidia-smi to verify."
+  echo "${P} NVIDIA drivers installed successfully. Reboot and run nvidia-smi to verify."
   return 0
 }
 
 install_packages() {
-  echo "Installing base packages..."
+  echo "${P} Installing base packages..."
   for PACKAGE in ${BASE}; do
     sudo dnf install -y ${PACKAGE}
   done
 }
 
 configure_system() {
-  echo "Configuring SSH and XRDP..."
+  echo "${P} Configuring SSH and XRDP..."
   sudo systemctl enable --now sshd
   sudo systemctl enable --now xrdp
   sudo firewall-cmd --permanent --add-port=3389/tcp
@@ -172,7 +172,7 @@ configure_system() {
 }
 
 install_gnome_extensions() {
-  echo "Installing Extensions..."
+  echo "${P} Installing Extensions..."
 
   # List of GNOME extensions to install
   GNOME_EXTENSIONS=(
@@ -188,7 +188,7 @@ install_gnome_extensions() {
   for EXTENSION in "${GNOME_EXTENSIONS[@]}"; do
     # First install the extension using dnf with a wildcard for the version
     if ! sudo dnf install -y gnome-shell-extension-${EXTENSION}-*; then
-      echo "Error: Failed to install GNOME extension ${EXTENSION}."
+      echo "${P} Error: Failed to install GNOME extension ${EXTENSION}."
       return 1
     fi
 
@@ -199,30 +199,30 @@ install_gnome_extensions() {
     #fi
   done
 
-  echo "GNOME extensions installed, need to logout and back in to enable them."
+  echo "${P} GNOME extensions installed, need to logout and back in to enable them."
   return 0
 }
 
 install_docker() {
-  echo "Installing Docker..."
+  echo "${P} Installing Docker..."
   sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
   sudo dnf install -y docker-ce docker-ce-cli containerd.io
   sudo systemctl enable --now docker
   sudo usermod -aG docker ${USER}
-  echo "Docker installed successfully."
+  echo "${P} Docker installed successfully."
 
   # Install Dockge
-  echo "Installing Dockge..."
+  echo "${P} Installing Dockge..."
   sudo mkdir -p /opt/stacks /opt/dockge
   cd /opt/dockge
   sudo curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
   sudo docker compose up -d
   cd ${CWD}
-  echo "Dockge installed successfully."
+  echo "${P} Dockge installed successfully."
 }
 
 customize_environment() {
-  echo "Customizing Environment..."
+  echo "${P} Customizing Environment..."
   cp -f ${CWD}/bash/bashrc /root/.bashrc
   cp -f ${CWD}/bash/bash_aliases /root/.bash_aliases
   for USER in ${USERS}; do
@@ -248,7 +248,7 @@ customize_environment() {
 }
 
 auto_mount_network_locations() {
-  echo "Mounting SMB network locations..."
+  echo "${P} Mounting SMB network locations..."
   while IFS=, read -r SHARE MOUNT_POINT OPTIONS; do
     if [[ ! -d "${MOUNT_POINT}" ]]; then
       mkdir -p "${MOUNT_POINT}"
@@ -258,7 +258,7 @@ auto_mount_network_locations() {
 }
 
 remove_rocky_wallpapers() {
-  echo "Removing Rocky Linux wallpapers..."
+  echo "${P} Removing Rocky Linux wallpapers..."
 
   # Define the directories where Rocky Linux wallpapers might be located
   WALLPAPER_DIRS=(
@@ -268,44 +268,44 @@ remove_rocky_wallpapers() {
   # Loop through each directory and remove the wallpapers
   for DIR in "${WALLPAPER_DIRS[@]}"; do
     if [[ -d "${DIR}" ]]; then
-      echo "Removing wallpapers in ${DIR}..."
+      echo "${P} Removing wallpapers in ${DIR}..."
       sudo rm -rf "${DIR}"
     else
-      echo "Directory ${DIR} not found. Skipping..."
+      echo "${P} Directory ${DIR} not found. Skipping..."
     fi
   done
 
-  echo "Rocky Linux wallpapers removed successfully."
+  echo "${P} Rocky Linux wallpapers removed successfully."
   return 0
 }
 
 set_desktop_wallpaper() {
-  echo "Changing desktop wallpaper for all users..."
+  echo "${P} Changing desktop wallpaper for all users..."
 
   # Define the path to the wallpaper in the branding directory
   WALLPAPER_FILE="${BRANDING_DIR}/wallpaper.jpg"
 
   # Set wallpaper for the current user
-  echo "Setting wallpaper for the current user..."
+  echo "${P} Setting wallpaper for the current user..."
   gsettings set org.gnome.desktop.background picture-uri "file://${WALLPAPER_FILE}"
   gsettings set org.gnome.desktop.background picture-options "zoom"
 
   # Set wallpaper for all existing users
-  echo "Setting wallpaper for all users..."
+  echo "${P} Setting wallpaper for all users..."
   for USER in ${USERS}; do
     if [[ -d "/home/${USER}/.config" ]]; then
       su -c "gsettings set org.gnome.desktop.background picture-uri 'file://${WALLPAPER_FILE}'" "${USER}" 2>/dev/null || {
-        echo "Failed to set wallpaper for user: ${USER}. Skipping..."
+        echo "${P} Failed to set wallpaper for user: ${USER}. Skipping..."
       }
     fi
   done
 
   # Notify the user
-  echo "Wallpaper has been updated. Users may need to log out and log back in to see the changes."
+  echo "${P} Wallpaper has been updated. Users may need to log out and log back in to see the changes."
 }
 
 white_label_os() {
-  echo "Applying white-label branding to Rocky Linux..."
+  echo "${P} Applying white-label branding to Rocky Linux..."
 
   # Define paths for branding assets
   DANGER_LOGO=(
@@ -331,31 +331,31 @@ white_label_os() {
     if [[ -f "${DANGER_LOGO[$i]}" ]]; then
       sudo cp -f "${DANGER_LOGO[$i]}" "${ROCKY_LOGO[$i]}"
     else
-      echo "Error: Branding asset not found: ${DANGER_LOGO[$i]}. Skipping..."
+      echo "${P} Error: Branding asset not found: ${DANGER_LOGO[$i]}. Skipping..."
     fi
   done
 
 }
 
 enable_dark_mode() {
-  echo "Enabling dark mode for GNOME desktop and applications globally..."
+  echo "${P} Enabling dark mode for GNOME desktop and applications globally..."
 
   # Ensure dconf CLI is installed
   if ! command -v dconf &>/dev/null; then
-    echo "Installing dconf to configure GNOME system settings..."
+    echo "${P} Installing dconf to configure GNOME system settings..."
     sudo dnf install -y dconf
   fi
 
   # Enable dark mode for all Flatpak apps
-  echo "Enabling dark mode for Flatpak apps..."
+  echo "${P} Enabling dark mode for Flatpak apps..."
 
   if ! flatpak override --env=GTK_THEME=Adwaita:dark; then
-    echo "Error: Failed to enable dark mode for Flatpak apps."
+    echo "${P} Error: Failed to enable dark mode for Flatpak apps."
     return 1
   fi
 
   # Set system-wide GNOME desktop to dark mode
-  echo "Setting GNOME desktop interface to dark mode..."
+  echo "${P} Setting GNOME desktop interface to dark mode..."
   sudo mkdir -p /etc/dconf/db/local.d
   sudo tee /etc/dconf/db/local.d/00-dark-mode > /dev/null <<EOF
 [org/gnome/desktop/interface]
@@ -367,56 +367,57 @@ name='Adwaita-dark'
 EOF
 
   # Apply changes
-  echo "Updating dconf database to apply dark mode settings..."
+  echo "${P} Updating dconf database to apply dark mode settings..."
   sudo dconf update
 
   # Configure Flatpak apps to use dark mode
-  echo "Applying dark mode for Flatpak applications..."
+  echo "${P} Applying dark mode for Flatpak applications..."
   flatpak override --env=GTK_THEME=Adwaita:dark org.mozilla.firefox
   flatpak override --env=GTK_THEME=Adwaita:dark com.spotify.Client
   flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
 
   # Notify user
-  echo "Dark mode has been enabled system-wide. Please restart GNOME Shell or reboot the system to apply changes."
+  echo "${P} Dark mode has been enabled system-wide. Please restart GNOME Shell or reboot the system to apply changes."
 }
 
 increase_scaling_factor() {
-  echo "Increasing scaling factor..."
+  echo "${P} Increasing scaling factor..."
 
   # Enable fractional scaling
   if ! gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"; then
-    echo "Error: Failed to enable fractional scaling."
+    echo "${P} Error: Failed to enable fractional scaling."
     return 1
   fi
 
   # Set the scaling factor to 1.5
   if ! gsettings set org.gnome.desktop.interface text-scaling-factor 1.5; then
-    echo "Error: Failed to increase scaling factor."
+    echo "${P} Error: Failed to increase scaling factor."
     return 1
   fi
 
-  echo "Scaling factor increased successfully."
+  echo "${P} Scaling factor increased successfully."
   return 0
 }
 
 set_nautilus_padding() {
-  echo "Setting universal padding for Nautilus..."
+  echo "${P} Setting universal padding for Nautilus..."
 
   # Set the padding for Nautilus
   if ! gsettings set org.gnome.nautilus.icon-view horizontal-icon-container-padding 100; then
-    echo "Error: Failed to set padding for Nautilus."
+    echo "${P} Error: Failed to set padding for Nautilus."
     return 1
   fi
 
-  echo "Nautilus padding set successfully."
+  echo "${P} Nautilus padding set successfully."
   return 0
 }
 
 install_flatpak_apps() {
-  echo "Installing Apps..."
+  echo "${P} Installing Apps..."
   for APP in ${FLATPAK}; do
     flatpak install -y ${APP}
   done
+  echo "${P} Apps installed successfully."
 }
 
 #############################
@@ -443,9 +444,10 @@ run_tasks() {
     "16" "install_flatpak_apps" off
 
   )
+  
   local choices=$(dialog --separate-output --checklist "Select tasks to perform:" 20 50 12 "${tasks[@]}" 3>&1 1>&2 2>&3)
+  
   clear
-
   check_prerequisites
 
   for choice in $choices; do
@@ -473,4 +475,4 @@ run_tasks() {
 
 install_dialog
 run_tasks
-echo "All selected tasks completed. Reboot is recommended."
+echo "${P} All selected tasks completed. Reboot is recommended!"
