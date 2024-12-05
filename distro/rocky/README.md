@@ -4,8 +4,17 @@
 ░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
 ```
 ![image](https://github.com/user-attachments/assets/07cf9726-3a6a-4e57-87c0-71bc686ca5a2)
+
+> [!TIP]
+> Get rocky 9 kick start stuff for building iso's [here](https://git.resf.org/sig_core/kickstarts/src/branch/r9)
+
+> [!TIP]
+> A list of reocky linux repositories [here](https://wiki.rockylinux.org/rocky/repo/#vault)
+
+
 <br>
 <br>
+
 
 # Rocky Install Guide
 
@@ -13,8 +22,24 @@
 
   > [!TIP]
   > Grab the Rocky Linux `Minimal` ISO file from [here](https://rockylinux.org/download)
-  > After the minimal install, login using root user/password and Update stuff.
+  > And install the following `Base environment` with `Additional software selected`:
   
+- Server with GUI
+- Network Fifle system Client
+- Remote Desktop Clients
+- Remote Management for Linux
+- Windows FIle Server
+- Development tools
+- Graphical Administration Tools
+- Headless Management
+- System Tools
+
+ Like this:
+![image](https://github.com/user-attachments/assets/ba2a147b-cfbe-4f51-babe-17ac56da838e)
+
+
+  
+  After the minimal install, login using root user/password and Update stuff.
   ```
   dnf update -y
   ```
