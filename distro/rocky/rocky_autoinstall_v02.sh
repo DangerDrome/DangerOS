@@ -14,6 +14,7 @@ BASE=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/base.txt)
 FLATPAK=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/flatpak.txt)
 GNOME=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/gnome.txt)
 NETWORK_CONFIG="${CWD}/network/locations.txt"
+BRANDING_DIR="${CWD}/media/brand"
 
 #############################
 # Functions
@@ -39,31 +40,55 @@ check_prerequisites() {
 }
 
 setup_repositories() {
-  echo "Setting up repositories..."
+  echo "Setting up repositories from .repo files in the /dnf directory..."
 
-  # Remove old repository files
-  echo "Removing old repository files..."
+  # Path to the local repository files
+  DNF_DIR="${CWD}/dnf"
+
+  # Check if the directory exists
+  if [[ ! -d "${DNF_DIR}" ]]; then
+    echo "Error: Repository directory ${DNF_DIR} does not exist."
+    echo "Please ensure the /dnf directory contains the necessary .repo files."
+    return 1
+  fi
+
+  # Remove existing repository files
+  echo "Removing existing repository files in /etc/yum.repos.d..."
   sudo rm -f /etc/yum.repos.d/*.repo /etc/yum.repos.d/*.rpmsave
 
-  # Add Rocky repositories
-  echo "Adding Rocky Linux repositories..."
-  sudo cp -f "${CWD}/dnf/rocky.repo" /etc/yum.repos.d/
-  sudo dnf install -y epel-release
+  # Copy all .repo files from /dnf to /etc/yum.repos.d
+  echo "Copying .repo files from ${DNF_DIR} to /etc/yum.repos.d..."
+  sudo cp -f "${DNF_DIR}"/*.repo /etc/yum.repos.d/ || {
+    echo "Error: Failed to copy .repo files from ${DNF_DIR}. Check if the files exist and have correct permissions."
+    return 1
+  }
 
-  # Add RPM Fusion repositories
-  echo "Adding RPM Fusion repositories..."
-  sudo dnf install -y "${FUSION}/free/el/rpmfusion-free-release-9.noarch.rpm"
-  sudo dnf install -y "${FUSION}/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm"
+  # Enable CRB repository
+  echo "Enabling the CRB (CodeReady Builder) repository..."
+  if sudo dnf config-manager --set-enabled crb; then
+    # install epel repository
+    sudo dnf install epel-release
+    echo "CRB repository has been successfully enabled."
+  else
+    echo "Error: Failed to enable the CRB repository. Please check your system configuration."
+    return 1
+  fi
 
-  # Install Flatpak and configure Flathub
-  echo "Installing Flatpak..."
-  sudo dnf install -y flatpak
-  echo "Adding Flathub repository..."
-  sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  # Refresh the repository cache
+  echo "Refreshing repository cache..."
+  sudo dnf clean all
+  sudo dnf makecache || {
+    echo "Error: Failed to refresh the repository cache. Check the repository files and network connection."
+    return 1
+  }
 
   # Notify user
-  echo "Repositories have been set up, including Flatpak and Flathub."
+  echo "Repositories have been successfully set up from ${DNF_DIR}, and CRB is enabled."
+  #dnf repolist
 }
+
+
+
 
 install_packages() {
   echo "Installing base packages..."
@@ -127,10 +152,7 @@ auto_mount_network_locations() {
 
 white_label_os() {
   echo "Applying white-label branding to Rocky Linux..."
-
-  # Define the branding directory
-  BRANDING_DIR="${CWD}/media/brand"
-
+  
   # Ensure the branding directory exists
   if [[ ! -d "${BRANDING_DIR}" ]]; then
     echo "Branding directory not found at ${BRANDING_DIR}. Creating it now..."
@@ -255,6 +277,35 @@ EOF
   echo "Dark mode has been enabled system-wide. Please restart GNOME Shell or reboot the system to apply changes."
 }
 
+optimize_dnf() {
+  echo "Optimizing DNF for faster performance..."
+
+  # Path to the DNF configuration file
+  DNF_CONF="/etc/dnf/dnf.conf"
+
+  # Backup the original configuration
+  if [[ ! -f "${DNF_CONF}.backup" ]]; then
+    echo "Creating a backup of the current DNF configuration..."
+    sudo cp "${DNF_CONF}" "${DNF_CONF}.backup"
+  fi
+
+  # Apply optimizations
+  echo "Applying performance optimizations to ${DNF_CONF}..."
+  sudo tee -a "${DNF_CONF}" > /dev/null <<EOF
+
+# Optimization settings
+fastestmirror=True
+max_parallel_downloads=10
+keepcache=True
+EOF
+
+  # Notify user
+  echo "DNF has been optimized with the following settings:"
+  echo "  - Enabled fastest mirror detection"
+  echo "  - Increased parallel downloads to 10"
+  echo "  - Enabled cache retention"
+  echo "You may now experience faster DNF commands."
+}
 
 #############################
 # User Menu
@@ -275,6 +326,7 @@ run_tasks() {
     "11" "Set 100px universal padding for Nautilus" off
     "12" "Apply white-label branding to Rocky Linux" off
     "13" "Set desktop wallpaper from branding folder" off
+    "14" "Optimize DNF for faster commands" off
 
   )
   local choices=$(dialog --separate-output --checklist "Select tasks to perform:" 20 50 12 "${tasks[@]}" 3>&1 1>&2 2>&3)
@@ -297,6 +349,7 @@ run_tasks() {
       11) set_nautilus_padding ;;
       12) white_label_os ;;
       13) set_desktop_wallpaper ;;
+      14) optimize_dnf ;;
       *) echo "Invalid option: ${choice}" ;;
     esac
   done
