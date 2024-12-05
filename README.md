@@ -1,3 +1,6 @@
+<br>
+<br>
+
 ![image](https://github.com/DangerDrome/DangerOS/blob/fc4d13e57f73ae80edccb4f0f750be33b317193e/distro/rocky/media/brand/fedora-gdm-logo.png)
 # An operating system for Visual Effects.
 <br>
