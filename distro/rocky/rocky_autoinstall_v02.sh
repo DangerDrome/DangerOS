@@ -122,6 +122,7 @@ install_gnome_extensions() {
   for EXTENSION in ${GNOME}; do
     # First install the extension
     sudo gnome-extensions install ${EXTENSION}
+    sudo dnf install gnome-shell-extension-${EXTENSION}
     # Then enable the extension
     sudo gnome-extensions enable ${EXTENSION}
   done
@@ -327,6 +328,19 @@ EOF
   echo "  - Increased parallel downloads to 10"
   echo "  - Enabled cache retention"
   echo "You may now experience faster DNF commands."
+}
+
+increase_scaling_factor() {
+  echo "Increasing scaling factor..."
+
+  # Set the scaling factor to 2 (or any desired value)
+  if ! gsettings set org.gnome.desktop.interface scaling-factor 1.5; then
+    echo "Error: Failed to increase scaling factor."
+    return 1
+  fi
+
+  echo "Scaling factor increased successfully."
+  return 0
 }
 
 #############################
