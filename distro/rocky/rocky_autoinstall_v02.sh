@@ -115,11 +115,15 @@ install_packages() {
   done
 }
 
+# install GNOME extensions from gnome.txt
+
 install_gnome_extensions() {
   echo "Installing GNOME extensions..."
-  for EXT in ${GNOME}; do
-    sudo gnome-extensions install --force ${EXT}
-    sudo gnome-extensions enable ${EXT}
+  for EXTENSION in ${GNOME}; do
+    # First install the extension
+    sudo gnome-extensions install ${EXTENSION}
+    # Then enable the extension
+    sudo gnome-extensions enable ${EXTENSION}
   done
 }
 
