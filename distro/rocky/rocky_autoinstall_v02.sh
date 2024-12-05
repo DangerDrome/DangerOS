@@ -6,6 +6,7 @@
 #############################
 # Variables
 #############################
+
 P="[>] "
 CWD=$(pwd)
 USERS=$(awk -F: '$3 > 999 && $3 < 65534 {print $1}' /etc/passwd | sort)
@@ -16,6 +17,7 @@ GNOME=$(grep -E -v '(^\#)|(^\s+$)' ${CWD}/pkgs/gnome.txt)
 NETWORK_CONFIG="${CWD}/network/locations.txt"
 BRANDING_DIR="${CWD}/media/brand"
 DNF_DIR="${CWD}/dnf"
+
 
 #############################
 # Functions
@@ -422,6 +424,7 @@ install_flatpak_apps() {
   echo "${P} Apps installed successfully."
 }
 
+
 #############################
 # User Menu
 #############################
@@ -447,7 +450,7 @@ run_tasks() {
 
   )
   
-  local choices=$(dialog --separate-output --checklist "Select tasks to perform:" 20 50 12 "${tasks[@]}" 3>&1 1>&2 2>&3)
+  local choices=$(dialog --separate-output --checklist "DangerOS Installer:" 20 50 12 "${tasks[@]}" 3>&1 1>&2 2>&3)
   
   clear
   check_prerequisites
@@ -477,4 +480,4 @@ run_tasks() {
 
 install_dialog
 run_tasks
-echo "${P} All selected tasks completed. Reboot is recommended!"
+echo "${P} All selected tasks completed. A reboot is recommended!"
