@@ -97,8 +97,8 @@ setup_repositories() {
   if ! sudo dnf install -y rpmfusion-nonfree-release; then
     echo "Error: Failed to install RPM Fusion nonfree package. Check the repository files and network connection."
     return 1
-  fi  
-
+  fi 
+  
   echo "RPM Fusion free & nonfree installed successfully."
 
 
