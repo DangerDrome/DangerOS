@@ -67,8 +67,8 @@ strike=$(tput smxx)
 # echo -e "\033[1;30mGRAY\t\033[0;37mLIGHT_GRAY"
 
 # App aliases
-alias ff='fastfetch --logo /home/danger/logo_02.txt'
-alias neofetch='fastfetch --logo /home/danger/logo_02.txt'
+alias ff='fastfetch --logo /usr/share/pixmaps/logo.txt'
+alias neofetch='fastfetch --logo /usr/share/pixmaps/logo.txt'
 
 # DCC  aliases
 alias nuke='/opt/Nuke15.1v4/Nuke15.1 --NukeX -indie'
