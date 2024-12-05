@@ -274,6 +274,14 @@ enable_dark_mode() {
     sudo dnf install -y dconf
   fi
 
+  # Enable dark mode for all Flatpak apps
+  echo "Enabling dark mode for Flatpak apps..."
+
+  if ! flatpak override --env=GTK_THEME=Adwaita:dark; then
+    echo "Error: Failed to enable dark mode for Flatpak apps."
+    return 1
+  fi
+
   # Set system-wide GNOME desktop to dark mode
   echo "Setting GNOME desktop interface to dark mode..."
   sudo mkdir -p /etc/dconf/db/local.d
