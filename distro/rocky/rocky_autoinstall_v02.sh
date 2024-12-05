@@ -309,7 +309,7 @@ white_label_os() {
     "${BRANDING_DIR}/fedora-logo-small.png"
     "${BRANDING_DIR}/fedora-logo-sprite.png"
     "${BRANDING_DIR}/fedora-logo-sprite.svg"
-    "${BRANDING_DIR}/rocky-logo.png"
+    "${BRANDING_DIR}/fedora-logo.png"
     "${BRANDING_DIR}/system-logo-white.png"
   )
 
@@ -318,7 +318,7 @@ white_label_os() {
     "/usr/share/pixmaps/fedora-logo-small.png"
     "/usr/share/pixmaps/fedora-logo-sprite.png"
     "/usr/share/pixmaps/fedora-logo-sprite.svg"
-    "/usr/share/pixmaps/rocky-logo.png"
+    "/usr/share/pixmaps/fedora-logo.png"
     "/usr/share/pixmaps/system-logo-white.png"
   )
 
