@@ -139,10 +139,10 @@ install_gnome_extensions() {
     fi
 
     # Then enable the extension
-    if ! sudo gnome-extensions enable ${EXTENSION}; then
-      echo "Error: Failed to enable GNOME extension ${EXTENSION}."
-      return 1
-    fi
+    #if ! sudo gnome-extensions enable ${EXTENSION}; then
+    #  echo "Error: Failed to enable GNOME extension ${EXTENSION}."
+    #  return 1
+    #fi
   done
 
   echo "GNOME extensions installed and enabled successfully."
