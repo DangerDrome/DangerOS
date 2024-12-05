@@ -91,11 +91,15 @@ setup_repositories() {
   echo "Installing RPM Fusion repository..."
   
   if ! sudo dnf install -y rpmfusion-free-release; then
-    echo "Error: Failed to install RPM Fusion package. Check the repository files and network connection."
+    echo "Error: Failed to install RPM Fusion free package. Check the repository files and network connection."
     return 1
   fi
+  if ! sudo dnf install -y rpmfusion-nonfree-release; then
+    echo "Error: Failed to install RPM Fusion nonfree package. Check the repository files and network connection."
+    return 1
+  fi  
 
-  echo "RPM Fusion installed successfully."
+  echo "RPM Fusion free & nonfree installed successfully."
 
 
   # Refresh the repository cache
