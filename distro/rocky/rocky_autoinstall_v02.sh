@@ -105,17 +105,12 @@ setup_repositories() {
   #dnf repolist
 }
 
-
-
-
 install_packages() {
   echo "Installing base packages..."
   for PACKAGE in ${BASE}; do
     sudo dnf install -y ${PACKAGE}
   done
 }
-
-# install GNOME extensions from gnome.txt
 
 install_gnome_extensions() {
   echo "Installing Extensions..."
@@ -169,6 +164,17 @@ install_docker() {
   sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
   sudo dnf install -y docker-ce docker-ce-cli containerd.io
   sudo systemctl enable --now docker
+  sudo usermod -aG docker ${USER}
+  echo "Docker installed successfully."
+
+  # Install Dockge
+  echo "Installing Dockge..."
+  sudo mkdir -p /opt/stacks /opt/dockge
+  cd /opt/dockge
+  sudo curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
+  sudo docker compose up -d
+  cd ${CWD}
+  echo "Dockge installed successfully."
 }
 
 customize_environment() {
@@ -207,78 +213,66 @@ auto_mount_network_locations() {
   done < "${NETWORK_CONFIG}"
 }
 
+remove_rocky_wallpapers() {
+  echo "Removing Rocky Linux wallpapers..."
+
+  # Define the directories where Rocky Linux wallpapers might be located
+  WALLPAPER_DIRS=(
+    "/usr/share/backgrounds"
+  )
+
+  # Loop through each directory and remove the wallpapers
+  for DIR in "${WALLPAPER_DIRS[@]}"; do
+    if [[ -d "${DIR}" ]]; then
+      echo "Removing wallpapers in ${DIR}..."
+      sudo rm -rf "${DIR}"
+    else
+      echo "Directory ${DIR} not found. Skipping..."
+    fi
+  done
+
+  echo "Rocky Linux wallpapers removed successfully."
+  return 0
+}
+
 white_label_os() {
   echo "Applying white-label branding to Rocky Linux..."
-  
-  # Ensure the branding directory exists
-  if [[ ! -d "${BRANDING_DIR}" ]]; then
-    echo "Branding directory not found at ${BRANDING_DIR}. Creating it now..."
-    sudo mkdir -p "${BRANDING_DIR}"
-    echo "Please add the following files to ${BRANDING_DIR}:"
-    echo "  - grub_background.png: Custom GRUB background."
-    echo "  - gdm_background.png: Custom GNOME login screen background."
-    echo "  - os-release: Custom OS branding."
-    echo "  - logo.png: Custom system logo."
-    echo "After adding these files, rerun this script."
-    exit 1
-  fi
 
   # Define paths for branding assets
-  GRUB_BACKGROUND="/boot/grub2/themes/Rocky/background.png"
-  GDM_BACKGROUND="/usr/share/gnome-shell/theme/gnome-shell-theme.gresource"
-  OS_RELEASE="/etc/os-release"
-  ROCKY_LOGO="/usr/share/pixmaps/rocky-logo.png"
+  DANGER_LOGO=(
+    "${BRANDING_DIR}/fedora-gdm-logo.png"
+    "${BRANDING_DIR}/fedora-logo-small.png"
+    "${BRANDING_DIR}/fedora-logo-sprite.png"
+    "${BRANDING_DIR}/fedora-logo-sprite.svg"
+    "${BRANDING_DIR}/rocky-logo.png"
+    "${BRANDING_DIR}/system-logo-white.png"
+  )
 
-  # Replace GRUB background
-  if [[ -f "${BRANDING_DIR}/grub_background.png" ]]; then
-    echo "Replacing GRUB background..."
-    sudo cp "${BRANDING_DIR}/grub_background.png" "${GRUB_BACKGROUND}"
-  else
-    echo "Warning: grub_background.png not found in ${BRANDING_DIR}. Skipping GRUB background replacement."
-  fi
+  ROCKY_LOGO=(
+    "/usr/share/pixmaps/fedora-gdm-logo.png"
+    "/usr/share/pixmaps/fedora-logo-small.png"
+    "/usr/share/pixmaps/fedora-logo-sprite.png"
+    "/usr/share/pixmaps/fedora-logo-sprite.svg"
+    "/usr/share/pixmaps/rocky-logo.png"
+    "/usr/share/pixmaps/system-logo-white.png"
+  )
 
-  # Replace GDM background
-  if [[ -f "${BRANDING_DIR}/gdm_background.png" ]]; then
-    echo "Replacing GDM background..."
-    sudo cp "${BRANDING_DIR}/gdm_background.png" "${GDM_BACKGROUND}"
-  else
-    echo "Warning: gdm_background.png not found in ${BRANDING_DIR}. Skipping GDM background replacement."
-  fi
+  # Replace ROCKY_LOGO with DANGER_LOGO
+  for i in "${!DANGER_LOGO[@]}"; do
+    if [[ -f "${DANGER_LOGO[$i]}" ]]; then
+      sudo cp -f "${DANGER_LOGO[$i]}" "${ROCKY_LOGO[$i]}"
+    else
+      echo "Error: Branding asset not found: ${DANGER_LOGO[$i]}. Skipping..."
+    fi
+  done
 
-  # Update OS branding in /etc/os-release
-  if [[ -f "${BRANDING_DIR}/os-release" ]]; then
-    echo "Updating OS branding in /etc/os-release..."
-    sudo cp "${BRANDING_DIR}/os-release" "${OS_RELEASE}"
-  else
-    echo "Warning: os-release not found in ${BRANDING_DIR}. Skipping OS branding update."
-  fi
-
-  # Replace Rocky logo
-  if [[ -f "${BRANDING_DIR}/logo.png" ]]; then
-    echo "Replacing system logo..."
-    sudo cp "${BRANDING_DIR}/logo.png" "${ROCKY_LOGO}"
-  else
-    echo "Warning: logo.png not found in ${BRANDING_DIR}. Skipping logo replacement."
-  fi
-
-  # Notify user
-  echo "White-label branding process completed."
-  echo "Please restart your system for all changes to take effect."
 }
 
 set_desktop_wallpaper() {
   echo "Changing desktop wallpaper for all users..."
 
   # Define the path to the wallpaper in the branding directory
-  BRANDING_DIR="${CWD}/media/brand"
   WALLPAPER_FILE="${BRANDING_DIR}/wallpaper.jpg"
-
-  # Ensure the wallpaper file exists
-  if [[ ! -f "${WALLPAPER_FILE}" ]]; then
-    echo "Error: Wallpaper file not found at ${WALLPAPER_FILE}."
-    echo "Please place a wallpaper.jpg file in ${BRANDING_DIR} and rerun this function."
-    return 1
-  fi
 
   # Set wallpaper for the current user
   echo "Setting wallpaper for the current user..."
@@ -388,6 +382,40 @@ increase_scaling_factor() {
   fi
 
   echo "Scaling factor increased successfully."
+  return 0
+}
+
+set_nautilus_padding() {
+  echo "Setting universal padding for Nautilus..."
+
+  # Set the padding for Nautilus
+  if ! gsettings set org.gnome.nautilus.icon-view horizontal-icon-container-padding 100; then
+    echo "Error: Failed to set padding for Nautilus."
+    return 1
+  fi
+
+  echo "Nautilus padding set successfully."
+  return 0
+}
+
+install_nvidia_drivers() {
+
+  echo "Installing NVIDIA drivers..."
+  # Add NVIDIA repository
+  sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo
+  # Install required packages
+  sudo dnf install kernel-headers-$(uname -r) kernel-devel-$(uname -r) tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms -y
+  # Install NVIDIA driver
+  sudo dnf module install nvidia-driver:latest-dkms -y
+  # Blacklist nouveau driver
+  echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+  echo 'omit_drivers+=" nouveau "' | sudo tee /etc/dracut.conf.d/blacklist-nouveau.conf
+  # Regenerate initramfs
+  sudo dracut --regenerate-all --force
+  # Update module dependencies
+  sudo depmod -a
+
+  echo "NVIDIA drivers installed successfully. Reboot and run nvidia-smi to verify."
   return 0
 }
 
