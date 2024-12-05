@@ -41,28 +41,7 @@ check_prerequisites() {
 }
 
 setup_repositories() {
-  echo "Setting up repositories from .repo files in the /dnf directory..."
-
-  # Path to the local repository files
-
-
-  # Check if the directory exists
-  #if [[ ! -d "${DNF_DIR}" ]]; then
-  #  echo "Error: Repository directory ${DNF_DIR} does not exist."
-  #  echo "Please ensure the /dnf directory contains the necessary .repo files."
-  #  return 1
-  #fi
-
-  # Remove existing repository files
-  #echo "Removing existing repository files in /etc/yum.repos.d..."
-  #sudo rm -f /etc/yum.repos.d/*.repo /etc/yum.repos.d/*.rpmsave
-
-  # Copy all .repo files from /dnf to /etc/yum.repos.d
-  #echo "Copying .repo files from ${DNF_DIR} to /etc/yum.repos.d..."
-  #sudo cp -f "${DNF_DIR}"/*.repo /etc/yum.repos.d/ || {
-    #echo "Error: Failed to copy .repo files from ${DNF_DIR}. Check if the files exist and have correct permissions."
-    #return 1
-  #}
+  echo "Setting up repositories"
 
   # Enable CRB repository
   echo "Enabling the CRB (CodeReady Builder) repository..."
@@ -99,11 +78,19 @@ setup_repositories() {
     if ! sudo dnf install -y ${FUSION}/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm; then
       echo "Error: Failed to install RPM Fusion nonfree package. Check the repository files and network connection."
       return 1
+    echo "Switched to another mirror to install RPM Fusion nonfree package."
     fi
   fi 
-
   echo "RPM Fusion free & nonfree installed successfully."
 
+  # Install flatpak & flathub
+  echo "Installing Flatpak and Flathub..."
+  if ! sudo dnf install -y flatpak; then
+    echo "Error: Failed to install Flatpak package. Check the repository files and network connection."
+    return 1
+  fi
+  flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  echo "Flatpak and Flathub installed successfully."
 
   # Refresh the repository cache
   echo "Refreshing repository cache..."
