@@ -40,11 +40,29 @@ check_prerequisites() {
 
 setup_repositories() {
   echo "Setting up repositories..."
-  rm -f /etc/yum.repos.d/*.repo /etc/yum.repos.d/*.rpmsave
-  cp -f ${CWD}/dnf/rocky.repo /etc/yum.repos.d/
+
+  # Remove old repository files
+  echo "Removing old repository files..."
+  sudo rm -f /etc/yum.repos.d/*.repo /etc/yum.repos.d/*.rpmsave
+
+  # Add Rocky repositories
+  echo "Adding Rocky Linux repositories..."
+  sudo cp -f "${CWD}/dnf/rocky.repo" /etc/yum.repos.d/
   sudo dnf install -y epel-release
-  sudo dnf install -y ${FUSION}/free/el/rpmfusion-free-release-9.noarch.rpm
-  sudo dnf install -y ${FUSION}/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm
+
+  # Add RPM Fusion repositories
+  echo "Adding RPM Fusion repositories..."
+  sudo dnf install -y "${FUSION}/free/el/rpmfusion-free-release-9.noarch.rpm"
+  sudo dnf install -y "${FUSION}/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm"
+
+  # Install Flatpak and configure Flathub
+  echo "Installing Flatpak..."
+  sudo dnf install -y flatpak
+  echo "Adding Flathub repository..."
+  sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+  # Notify user
+  echo "Repositories have been set up, including Flatpak and Flathub."
 }
 
 install_packages() {
@@ -200,6 +218,41 @@ set_desktop_wallpaper() {
 
   # Notify the user
   echo "Desktop wallpaper has been updated. Users may need to log out and log back in to see the changes."
+}
+
+enable_dark_mode() {
+  echo "Enabling dark mode for GNOME desktop and applications globally..."
+
+  # Ensure dconf CLI is installed
+  if ! command -v dconf &>/dev/null; then
+    echo "Installing dconf to configure GNOME system settings..."
+    sudo dnf install -y dconf
+  fi
+
+  # Set system-wide GNOME desktop to dark mode
+  echo "Setting GNOME desktop interface to dark mode..."
+  sudo mkdir -p /etc/dconf/db/local.d
+  sudo tee /etc/dconf/db/local.d/00-dark-mode > /dev/null <<EOF
+[org/gnome/desktop/interface]
+gtk-theme='Adwaita-dark'
+color-scheme='prefer-dark'
+
+[org/gnome/shell/extensions/user-theme]
+name='Adwaita-dark'
+EOF
+
+  # Apply changes
+  echo "Updating dconf database to apply dark mode settings..."
+  sudo dconf update
+
+  # Configure Flatpak apps to use dark mode
+  echo "Applying dark mode for Flatpak applications..."
+  flatpak override --env=GTK_THEME=Adwaita:dark org.mozilla.firefox
+  flatpak override --env=GTK_THEME=Adwaita:dark com.spotify.Client
+  flatpak override --env=GTK_THEME=Adwaita:dark org.gnome.Calendar
+
+  # Notify user
+  echo "Dark mode has been enabled system-wide. Please restart GNOME Shell or reboot the system to apply changes."
 }
 
 
