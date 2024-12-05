@@ -235,11 +235,10 @@ customize_environment() {
   # Copy fastfetch logo
   cp -f ${CWD}/media/brand/logo.txt /usr/share/pixmaps/fastfetch-logo.png
 
-  # Get Meslo nerd font:
+  # Get Rocky & Meslo nerd font:
   wget -O /usr/share/fonts/Meslo.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Meslo.zip \
   && unzip /usr/share/fonts/Meslo.zip -d /usr/share/fonts/ \
   && rm /usr/share/fonts/Meslo.zip \
-  # Get rocky font
   && sudo unzip ${CWD}/media/fonts/rocky.zip -d /usr/share/fonts/ \
   && sudo fc-cache -f -v
 }
