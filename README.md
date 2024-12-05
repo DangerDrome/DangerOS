@@ -1,28 +1,12 @@
-```
-                                                             ■██████■     
-                                                          ████████████■   
-                                                 ███████ █████    ███     
-                                          █████  ███     ████    ███      
-                            ■          █████  ████████████████  ████      
-                           ███   ███  █████    ██████    ████ █████       
-            ■█████████    ███ █   ██ ██████     ███   ███████████         
-         ░▒██████████████ ██  ██ ███ █████ █████████████████████          
-       ░▒███████░░░▒██████████████████████  █████      ████ █████         
-       ░███████    ▒██████████████ ███ ███████        █████  ██████       
-        ░████     ░██████░░▒█████  █▓  ████          ████     █████       
-        ░█████    ░██████   ░████  ▒                  ████      █████     
-     ░▒█████     ░██████     ███   ░                 ███        ██████    
-     ░██████      ░█████      ▓                     ████■          ██████ 
-     ░█████    ░███████       ■                                     █████ 
-     ░████    ░██████                                                 ██████■ ®
-     ░████  ░███████                                                          
-   ░▓████░████████                                                    ░█▀█░█▀▀
-   ░▓███████████                                                      ░█░█░▀▀█
-   ░▓███████                                                          ░▀▀▀░▀▀▀
- ░▓███████                                                            
- ■▓██▒░░░                
- ░░▒
-```
+![image](https://github.com/DangerDrome/DangerOS/blob/fc4d13e57f73ae80edccb4f0f750be33b317193e/distro/rocky/media/brand/fedora-gdm-logo.png)
+# An operating system for VFX.
+<br>
+<br>
+
+![image](https://github.com/user-attachments/assets/07cf9726-3a6a-4e57-87c0-71bc686ca5a2)
+<br>
+<br>
+
 # DangerOS v1.0.1
 **Status: Working**
 #### DangerOS(Dangerous) is a spin on the Rocky Linux Operating System: Streamlined specifically for use in Visual Effects.
