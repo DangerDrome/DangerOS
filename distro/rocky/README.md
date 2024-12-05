@@ -1,17 +1,15 @@
-```
-░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀▄░█▀█░█▀▀
-░█░█░█▀█░█░█░█░█░█▀▀░█▀▄░█░█░▀▀█
-░▀▀░░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
-```
-![image](https://github.com/user-attachments/assets/07cf9726-3a6a-4e57-87c0-71bc686ca5a2)
+![image](/distro/rocky/media/brand/logo_04.svg)
+# An operating system for VFX.
 
 > [!TIP]
 > Get rocky 9 kick start stuff for building iso's [here](https://git.resf.org/sig_core/kickstarts/src/branch/r9)
 
 > [!TIP]
 > A list of reocky linux repositories [here](https://wiki.rockylinux.org/rocky/repo/#vault)
+<br>
+<br>
 
-
+![image](https://github.com/user-attachments/assets/07cf9726-3a6a-4e57-87c0-71bc686ca5a2)
 <br>
 <br>
 
