@@ -86,11 +86,11 @@ setup_repositories() {
   fi
 
   echo "ELRepo installed successfully."
-  
+
   # Install RPM Fusion
   echo "Installing RPM Fusion repository..."
   
-  if ! sudo dnf install -y pmfusion-free-release; then
+  if ! sudo dnf install -y rpmfusion-free-release; then
     echo "Error: Failed to install RPM Fusion package. Check the repository files and network connection."
     return 1
   fi
