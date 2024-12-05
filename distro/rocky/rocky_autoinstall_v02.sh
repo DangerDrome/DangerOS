@@ -86,8 +86,7 @@ setup_repositories() {
   fi
 
   echo "ELRepo installed successfully."
-  return 0
-
+  
   # Install RPM Fusion
   echo "Installing RPM Fusion repository..."
   
@@ -97,7 +96,6 @@ setup_repositories() {
   fi
 
   echo "RPM Fusion installed successfully."
-  return 0
 
 
   # Refresh the repository cache
