@@ -183,8 +183,19 @@ customize_environment() {
     fi
   done
   # Copy fastfetch logo
-  # Get fonts
-  sudo yum install rocky-display-fonts rocky-text-fonts
+  cp -f ${CWD}/media/brand/logo.txt /usr/share/pixmaps/fastfetch-logo.png
+
+  # Get Meslo nerd font:
+  wget -O /usr/share/fonts/Meslo.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Meslo.zip \
+  && unzip /usr/share/fonts/Meslo.zip -d /usr/share/fonts/ \
+  && rm /usr/share/fonts/Meslo.zip \
+  && fc-cache -f -v
+
+  # Get rocky font
+  wget -O /usr/share/fonts/rocky.zip 
+
+
+
   
 }
 
