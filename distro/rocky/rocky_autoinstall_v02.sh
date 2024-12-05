@@ -239,10 +239,7 @@ customize_environment() {
   wget -O /usr/share/fonts/Meslo.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Meslo.zip \
   && unzip /usr/share/fonts/Meslo.zip -d /usr/share/fonts/ \
   && rm /usr/share/fonts/Meslo.zip \
-  && fc-cache -f -v
-
   # Get rocky font
-  # sudo wget -O /usr/share/fonts/rocky.zip https://github.com/DangerDrome/DangerOS/blob/main/distro/rocky/media/fonts/rocky.zip \
   && sudo unzip ${CWD}/media/fonts/rocky.zip -d /usr/share/fonts/ \
   && sudo fc-cache -f -v
 }
