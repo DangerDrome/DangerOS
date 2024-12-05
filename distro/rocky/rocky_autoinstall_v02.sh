@@ -119,13 +119,34 @@ install_packages() {
 
 install_gnome_extensions() {
   echo "Installing GNOME extensions..."
-  for EXTENSION in ${GNOME}; do
-    # First install the extension
-    sudo gnome-extensions install ${EXTENSION}
-    sudo dnf install gnome-shell-extension-${EXTENSION}
+
+  # List of GNOME extensions to install
+  GNOME_EXTENSIONS=(
+    "dash-to-panel"
+    "workspace-indicator"
+    "systemMonitor"
+    "panel-favorites"
+    "appindicator"
+    "screenshot-window-sizer"
+    "custom-menu"
+  )
+
+  for EXTENSION in "${GNOME_EXTENSIONS[@]}"; do
+    # First install the extension using dnf with a wildcard for the version
+    if ! sudo dnf install -y gnome-shell-extension-${EXTENSION}-*; then
+      echo "Error: Failed to install GNOME extension ${EXTENSION}."
+      return 1
+    fi
+
     # Then enable the extension
-    sudo gnome-extensions enable ${EXTENSION}
+    if ! sudo gnome-extensions enable ${EXTENSION}; then
+      echo "Error: Failed to enable GNOME extension ${EXTENSION}."
+      return 1
+    fi
   done
+
+  echo "GNOME extensions installed and enabled successfully."
+  return 0
 }
 
 install_flatpak_apps() {
