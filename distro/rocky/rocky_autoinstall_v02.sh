@@ -74,7 +74,11 @@ EOF
 
 setup_repositories() {
   echo "${P} Setting up repositories"
-
+  
+  # update packages
+  echo "${P} Updating packages..."
+  sudo dnf update -y
+  
   # Enable CRB repository
   echo "${P} Enabling the CRB (CodeReady Builder) repository..."
   if sudo dnf config-manager --set-enabled crb; then
