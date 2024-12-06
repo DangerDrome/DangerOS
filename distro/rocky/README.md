@@ -17,6 +17,10 @@
 
 > [!TIP]
 > A list of rocky linux repositories [here](https://wiki.rockylinux.org/rocky/repo/#vault)
+
+> [!TIP]
+> Nvidia Drivers install pro-tips [here](https://forums.rockylinux.org/t/nvidia-drivers-on-rocky-linux/12366)
+
 <br>
 <br>
 
