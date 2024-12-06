@@ -144,6 +144,8 @@ setup_repositories() {
 install_nvidia_drivers() {
 
   echo "${P} Installing NVIDIA drivers..."
+  # Check Status of secure boot
+  mokutil --sb-state
   # Add NVIDIA repository
   sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo
   # Install required packages
