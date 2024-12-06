@@ -53,7 +53,9 @@
 > - Think before you type.
 > - With great power comes great responsibility.
 
-**1. dowload this repository as a .zip file, extract, go into the /distro/rocky folder and run:**
+<br>
+
+**1. Download this repository as a .zip file, extract, go into the /distro/rocky folder and run:**
 ```
 sudo ./rocky_autoinstall_v02.sh
 ```
