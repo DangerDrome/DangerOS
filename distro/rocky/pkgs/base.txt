@@ -12,6 +12,7 @@ vlc
 virt-manager
 
 # Utilities
+nvidia-detect
 keepassxc
 ImageMagick
 timeshift
