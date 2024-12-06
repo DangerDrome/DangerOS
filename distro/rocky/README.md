@@ -52,10 +52,28 @@
 
 
   
-  After the minimal install, login using root user/password and Update stuff.
+## 2. After the minimal install, login using root user/password and Update stuff.
   ```
   dnf update -y
   ```
+<br>
+
+## 3. Download this repository as a .zip file, extract, go into the /distro/rocky folder and run:
+> [!WARNING]
+> Use bash scripts at your own risk, read the code carefully before executing.
+> We trust you have received the usual lecture from the local System
+> Administrator. It usually boils down to these three things:
+>
+> - Respect the privacy of others.
+> - Think before you type.
+> - With great power comes great responsibility.
+<br>
+
+```
+sudo ./rocky_autoinstall_v02.sh
+```
+![image](https://github.com/user-attachments/assets/c5977059-e81e-4304-ac6a-f4e36a706613)
+
 <br>
 <br>
 <br>
