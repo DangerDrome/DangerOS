@@ -78,19 +78,6 @@ setup_repositories() {
   # update packages
   echo "${P} Updating packages..."
   sudo dnf update -y
-  
-  # Enable CRB repository
-  echo "${P} Enabling the CRB (CodeReady Builder) repository..."
-  if sudo dnf config-manager --set-enabled crb; then
-    # install epel repository
-    if ! sudo dnf install -y epel-release; then
-      echo "${P} Error: Failed to install epel-release package. Check the repository files and network connection."
-      return 1
-    fi
-  else
-    echo "${P} Error: Failed to enable the CRB repository. Please check your system configuration."
-    return 1
-  fi
 
   # Install Community Enterprise Linux Repository (ELRepo)
   echo "${P} Installing ELRepo for additional kernel modules..."
@@ -99,25 +86,17 @@ setup_repositories() {
     echo "${P} Error: Failed to install elrepo-release package. Check the repository files and network connection."
     return 1
   fi
-
   echo "${P} ELRepo installed successfully."
 
   # Install RPM Fusion
   echo "${P} Installing RPM Fusion repository..."
-  
-  if ! sudo dnf install -y rpmfusion-free-release; then
-    echo "${P} Error: Failed to install RPM Fusion free package. Check the repository files and network connection."
-    return 1
-  fi
-  if ! sudo dnf install -y rpmfusion-nonfree-release; then
-    # grab it from a different mirror
-    if ! sudo dnf install -y ${FUSION}/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm; then
-      echo "${P} Error: Failed to install RPM Fusion nonfree package. Check the repository files and network connection."
-      return 1
-    echo "${P} Switched to another mirror to install RPM Fusion nonfree package."
-    fi
-  fi 
+  sudo dnf install -y rpmfusion-free-release epel-release
+  sudo dnf install --nogpgcheck \
+  https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-$(rpm -E %rhel).noarch.rpm
   echo "${P} RPM Fusion free & nonfree installed successfully."
+
+  # CRB/PowerTools must be enabled
+  sudo crb enable
 
   # Install flatpak & flathub
   echo "${P} Installing Flatpak and Flathub..."
@@ -135,20 +114,53 @@ setup_repositories() {
     echo "${P} Error: Failed to refresh the repository cache. Check the repository files and network connection."
     return 1
   }
-
   # Notify user
   echo "${P} Repositories have been successfully set up from ${DNF_DIR}, and CRB is enabled."
   #dnf repolist
 }
-
-install_nvidia_drivers() {
-
+install_nvidia_drivers_01() {
+  # The Nvidia way
   echo "${P} Installing NVIDIA drivers..."
-  # Check Status of secure boot
   mokutil --sb-state
-  # Add NVIDIA repository
+  sudo dnf remove '*nvidia*' --exclude=nvidia-gpu-firmware
+  nvidia-detect -v
+  # Get the major version and download the repo file
+  curver="rhel$(rpm -E %rhel)"
+  sudo wget -O /etc/yum.repos.d/cuda-$curver.repo \
+  http://developer.download.nvidia.com/compute/cuda/repos/$curver/$(uname -i)/cuda-$curver.repo
+  # CRB/PowerTools must be enabled
+  sudo crb enable
+  # Perform a dnf update now
+  sudo dnf update -y
+  # Install the driver
+  dnf module install nvidia-driver:latest-dkms
+  # Blasklist the nouveau driver
+  grubby --update-kernel=ALL --args="rd.driver.blacklist=nouveau modprobe.blacklist=nouveau"
+  sed -i -e 's/GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="rd.driver.blacklist=nouveau modprobe.blacklist=nouveau /g' /etc/default/grub
+  echo "${P} NVIDIA drivers installed successfully. Reboot and run nvidia-smi to verify."
+  return 0
+}
+
+install_nvidia_drivers_02() {
+  # The 3rd Party repo way (ELrepo/RPMFusion)
+  echo "${P} Installing NVIDIA drivers..."
+  mokutil --sb-state
+  sudo dnf remove '*nvidia*' --exclude=nvidia-gpu-firmware
+  # Install the kmod driver
+  nvidia-detect -v
+  dnf install kmod-nvidia
+  #install cuda
+  dnf install xorg-x11-drv-nvidia-cuda
+  echo "${P} NVIDIA drivers installed successfully. Reboot and run nvidia-smi to verify."
+  return 0
+}
+
+install_nvidia_drivers_03() {
+  # The old way 
+  echo "${P} Installing NVIDIA drivers..."
+  mokutil --sb-state
+  sudo dnf remove '*nvidia*' --exclude=nvidia-gpu-firmware
   sudo dnf config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel9/$(uname -i)/cuda-rhel9.repo
-  # Install required packages
   sudo dnf install kernel-headers-$(uname -r) kernel-devel-$(uname -r) tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms -y
   # Install NVIDIA driver
   sudo dnf module install nvidia-driver:latest-dkms -y
@@ -159,7 +171,6 @@ install_nvidia_drivers() {
   sudo dracut --regenerate-all --force
   # Update module dependencies
   sudo depmod -a
-
   echo "${P} NVIDIA drivers installed successfully. Reboot and run nvidia-smi to verify."
   return 0
 }
@@ -465,7 +476,7 @@ run_tasks() {
     case $choice in
       1) optimize_dnf ;;
       2) setup_repositories ;;
-      3) install_nvidia_drivers ;;
+      3) install_nvidia_drivers_01 ;;
       4) install_packages ;;
       5) configure_system ;;
       6) install_gnome_extensions ;;
