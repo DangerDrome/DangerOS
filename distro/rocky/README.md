@@ -23,6 +23,9 @@
 > [!TIP]
 > GNOME Human Interface Guidelines [here](https://developer.gnome.org/hig/index.html)
 
+> [!TIP]
+> Adwaita Icon Theme [here](https://gitlab.gnome.org/GNOME/adwaita-icon-theme/)
+
 <br>
 <br>
 
