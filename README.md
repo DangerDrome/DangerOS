@@ -64,7 +64,9 @@ sudo ./rocky_autoinstall_v02.sh
 <br>
 <br>
 <br>
+
 ---
+
 <br>
 <br>
 <br>
