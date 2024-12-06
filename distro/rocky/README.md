@@ -29,7 +29,7 @@
 <br>
 <br>
 
-# Rocky Install Guide
+# Rocky Auto Install Guide
 
 ## 1. Install Minimal
 
@@ -56,8 +56,17 @@
   ```
   dnf update -y
   ```
-  <br>
+<br>
+<br>
+<br>
 
+---
+
+<br>
+<br>
+<br>
+
+# Usefull commands (Deprecated)
 ### Enable ssh so you can copy paste stuff:
   ```
   systemctl start sshd
