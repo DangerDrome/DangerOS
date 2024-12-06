@@ -7,7 +7,6 @@
 <br>
 
 
-
 ![image](https://github.com/user-attachments/assets/07cf9726-3a6a-4e57-87c0-71bc686ca5a2)
 <br>
 <br>
@@ -20,6 +19,9 @@
 
 > [!TIP]
 > Nvidia Drivers install pro-tips [here](https://forums.rockylinux.org/t/nvidia-drivers-on-rocky-linux/12366)
+
+> [!TIP]
+> GNOME Human Interface Guidelines [here](https://developer.gnome.org/hig/index.html)
 
 <br>
 <br>
