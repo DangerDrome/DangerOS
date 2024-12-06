@@ -13,7 +13,8 @@ com.vysp3r.ProtonPlus
 com.valvesoftware.Steam
 fr.handbrake.ghb
 com.github.tchx84.Flatseal
-com.dec05eba.gpu_screen_recorder 
+com.dec05eba.gpu_screen_recorder
+org.angryip.ipscan
 
 # DCC
 # install after NVIDIA drivers and a reboot
