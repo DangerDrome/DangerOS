@@ -4513,14 +4513,26 @@ button.titlebutton:not(.suggested-action):not(.destructive-action) {
   color: #FFFFFF;
 }
 
-/* padding to list view */
+/* outside padding to list view */
 .nautilus-list-view {
   padding: 20px;
+}
+
+/* row padding to list view */
+.nautilus-list-view .view {
+  padding: 8px;
+}
+
+/* header padding to list view */
+.nautilus-list-view .view .horizontal{
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 /* padding to grid view */
 .nautilus-grid-view {
   padding: 20px;
+  margin-bottom: 100px;
 }
 
 /* nautilus scale widget button icons */
