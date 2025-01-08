@@ -4360,16 +4360,59 @@ popover.emoji-completion .emoji:hover {
  *     Nautilus DangerOS     *
  *****************************/
 
+/* Nautilus Path Bar */
+.nautilus-window .path-bar-box {
+  background-color: #242424;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+}
 
+/* Nautilus Search Bar */
+.nautilus-window .search {
+  background-color: #242424;
+  border-radius: 8px;
+  padding: 12px;
+}
 
+/* Nautilus Search Filter Dropdown Button */
+.nautilus-window .toggle.popup {
+  background-color: #242424;
+  border-radius: 8px;
+  padding: 8px;
+  margin-left: 16px;
+}
 
-/* Nautilus search bar*/
-.nautilus-window .searchbar {
-  background-color: #ff0000;
-  border-radius: 6px;
-  padding: 10px;
-  margin: 8px;
-  color: #fa0000;
+/* Nautilus Search Button & Prefs button */
+.nautilus-window .image-button.toggle {
+  background-color: #363636;
+  border-radius: 8px;
+  padding: 18px;
+  margin-left: 16px;
+  margin-right: 40px;
+}
+
+/* Nautilus Grid/List Button | Back Forward buttons */
+.nautilus-window .image-button {
+  background-color: #363636;
+  border-radius: 8px;
+  padding: 18px;
+  margin-left: 16px;
+}
+
+/* Nautilus Down Arrow Button */
+.nautilus-window .toggle.popup.disclosure-button {
+  background-color: #363636;
+  border-radius: 8px;
+  padding: 18px;
+  margin-left: 20px;
+}
+
+/* Nautilus Right Click Menus */
+.nautilus-window .background.menu{
+  background-color: #363636;
+  border-radius: 8px;
+  padding: 20px;
 }
 
  /* titlebar ACTIVE */
@@ -4394,7 +4437,7 @@ button.titlebutton:not(.suggested-action):not(.destructive-action) {
   margin: 0 8px;
 }
 
-/* nautilus 'places' items / list */
+/* nautilus 'places' items/list */
 .nautilus-window placessidebar.sidebar {
   padding: 0 10px;
   margin: 0 0 1px 0;
@@ -4404,7 +4447,7 @@ button.titlebutton:not(.suggested-action):not(.destructive-action) {
   color: #DDDDDD;
 }
 
-/* nautilus 'places' items / list */
+/* nautilus 'places' items/list/row */
 .nautilus-window placessidebar.sidebar row.sidebar-row {
   padding: 0 10px;
   margin: 0 0 1px 0;
@@ -4417,7 +4460,6 @@ button.titlebutton:not(.suggested-action):not(.destructive-action) {
 /* nautilus sidebar icons */
 .nautilus-window placessidebar.sidebar row.sidebar-row image  {
   margin: 0 5px 0 0;
- /*  color: #10b981; */
   color:#6b6b6b;
   min-width: 30px;
   min-height: 30px;
@@ -4465,7 +4507,7 @@ button.titlebutton:not(.suggested-action):not(.destructive-action) {
   display: none;
 }
 
-/* nautilus 'places' items / list over */
+/* nautilus 'places' items/list:over */
 .nautilus-window placessidebar.sidebar row.sidebar-row:hover, .nautilus-window placessidebar.sidebar row.sidebar-row:selected {
   background-color: #2C2C2C;
   color: #FFFFFF;
@@ -4478,20 +4520,11 @@ button.titlebutton:not(.suggested-action):not(.destructive-action) {
 
 /* padding to grid view */
 .nautilus-grid-view {
-
-
   padding: 20px;
 }
 
-
-
-/* nautilus widgets buttons */
+/* nautilus scale widget button icons */
 .nautilus-window .titlebar image {
-  -gtk-icon-transform: scale(1.3);
-}
-
-/* nautilus widgets buttons */
-.nautilus-window .titlebar image  {
   -gtk-icon-transform: scale(1.3);
 }
 
@@ -4673,7 +4706,7 @@ button.titlebutton:not(.suggested-action):not(.destructive-action) {
 }
 
 .windowhandle .linked.nautilus-path-bar button:not(.suggested-action):not(.destructive-action).current-dir {
-  color: #FFFFFF;
+  color: #DDDDDD;
 }
 
 .windowhandle .linked.nautilus-path-bar button:not(.suggested-action):not(.destructive-action).current-dir:hover, .windowhandle .linked.nautilus-path-bar button:not(.suggested-action):not(.destructive-action).current-dir:active {
@@ -4697,10 +4730,9 @@ button.titlebutton:not(.suggested-action):not(.destructive-action) {
 }
 
 .search-information {
-  padding: 2px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   background-color: #2C2C2C;
-  color: #FFFFFF;
+  color: #DDDDDD;
 }
 
 .conflict-row:not(:selected) {
@@ -5481,7 +5513,7 @@ dockpaned {
 eggsearchbar box.search-bar {
   padding: 0 8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  background-color: #2C2C2C;
+  background-color: #38c76a;
 }
 
 docktabstrip {
