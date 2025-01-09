@@ -4135,35 +4135,12 @@ button.minimize.titlebutton:hover:not(.suggested-action):not(.destructive-action
 }
 
 button.minimize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action), button.maximize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action), button.close.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: #363636;
+  color: #2C2C2C;
 }
 
 button.minimize.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action), button.minimize.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action), button.maximize.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action), button.maximize.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action), button.close.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action), button.close.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action) {
   color: rgba(255, 255, 255, 0.5);
-}
-
-button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) {
-  background-color: #fdbe04;
-}
-
-button.minimize.titlebutton:active:not(.suggested-action):not(.destructive-action) {
-  background-color: #fece43;
-}
-
-button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
-  background-color: #38c76a;
-}
-
-button.maximize.titlebutton:active:not(.suggested-action):not(.destructive-action) {
-  background-color: #6ad58f;
-}
-
-button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
-  background-color: #fd5f51;
-}
-
-button.close.titlebutton:active:not(.suggested-action):not(.destructive-action) {
-  background-color: #fe877d;
 }
 
 #MozillaGtkWidget.background headerbar.titlebar.default-decoration button.minimize.titlebutton, .background.csd headerbar.titlebar.default-decoration button.minimize.titlebutton:not(.suggested-action):not(.destructive-action), #MozillaGtkWidget.background headerbar.titlebar.default-decoration button.maximize.titlebutton, .background.csd headerbar.titlebar.default-decoration button.maximize.titlebutton:not(.suggested-action):not(.destructive-action), #MozillaGtkWidget.background headerbar.titlebar.default-decoration button.close.titlebutton, .background.csd headerbar.titlebar.default-decoration button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
@@ -4375,7 +4352,56 @@ popover.emoji-completion .emoji:hover {
   padding: 12px;
 }
 
+/* Other Locations*/
+.nautilus-window .activatable image{
+  /* -gtk-icon-transform: scale(1.5); */
+  padding: 10px;
+}
 
+.nautilus-window .frame .activatable .flat.image-button.sidebar-button {
+  /* -gtk-icon-transform: scale(1.5); */
+  padding: 0px;
+}
+
+.nautilus-window .background .horizontal {
+  padding: 20px;
+}
+
+.nautilus-window .background .horizontal .linked.horizontal entry {
+  padding: 20px;
+  background-color: #242424;
+  border-radius: 8px;
+  border-color: #38c76a;
+}
+
+.nautilus-window .background .horizontal .linked.horizontal entry focus {
+  padding: 20px;
+  background-color: #242424;
+  border-radius: 8px;
+  border-color: #38c76a;
+}
+
+/* Other Locations Connect Button*/
+.nautilus-window .background .horizontal .text-button {
+  padding: 20px;
+  background-color: #38c76a;
+  color: #171717;
+}
+
+/* Nautilus Info pane (top) outter */
+.nautilus-window .horizontal.question {
+  background-color: #2C2C2C;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* Nautilus Info pane (top) inner */
+.nautilus-window .horizontal .question .horizontal {
+  background-color: #242424;
+  border-radius: 8px;
+  padding: 8px;
+  color: #6b6b6b;
+}
 
 /* Nautilus Search Filter Dropdown Button */
 .nautilus-window .toggle.popup {
@@ -4410,11 +4436,22 @@ popover.emoji-completion .emoji:hover {
   margin-left: 20px;
 }
 
-/* Nautilus Right Click Menus */
-.nautilus-window .background.menu{
+/* Nautilus button left Click Menus */
+.nautilus-window .background.menu stack {
   background-color: #363636;
   border-radius: 8px;
-  padding: 20px;
+  padding: 10px;
+  min-width: 300px;
+}
+
+.nautilus-window .background.menu .horizontal {
+  border-radius: 8px;
+  padding: 0px;
+  margin: 12px;
+}
+
+.nautilus-window .background.menu .horizontal image {
+  -gtk-icon-transform: scale(1.3);
 }
 
  /* titlebar ACTIVE */
@@ -4435,8 +4472,41 @@ popover.emoji-completion .emoji:hover {
 button.titlebutton:not(.suggested-action):not(.destructive-action) {
   min-height: 20px;
   min-width: 20px;
-  padding: 0;
+  padding: 8px;
   margin: 0 8px;
+  color: #6b6b6b;
+  /* border-radius: 4px; */
+
+}
+
+button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) {
+  background-color: #363636;
+  color: #d0d0d0;
+}
+
+button.minimize.titlebutton:active:not(.suggested-action):not(.destructive-action) {
+  background-color: #363636;
+  color: #d0d0d0;
+}
+
+button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
+  background-color: #363636;
+  color: #d0d0d0;
+}
+
+button.maximize.titlebutton:active:not(.suggested-action):not(.destructive-action) {
+  background-color: #363636;
+  color: #d0d0d0;
+}
+
+button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
+  background-color: #363636;
+  color: #d0d0d0;
+}
+
+button.close.titlebutton:active:not(.suggested-action):not(.destructive-action) {
+  background-color: #363636;
+  color: #d0d0d0;
 }
 
 /* nautilus 'places' items/list */
@@ -4546,7 +4616,6 @@ button.titlebutton:not(.suggested-action):not(.destructive-action) {
   color: #6b6b6b;
 }
 
-
 /* treeview padding to list view */
 .nautilus-window.background.csd .treeview {
   padding: 30px;
@@ -4559,7 +4628,7 @@ button.titlebutton:not(.suggested-action):not(.destructive-action) {
   margin-top: 1000px;
 }
 
-/* nautilus scale widget button icons */
+/* nautilus scale titlebar button icons */
 .nautilus-window .titlebar image {
   -gtk-icon-transform: scale(1.3);
 }
