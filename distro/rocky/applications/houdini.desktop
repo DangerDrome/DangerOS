@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Houdini
+Comment=3D Animation Tools
+GenericName=Houdini FX
+Exec=/media/apps/Houdini/20.5/bin/houdini %F @@
+Icon=houdini
+Terminal=false
+Type=Application
+PrefersNonDefaultGPU=true
+X-KDE-RunOnDiscreteGpu=true
+Categories=Graphics;3DGraphics;
+MimeType=application/x-houdini;
+StartupWMClass=Houdini
+Keywords=houdini;
+
+
