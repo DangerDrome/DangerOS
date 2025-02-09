@@ -2,10 +2,10 @@
 Name=Unreal
 Comment= Unreal Engine Development
 Keywords=Unreal; Unreal Engine; unreal; engine; ue5; ue; UE; UE5
-Exec="/home/danger/Downloads/Linux_Unreal_Engine_5.5.0/Engine/Binaries/Linux/UnrealEditor" %f
+Exec="/media/apps/Unreal/Engine/Binaries/Linux/UnrealEditor" %f
 Terminal=false
 MimeType=application/unreal
 #Icon=unreal
-Icon=/home/danger/Downloads/Linux_Unreal_Engine_5.5.0/unreal.svg
+Icon=unreal
 Type=Application
 Categories=Development
