@@ -1,3 +1,4 @@
 # Network location Mounts:
+skeletor/apps,/media/apps,username=danger,password=danger
 skeletor/jobs,/media/jobs,username=danger,password=danger
 skeletor/io,/media/io,username=danger,password=danger
