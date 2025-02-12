@@ -98,95 +98,6 @@ comming soon...
 <br>
 <br>
 
-
-
-
-# GPU passthrough 
-**For running Virtual Machines.**
-> [!TIP] 
-> https://www.reddit.com/r/homelab/comments/b5xpua/the_ultimate_beginners_guide_to_gpu_passthrough/
-
-<br>
-
-**1. Configure the Grub:**
-
-```
-nano /etc/default/grub
-
-# Change this line:
-GRUB_CMDLINE_LINUX_DEFAULT="quiet"
-
-# To this line:
-GRUB_CMDLINE_LINUX_DEFAULT="quiet amd_iommu=on"
-
-# Or with additional commands:
-GRUB_CMDLINE_LINUX_DEFAULT="quiet amd_iommu=on iommu=pt pcie_acs_override=downstream,multifunction nofb nomodeset video=vesafb:off,efifb:off"
-
-# Save & Exit
-
-update-grub
-```
-
-<br>
-
-**2. VFIO Modules:**
-
-```
-nano /etc/modules
-
-# Add the following to the 'modules' file:
-vfio
-vfio_iommu_type1
-vfio_pci
-vfio_virqfd
-
-# Save & Exit nano(ctrl+o, ctrl+x)
-```
-
-<br>
-
-**3. IOMMU interrupt remapping:**
-
-```
-echo "options vfio_iommu_type1 allow_unsafe_interrupts=1" > /etc/modprobe.d/iommu_unsafe_interrupts.conf
-echo "options kvm ignore_msrs=1" > /etc/modprobe.d/kvm.conf
-```
-
-<br>
-
-**4. BlackListing Drivers:**
-
-```
-echo "blacklist radeon" >> /etc/modprobe.d/blacklist.conf
-echo "blacklist nouveau" >> /etc/modprobe.d/blacklist.conf
-echo "blacklist nvidia" >> /etc/modprobe.d/blacklist.conf
-```
-
-<br>
-
-**5. Adding GPU to VFIO:**
-
-```
-lspci -v | grep NVIDIA
-
-# Find you GPU Number and run the following, for example:
-lspci -n -s 01:00
-
-# Take note of the vendor id codes: **10de:1b81** and **10de:10f0**.
-# Now we add the GPU's vendor id's to the VFIO, for example:
-echo "options vfio-pci ids=10de:1b81,10de:10f0 disable_vga=1"> /etc/modprobe.d/vfio.conf
-
-# Finally, run this:
-update-initramfs -u
-
-# restart
-reset
-```
-<br>
-<br>
-<br>
-
-
 # Step by step install
 ## Base system stuff
 
@@ -651,3 +562,90 @@ Extract and copy the folder to the themes directory:
 cd /usr/share/themes
 sudo cp -r /home/danger/Downloads/Adwaita-gray-dark 
 ```
+<br>
+
+
+# NOTE: GPU passthrough 
+**For running Virtual Machines.**
+> [!TIP] 
+> https://www.reddit.com/r/homelab/comments/b5xpua/the_ultimate_beginners_guide_to_gpu_passthrough/
+
+<br>
+
+**1. Configure the Grub:**
+
+```
+nano /etc/default/grub
+
+# Change this line:
+GRUB_CMDLINE_LINUX_DEFAULT="quiet"
+
+# To this line:
+GRUB_CMDLINE_LINUX_DEFAULT="quiet amd_iommu=on"
+
+# Or with additional commands:
+GRUB_CMDLINE_LINUX_DEFAULT="quiet amd_iommu=on iommu=pt pcie_acs_override=downstream,multifunction nofb nomodeset video=vesafb:off,efifb:off"
+
+# Save & Exit
+
+update-grub
+```
+
+<br>
+
+**2. VFIO Modules:**
+
+```
+nano /etc/modules
+
+# Add the following to the 'modules' file:
+vfio
+vfio_iommu_type1
+vfio_pci
+vfio_virqfd
+
+# Save & Exit nano(ctrl+o, ctrl+x)
+```
+
+<br>
+
+**3. IOMMU interrupt remapping:**
+
+```
+echo "options vfio_iommu_type1 allow_unsafe_interrupts=1" > /etc/modprobe.d/iommu_unsafe_interrupts.conf
+echo "options kvm ignore_msrs=1" > /etc/modprobe.d/kvm.conf
+```
+
+<br>
+
+**4. BlackListing Drivers:**
+
+```
+echo "blacklist radeon" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist nouveau" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist nvidia" >> /etc/modprobe.d/blacklist.conf
+```
+
+<br>
+
+**5. Adding GPU to VFIO:**
+
+```
+lspci -v | grep NVIDIA
+
+# Find you GPU Number and run the following, for example:
+lspci -n -s 01:00
+
+# Take note of the vendor id codes: **10de:1b81** and **10de:10f0**.
+# Now we add the GPU's vendor id's to the VFIO, for example:
+echo "options vfio-pci ids=10de:1b81,10de:10f0 disable_vga=1"> /etc/modprobe.d/vfio.conf
+
+# Finally, run this:
+update-initramfs -u
+
+# restart
+reset
+```
+<br>
+<br>
+<br>
