@@ -2,7 +2,7 @@
 <br>
 
 ![image](https://github.com/DangerDrome/DangerOS/blob/fc4d13e57f73ae80edccb4f0f750be33b317193e/distro/rocky/media/brand/fedora-gdm-logo.png)
-# An operating system for Visual Effects.
+# An operating system for Media Content Creation.
 <br>
 <br>
 
@@ -17,7 +17,7 @@
 <br>
 
 # Features
-#### DangerOS(Dangerous) is a spin on the Rocky Linux Operating System: Streamlined specifically for use in Visual Effects.
+#### DangerOS(Dangerous) is a spin on the Rocky Linux Operating System: Streamlined specifically for use in Media Generation, Content Creation & Visual Effects.
 
 
 #### Features include
