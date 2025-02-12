@@ -26,7 +26,7 @@
 - [ ] MacOS layout
 - [x] A usable desktop (shortcuts, etc)
 - [x] Useful default applications
-- [x] Useful codecs for VFX
+- [x] Useful codecs for Media stuff
 - [x] Remote Desktop features
 - [x] Automated install
 - [x] Step by Step install
@@ -46,6 +46,10 @@
 - [ ] After Effects
 - [ ] Premiere
 - [ ] Photoshop
+- [ ] Reaper
+- [ ] Reason
+- [ ] Ableton Live
+- [ ] Pro Tools
 <br>
 <br>
 
