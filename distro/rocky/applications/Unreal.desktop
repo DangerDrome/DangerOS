@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Unreal
+Comment= Unreal Engine Development
+Keywords=Unreal; Unreal Engine; unreal; engine; ue5; ue; UE; UE5
+Exec="/run/media/danger/apps/apps/Unreal/5.5/Engine/Binaries/Linux/UnrealEditor" %f
+Terminal=true
+MimeType=application/unreal
+#Icon=unreal
+Icon=/run/media/danger/apps/apps/Unreal/unreal.svg
+Type=Application
+Categories=Development

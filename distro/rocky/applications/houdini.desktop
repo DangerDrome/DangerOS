@@ -2,9 +2,9 @@
 Name=Houdini
 Comment=3D Animation Tools
 GenericName=Houdini FX
-Exec=/media/apps/Houdini/20.5/bin/houdini %F @@
+Exec=/run/media/danger/apps/apps/Houdini/20.5/bin/houdini %F
 Icon=houdini
-Terminal=false
+Terminal=true
 Type=Application
 PrefersNonDefaultGPU=true
 X-KDE-RunOnDiscreteGpu=true

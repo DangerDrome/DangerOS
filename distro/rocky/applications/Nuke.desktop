@@ -2,11 +2,10 @@
 Version=1.0
 Type=Application
 Terminal=true
-Name=Natron
-Exec="/run/media/danger/apps/apps/Natron/Natron" %f
+Name=Nuke
+Exec=/run/media/danger/apps/apps/Nuke/15.1v5/Nuke15.1 --indie %f
 GenericName=Compositing software
 Comment=Node-graph based compositing software
-Icon=fr.natron.Natron
+Icon=/run/media/danger/apps/apps/Nuke/nuke.svg
 Categories=Graphics;2DGraphics;RasterGraphics;
-X-Desktop-File-Install-Version=0.27
-X-Flatpak=fr.natron.Natron
+
